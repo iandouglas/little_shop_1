@@ -7,15 +7,15 @@ RSpec.describe 'as visitor', type: :feature do
 
     click_link 'Register'
 
-    fill_in :username, with: 'bob'
-    fill_in :street, with: '123 main st'
-    fill_in :city, with: 'denver'
-    fill_in :state, with: 'CO'
-    fill_in :zip_code, with: 80216
-    fill_in :email, with: 'bob@bob.net'
-    fill_in :password, with: 'password'
-    fill_in :confirm_password, with: 'password'
-    click_on 'Register'
+    fill_in 'Username', with: 'bob'
+    fill_in 'Street', with: '123 main st'
+    fill_in 'City', with: 'denver'
+    fill_in 'State', with: 'CO'
+    fill_in 'Zip code', with: 80216
+    fill_in 'Email', with: 'bob@bob.net'
+    fill_in 'Password', with: 'password'
+    fill_in 'Confirm password', with: 'password'
+    click_on 'Register Now'
 
     user = User.last
 
