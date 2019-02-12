@@ -11,5 +11,23 @@ RSpec.describe 'as visitor', type: :feature do
     expect(current_path).to eq(root_path)
   end
 
+  it 'should have link to items directory' do
+
+    visit new_user_path
+
+    click_link "Items"
+
+    expect(current_path).to eq(items_path)
+  end
+
+  it 'should have link to all merchants' do
+
+    visit new_user_path
+
+    click_link "Merchants"
+
+    expect(current_path).to eq(merchants_path)
+  end
+
 
 end
