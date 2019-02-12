@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190211220216) do
+ActiveRecord::Schema.define(version: 20190212183022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20190211220216) do
     t.integer "quantity"
     t.float "price"
     t.string "thumbnail"
-    t.integer "enabled"
+    t.integer "enabled", default: 0
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -33,11 +33,13 @@ ActiveRecord::Schema.define(version: 20190211220216) do
     t.integer "fulfilled"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "current_price"
+    t.integer "quantity"
   end
 
-  create_table "orders_migrations", force: :cascade do |t|
+  create_table "orders", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "enabled"
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -50,8 +52,8 @@ ActiveRecord::Schema.define(version: 20190211220216) do
     t.integer "zip_code"
     t.string "email"
     t.string "password"
-    t.integer "role"
-    t.integer "enabled"
+    t.integer "role", default: 0
+    t.integer "enabled", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
