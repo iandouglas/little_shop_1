@@ -29,10 +29,26 @@ RSpec.describe 'navigation', type: :feature do
     visit user_path(user.id)
     expect(page).to have_http_status(404)
 
-    visit user_order_path(user.id)
+    visit user_profile_orders_path(user.id)
     expect(page).to have_http_status(404)
     visit logout_path
     expect(page).to have_http_status(404)
 
+  end
+
+  describe 'as a user' do
+    it 'should show the navbar' do
+      user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
+
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
+      visit root_path
+      click_link 'Profile'
+      expect(current_path).to eq(profile_path)
+      click_link 'Orders'
+      expect(current_path).to eq(profile_orders_path)
+      click_link 'Logout'
+      expect(current_path).to eq(logout_path)
+    end
   end
 end
