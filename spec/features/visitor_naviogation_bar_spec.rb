@@ -29,13 +29,22 @@ RSpec.describe 'as visitor', type: :feature do
     expect(current_path).to eq(merchants_path)
   end
 
-  it 'should have link to cart' do
+  xit 'should have link to cart' do
 
     visit new_user_path
 
     click_link "Cart"
 
     expect(current_path).to eq(cart_path)
+  end
+
+  it 'should have link to login' do
+
+    visit new_user_path
+
+    click_link "Log In"
+
+    expect(current_path).to eq(login_path)
   end
 
 
