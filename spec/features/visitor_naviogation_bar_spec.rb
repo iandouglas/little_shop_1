@@ -26,10 +26,10 @@ RSpec.describe 'navigation', type: :feature do
     expect(page).to_not have_link('Orders')
     expect(page).to_not have_link('Logout')
 
-    visit user_path(user.id)
+    visit profile_path(user.id)
     expect(page).to have_http_status(404)
 
-    visit user_profile_orders_path(user.id)
+    visit profile_orders_path(user.id)
     expect(page).to have_http_status(404)
     visit logout_path
     expect(page).to have_http_status(404)
