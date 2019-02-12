@@ -19,6 +19,7 @@ RSpec.describe 'as visitor', type: :feature do
 
     user = User.last
 
+    expect(page).to have_content("You've successfully registered your account")
     expect(current_path).to eq(user_path(user))
     expect(page).to have_content("Welcome #{user.username}!")
   end
@@ -37,6 +38,7 @@ RSpec.describe 'as visitor', type: :feature do
     fill_in 'Confirm password', with: 'password'
     click_on 'Register Now'
 
+    expect(page).to have_content("You are missing information")
     expect(page).to have_content('Username')
     expect(page).to have_content('Email')
   end
@@ -57,6 +59,7 @@ RSpec.describe 'as visitor', type: :feature do
     fill_in 'Confirm password', with: 'password'
     click_on 'Register Now'
 
+    expect(page).to have_content('This E-mail is already registered')
     expect(page).to have_content('Username')
     expect(page).to have_content('Email')
   end

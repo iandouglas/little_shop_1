@@ -1,1 +1,5 @@
+<% if flash[:success] %>
+  <div class="success"><%= flash[:success] %></div>
+  <% end %>
+
 <h1>Welcome <%= current_user.username %>!</h1>
