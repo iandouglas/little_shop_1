@@ -10,17 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20190211220216) do
-
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "orders_migrations", force: :cascade do |t|
-    t.integer "user_id"
+  create_table "items", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.integer "quantity"
+    t.float "price"
+    t.string "thumbnail"
     t.integer "enabled"
-    
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -29,7 +31,13 @@ ActiveRecord::Schema.define(version: 20190211220216) do
     t.integer "item_id"
     t.integer "order_id"
     t.integer "fulfilled"
-    
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders_migrations", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "enabled"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -44,21 +52,8 @@ ActiveRecord::Schema.define(version: 20190211220216) do
     t.string "password"
     t.integer "role"
     t.integer "enabled"
-    
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-  
-  create_table "items", force: :cascade do |t|
-    t.string "name"
-    t.string "description"
-    t.integer "quantity"
-    t.float "price"
-    t.string "thumbnail"
-    t.integer "enabled"
-    t.integer "user_id"
 
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 end
