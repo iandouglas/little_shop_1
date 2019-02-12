@@ -6,9 +6,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    
+
     if @user.save
       session[:user_id] = @user.id
+      flash[:success] = "You've successfully registered your account"
       redirect_to user_path(@user)
     else
       if User.find_by(email: @user.email)
