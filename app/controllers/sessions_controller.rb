@@ -38,13 +38,17 @@ class SessionsController < ApplicationController
         redirect_to profile_path
       end
     else
-      render :new
       flash[:error] = "The given credentials were incorrect"
+      render :new
     end
   end
 
   def destroy
-    unless regular_user?
+    if current_user
+      session.clear
+      flash[:success] = "You have successfully logged out"
+      redirect_to root_path
+    else
       render :file => './public/404.html', status: 404
     end
   end
