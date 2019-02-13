@@ -18,6 +18,10 @@ RSpec.describe 'navigation', type: :feature do
     click_link "Merchants"
     expect(current_path).to eq(merchants_path)
 
+    click_link "Cart"
+    expect(current_path).to eq(carts_path)
+
+
     visit new_user_path
     click_link "Log In"
     expect(current_path).to eq(login_path)
@@ -89,7 +93,7 @@ RSpec.describe 'navigation', type: :feature do
       visit admin_dashboard_path
       expect(page).to have_http_status(404)
       visit admin_users_path
-      expect(page).to have_http_status(404)  
+      expect(page).to have_http_status(404)
     end
   end
 

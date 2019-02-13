@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # get '/profile', to 'user#show', as: user_path
   resources :merchants, only: [:index]
 
-  resources :carts, only: [:show, :create]
+  resources :carts, only: [:index, :create]
   # resources :carts, only: [:index]
   get '/login', to: 'sessions#new'
   get '/logout', to: 'sessions#destroy'

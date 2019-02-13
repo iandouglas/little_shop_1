@@ -10,7 +10,7 @@ class CartsController < ApplicationController
     redirect_to items_path
   end
 
-  def show
+  def index
   end
 
 end
