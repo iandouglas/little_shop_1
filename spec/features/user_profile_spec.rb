@@ -38,7 +38,7 @@ RSpec.describe 'as registered user', type: :feature do
     fill_in 'Street', with: '555 first st.'
     fill_in 'City', with: 'Boston'
     fill_in 'State', with: 'MA'
-    fill_in 'Zip code', with: 02018
+    fill_in 'Zip code', with: "02018"
     fill_in 'Email', with: 'bob@bob.net'
 
     click_on 'Save Changes'
