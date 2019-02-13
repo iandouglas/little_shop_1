@@ -22,12 +22,17 @@ class UsersController < ApplicationController
     end
   end
 
-  def show
-    unless current_user
+  def profile
+    unless regular_user?
       render :file => './public/404.html', status: 404
     end
   end
 
+  def dashboard
+    unless merchant_user?
+      render :file => './public/404.html', status: 404
+    end
+  end
   private
   def user_params
     params.require(:user).permit(:username, :street, :city, :state, :zip_code, :email, :password)

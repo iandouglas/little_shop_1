@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   # resources :carts, only: [:index]
   get '/login', to: 'sessions#new'
   get '/logout', to: 'sessions#destroy'
-  get '/profile', to: 'users#show', as: 'profile'
+  get '/profile', to: 'users#profile', as: 'profile'
   get '/profile/orders', to: 'users/orders#index', as: 'profile_orders'
-
+  get '/dashboard', to: 'users#dashboard', as: 'dashboard'
 end

@@ -24,18 +24,20 @@ RSpec.describe 'navigation', type: :feature do
 
     expect(page).to_not have_link('Profile')
     expect(page).to_not have_link('Orders')
-    expect(page).to_not have_link('Logout')
 
-    visit profile_path(user.id)
+    visit profile_path
     expect(page).to have_http_status(404)
 
-    visit profile_orders_path(user.id)
+    visit profile_orders_path
     expect(page).to have_http_status(404)
     visit logout_path
     expect(page).to have_http_status(404)
-    visit dashboard_path(merchant)
+    visit dashboard_path
     expect(page).to have_http_status(404)
-
+    visit admin_dashboard_path
+    expect(page).to have_http_status(404)
+    visit admin_users_path
+    expect(page).to have_http_status(404)
   end
 
   describe 'as a user' do
@@ -49,10 +51,17 @@ RSpec.describe 'navigation', type: :feature do
       expect(current_path).to eq(profile_path)
       click_link 'Orders'
       expect(current_path).to eq(profile_orders_path)
+      expect(page).to_not have_link('Dashboard')
+
       click_link 'Logout'
       expect(current_path).to eq(logout_path)
 
-      visit dashboard_path(user)
+      visit dashboard_path
+      expect(page).to have_http_status(404)
+
+      visit admin_dashboard_path
+      expect(page).to have_http_status(404)
+      visit admin_users_path
       expect(page).to have_http_status(404)
     end
   end
@@ -64,15 +73,44 @@ RSpec.describe 'navigation', type: :feature do
 
       visit items_path
       click_link 'Dashboard'
-      expect(current_path).to eq(dashboard_path(merchant))
+      expect(current_path).to eq(dashboard_path)
+      expect(page).to_not have_link('Profile')
+      expect(page).to_not have_link('Orders')
 
       click_link 'Logout'
       expect(current_path).to eq(logout_path)
 
-      visit profile_path(merchant)
+      visit profile_path
       expect(page).to have_http_status(404)
 
-      visit profile_orders_path(merchant)
+      visit profile_orders_path
+      expect(page).to have_http_status(404)
+
+      visit admin_dashboard_path
+      expect(page).to have_http_status(404)
+      visit admin_users_path
+      expect(page).to have_http_status(404)  
+    end
+  end
+
+  describe 'as an admin' do
+    it 'shows navigation bar' do
+      admin = User.create(username: 'admin', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@admin", password: "password", role: 2, enabled: 0)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
+
+      visit items_path
+      click_link 'Users'
+      expect(current_path).to eq(admin_users_path)
+      click_link 'Dashboard'
+      expect(current_path).to eq(admin_dashboard_path)
+      expect(current_path).to_not eq(dashboard_path)
+
+      click_link 'Logout'
+      expect(current_path).to eq(logout_path)
+
+      visit dashboard_path
+      expect(page).to have_http_status(404)
+      visit profile_path
       expect(page).to have_http_status(404)
     end
   end
