@@ -74,7 +74,7 @@ RSpec.describe "Login and Logout", type: :feature do
       expect(current_path).to eq(root_path)
       expect(page).to have_content("You have successfully logged out")
       visit items_path
-      expect(page).to have_content("Cart: 0")
+      expect(page).to have_content("Cart(0)")
     end
   end
 
