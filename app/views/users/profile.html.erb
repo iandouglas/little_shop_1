@@ -1,5 +1,7 @@
 <% if flash[:success] %>
   <div class="success"><%= flash[:success] %></div>
   <% end %>
-
+  <% if flash[:error] %>
+    <div class="error"><%= flash[:error] %></div>
+<% end %>
 <h1>Welcome <%= current_user.username %>!</h1>
