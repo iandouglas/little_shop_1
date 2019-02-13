@@ -91,7 +91,7 @@ RSpec.describe "Login and Logout", type: :feature do
       click_button 'Sign In'
 
       expect(current_path).to eq(dashboard_path)
-      expect(page).to have_content("You are now logged in.")
+      expect(page).to have_content("You are now logged in")
     end
     it 'redirects me to my Merchant Dashboard if already logged in' do
       merchant = User.create(username: 'merch', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@merch", password: "password", role: 1, enabled: 0)
@@ -108,7 +108,7 @@ RSpec.describe "Login and Logout", type: :feature do
       visit login_path
 
       expect(current_path).to eq(dashboard_path)
-      expect(page).to have_content("You have already logged in.")
+      expect(page).to have_content("You have already logged in")
     end
   end
 
@@ -126,7 +126,7 @@ RSpec.describe "Login and Logout", type: :feature do
       click_button 'Sign In'
 
       expect(current_path).to eq(root_path)
-      expect(page).to have_content("You are now logged in.")
+      expect(page).to have_content("You are now logged in")
     end
 
     it 'redirects me to the Admin Dashboard if already logged in' do
@@ -144,7 +144,7 @@ RSpec.describe "Login and Logout", type: :feature do
       visit login_path
 
       expect(current_path).to eq(root_path)
-      expect(page).to have_content("You have already logged in.")
+      expect(page).to have_content("You have already logged in")
     end
   end
 end
