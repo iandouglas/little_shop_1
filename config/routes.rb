@@ -3,10 +3,19 @@ Rails.application.routes.draw do
 
   root to: "welcome#index"
   resources :items, only: [:index]
-  resources :users, only: [:new, :create, :show]
+  resources :users, only: [:new, :create]
+  # get '/profile', to 'user#show', as: user_path
   resources :merchants, only: [:index]
 
   # resources :carts, only: [:index]
   get '/login', to: 'sessions#new'
-  # resources :sessions, only: [:new, :create]
+  get '/logout', to: 'sessions#destroy'
+  get '/profile', to: 'users#profile', as: 'profile'
+  get '/profile/orders', to: 'users/orders#index', as: 'profile_orders'
+  get '/dashboard', to: 'users#dashboard', as: 'dashboard'
+
+  namespace :admin do
+    get '/users', to: 'users#index', as: 'users'
+    get '/dashboard', to: 'users#dashboard', as: 'dashboard'
+  end
 end

@@ -1,10 +1,5 @@
-class SessionsController < ApplicationController
-
-  def new
-
-  end
-
-  def destroy
+class Users::OrdersController < ApplicationController
+  def index
     unless regular_user?
       render :file => './public/404.html', status: 404
     end
