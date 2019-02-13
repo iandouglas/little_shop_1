@@ -45,8 +45,8 @@ RSpec.describe 'as visitor', type: :feature do
 
       visit item_path(item)
 
-      expect(page).to not_have_content("Cart(0)")
-      expect(page).to not_have_button('Add to Cart')
+      expect(page).to_not have_content("Cart(0)")
+      expect(page).to_not have_button('Add to Cart')
     end
   end
 
@@ -58,8 +58,8 @@ RSpec.describe 'as visitor', type: :feature do
 
       visit item_path(item)
 
-      expect(page).to not_have_content("Cart(0)")
-      expect(page).to not_have_button('Add to Cart')
+      expect(page).to_not have_content("Cart(0)")
+      expect(page).to_not have_button('Add to Cart')
     end
   end
 

@@ -16,7 +16,9 @@
       <%= link_to "Merchants", merchants_path %>
       <%= link_to "Log In", login_path %>
       <%= link_to "Logout", logout_path %>
-      <p>Cart(<%= @cart.total %>)</p>
+      <% unless merchant_or_admin? %>
+        <p>Cart(<%= @cart.total %>)</p>
+      <% end %>
       <% if regular_user? %>
         <%= link_to "Profile", profile_path %>
         <%= link_to "Orders", profile_orders_path %>
