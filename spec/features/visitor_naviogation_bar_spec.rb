@@ -33,6 +33,8 @@ RSpec.describe 'navigation', type: :feature do
     expect(page).to have_http_status(404)
     visit logout_path
     expect(page).to have_http_status(404)
+    visit dashboard_path(merchant)
+    expect(page).to have_http_status(404)
 
   end
 
@@ -42,13 +44,36 @@ RSpec.describe 'navigation', type: :feature do
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
-      visit root_path
+      visit items_path
       click_link 'Profile'
       expect(current_path).to eq(profile_path)
       click_link 'Orders'
       expect(current_path).to eq(profile_orders_path)
       click_link 'Logout'
       expect(current_path).to eq(logout_path)
+
+      visit dashboard_path(user)
+      expect(page).to have_http_status(404)
+    end
+  end
+
+  describe 'as a merchant' do
+    it 'shows the navbar' do
+      merchant = User.create(username: 'merch', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@merch", password: "password", role: 1, enabled: 0)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant)
+
+      visit items_path
+      click_link 'Dashboard'
+      expect(current_path).to eq(dashboard_path(merchant))
+
+      click_link 'Logout'
+      expect(current_path).to eq(logout_path)
+
+      visit profile_path(merchant)
+      expect(page).to have_http_status(404)
+
+      visit profile_orders_path(merchant)
+      expect(page).to have_http_status(404)
     end
   end
 end
