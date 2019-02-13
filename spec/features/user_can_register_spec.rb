@@ -20,7 +20,7 @@ RSpec.describe 'as visitor', type: :feature do
     user = User.last
 
     expect(page).to have_content("You've successfully registered your account")
-    expect(current_path).to eq(user_path(user))
+    expect(current_path).to eq(profile_path(user))
     expect(page).to have_content("Welcome #{user.username}!")
   end
 

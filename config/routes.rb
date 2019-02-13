@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root to: "welcome#index"
   resources :items, only: [:index]
-  resources :users, only: [:new, :create, :show]
+  resources :users, only: [:new, :create]
   # get '/profile', to 'user#show', as: user_path
   resources :merchants, only: [:index]
 
