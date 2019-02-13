@@ -9,4 +9,8 @@ class Cart
     @contents.values.sum
   end
 
+  def add_item(id)
+    @contents[id] += 1
+  end
+
 end

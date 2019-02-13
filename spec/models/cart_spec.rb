@@ -17,7 +17,7 @@ RSpec.describe Cart do
     end
 
     describe '.add_items' do
-      it 'should add items to the cart'
+      it 'should add items to the cart' do
         cart = Cart.new({
           '1'=> 6,
           '2'=> 2
