@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get '/profile', to: 'users#profile', as: 'profile'
   get '/profile/orders', to: 'users/orders#index', as: 'profile_orders'
   get '/dashboard', to: 'users#dashboard', as: 'dashboard'
+  post '/login', to: 'sessions#create'
 
   namespace :admin do
     get '/users', to: 'users#index', as: 'users'

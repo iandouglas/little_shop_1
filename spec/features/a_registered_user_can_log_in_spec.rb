@@ -10,10 +10,10 @@ RSpec.describe "Login and Logout", type: :feature do
 
       click_link 'Log In'
 
-      fill_in :username, with: user.email
+      fill_in :email, with: user.email
       fill_in :password, with: "psswrd"
 
-      click_button 'Sign in'
+      click_button 'Sign In'
 
       expect(current_path).to eq(login_path)
       expect(page).to have_content("The given credentials were incorrect")
@@ -22,16 +22,16 @@ RSpec.describe "Login and Logout", type: :feature do
 
   describe "As a registered user" do
     it "Logs me in and redirect me to my profile page" do
-      user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
+      user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "a12345@54321", password: "password", role: 0, enabled: 0)
 
       visit root_path
 
       click_link 'Log In'
 
-      fill_in :username, with: user.email
+      fill_in :email, with: user.email
       fill_in :password, with: user.password
 
-      click_button 'Sign in'
+      click_button 'Sign In'
 
       expect(current_path).to eq(profile_path)
       expect(page).to have_content("You are now logged in")
@@ -39,16 +39,16 @@ RSpec.describe "Login and Logout", type: :feature do
     end
 
     it 'redirects me to my profile if already logged in' do
-      user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
+      user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345awq@5asew4321", password: "password", role: 0, enabled: 0)
 
       visit root_path
 
       click_link 'Log In'
 
-      fill_in :username, with: user.email
+      fill_in :email, with: user.email
       fill_in :password, with: user.password
 
-      click_button 'Sign in'
+      click_button 'Sign In'
 
       visit login_path
 
@@ -63,10 +63,10 @@ RSpec.describe "Login and Logout", type: :feature do
 
       click_link 'Log In'
 
-      fill_in :username, with: user.email
+      fill_in :email, with: user.email
       fill_in :password, with: user.password
 
-      click_button 'Sign in'
+      click_button 'Sign In'
 
       visit login_path
 
@@ -85,10 +85,10 @@ RSpec.describe "Login and Logout", type: :feature do
 
       click_link 'Log In'
 
-      fill_in :username, with: user.email
-      fill_in :password, with: user.password
+      fill_in :email, with: merchant.email
+      fill_in :password, with: merchant.password
 
-      click_button 'Sign in'
+      click_button 'Sign In'
 
       expect(current_path).to eq(dashboard_path)
       expect(page).to have_content("You are now logged in.")
@@ -100,10 +100,10 @@ RSpec.describe "Login and Logout", type: :feature do
 
       click_link 'Log In'
 
-      fill_in :username, with: user.email
-      fill_in :password, with: user.password
+      fill_in :email, with: merchant.email
+      fill_in :password, with: merchant.password
 
-      click_button 'Sign in'
+      click_button 'Sign In'
 
       visit login_path
 
@@ -120,10 +120,10 @@ RSpec.describe "Login and Logout", type: :feature do
 
       click_link 'Log In'
 
-      fill_in :username, with: user.email
-      fill_in :password, with: user.password
+      fill_in :email, with: admin.email
+      fill_in :password, with: admin.password
 
-      click_button 'Sign in'
+      click_button 'Sign In'
 
       expect(current_path).to eq(root_path)
       expect(page).to have_content("You are now logged in.")
@@ -136,10 +136,10 @@ RSpec.describe "Login and Logout", type: :feature do
 
       click_link 'Log In'
 
-      fill_in :username, with: user.email
-      fill_in :password, with: user.password
+      fill_in :email, with: admin.email
+      fill_in :password, with: admin.password
 
-      click_button 'Sign in'
+      click_button 'Sign In'
 
       visit login_path
 
