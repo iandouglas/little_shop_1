@@ -5,7 +5,7 @@
 <p>Current Status: <%= @order.status %></p>
 <% @order.items.each do |item| %>
 <div class="item-<%= item.id %>">
-  
+
   <%= link_to image_tag(item.thumbnail, width: '200')%>
   <p>Name: <%= item.name %> </p>
   <p>Description: <%= item.description %></p>
@@ -18,4 +18,7 @@
 <% end %>
 <p>Total Items: <%= @order.total_item_quantity %></p>
 <p>Grand Total: <%= number_to_currency(@order.total_item_price) %></p>
+<% if @order.pending? %>
+  <%= button_to "Cancel Order" %>
+<% end %>
 </section>
