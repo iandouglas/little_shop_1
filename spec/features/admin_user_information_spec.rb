@@ -44,5 +44,22 @@ RSpec.describe 'As an admin', type: :feature do
     expect(page).to have_content("City: happy steve")
   end
 
+  it 'lets an admin see a users orders' do
+    admin = User.create!(username: 'test', street: '123 main st', city: 'denver', state: 'CO', zip_code: 80216, email: 'test@bob.net', password: 'password', role: 2)
+    user = User.create!(username: 'happy', street: '432 main st', city: 'steve', state: 'CO', zip_code: 80126, email: 'te@bob.net', password: 'password', role: 0)
+    merchant = User.create!(username: 'happy', street: '432 main st', city: 'steve', state: 'CO', zip_code: 80126, email: 'tester@bob.net', password: 'password', role: 1)
+    item = Item.create(name: "blah", description: "meh of meh", quantity: 200, price: 2.50, thumbnail: "haha", user_id: merchant.id)
+    order = user.orders.create
+    visit login_path
+    fill_in 'Email', with: 'test@bob.net'
+    fill_in 'Password', with: 'password'
+    click_button 'Sign In'
+
+    visit admin_user_show_path(user)
+    expect(page).to have_content("See happy's orders")
+    expect(page).to have_content("Upgrade happy to a Merchant")
+
+  end
+
 
 end
