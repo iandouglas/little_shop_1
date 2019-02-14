@@ -74,7 +74,7 @@ class User < ApplicationRecord
 
   def self.fulfillment_times(order)
     self.joins(items: :order_items)
-    .select('users.username, avg(order_items.created_at - order_items.updated_at) as fill_time')
+    .select('users.username, avg(order_items.updated_at - order_items.created_at) as fill_time')
     .group(:id)
     .where(order_items: {fulfilled: 1})
     .order("fill_time #{order}")

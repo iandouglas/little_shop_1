@@ -26,11 +26,11 @@ RSpec.describe 'As a visitor', type: :feature do
       item_3 = Item.create!(name: 'meh', description: "haha", quantity: 12, price: 100.00, thumbnail: "steve.jpg", user_id: merchant_3.id)
       item_4 = Item.create!(name: 'meh', description: "haha", quantity: 12, price: 50.00, thumbnail: "steve.jpg", user_id: merchant_4.id)
       item_5 = Item.create!(name: 'meh', description: "haha", quantity: 12, price: 50.00, thumbnail: "steve.jpg", user_id: merchant_5.id)
-      OrderItem.create!(item_id: item_2.id, order_id: order_2.id, fulfilled: 1, current_price: 200.00, quantity: 5)
-      OrderItem.create!(item_id: item_5.id, order_id: order_5.id, fulfilled: 1, current_price: 50.00, quantity: 16)
-      OrderItem.create!(item_id: item_1.id, order_id: order_1.id, fulfilled: 1, current_price: 2.50, quantity: 13)
-      OrderItem.create!(item_id: item_4.id, order_id: order_4.id, fulfilled: 1, current_price: 100.00, quantity: 5)
-      OrderItem.create!(item_id: item_3.id, order_id: order_3.id, fulfilled: 1, current_price: 100.00, quantity: 5)
+      OrderItem.create!(item_id: item_2.id, order_id: order_2.id, fulfilled: 1, current_price: 200.00, quantity: 5, created_at: 2.days.ago)
+      OrderItem.create!(item_id: item_5.id, order_id: order_5.id, fulfilled: 1, current_price: 50.00, quantity: 16, created_at: 5.days.ago)
+      OrderItem.create!(item_id: item_1.id, order_id: order_1.id, fulfilled: 1, current_price: 2.50, quantity: 13, created_at: 1.days.ago)
+      OrderItem.create!(item_id: item_4.id, order_id: order_4.id, fulfilled: 1, current_price: 100.00, quantity: 5, created_at: 4.days.ago)
+      OrderItem.create!(item_id: item_3.id, order_id: order_3.id, fulfilled: 1, current_price: 100.00, quantity: 5, created_at: 3.days.ago)
       OrderItem.create!(item_id: item_3.id, order_id: order_6.id, fulfilled: 1, current_price: 100.00, quantity: 5)
       OrderItem.create!(item_id: item_3.id, order_id: order_7.id, fulfilled: 1, current_price: 100.00, quantity: 5)
       OrderItem.create!(item_id: item_3.id, order_id: order_8.id, fulfilled: 1, current_price: 100.00, quantity: 20)
@@ -68,26 +68,28 @@ RSpec.describe 'As a visitor', type: :feature do
       item_3 = Item.create!(name: 'meh', description: "haha", quantity: 12, price: 100.00, thumbnail: "steve.jpg", user_id: merchant_3.id)
       item_4 = Item.create!(name: 'meh', description: "haha", quantity: 12, price: 50.00, thumbnail: "steve.jpg", user_id: merchant_4.id)
       item_5 = Item.create!(name: 'meh', description: "haha", quantity: 12, price: 50.00, thumbnail: "steve.jpg", user_id: merchant_5.id)
-      OrderItem.create!(item_id: item_2.id, order_id: order_2.id, fulfilled: 1, current_price: 200.00, quantity: 5)
-      OrderItem.create!(item_id: item_5.id, order_id: order_5.id, fulfilled: 1, current_price: 50.00, quantity: 16)
-      OrderItem.create!(item_id: item_1.id, order_id: order_1.id, fulfilled: 1, current_price: 2.50, quantity: 13)
-      OrderItem.create!(item_id: item_4.id, order_id: order_4.id, fulfilled: 1, current_price: 100.00, quantity: 5)
-      OrderItem.create!(item_id: item_3.id, order_id: order_3.id, fulfilled: 1, current_price: 100.00, quantity: 5)
-      OrderItem.create!(item_id: item_3.id, order_id: order_6.id, fulfilled: 1, current_price: 100.00, quantity: 5)
-      OrderItem.create!(item_id: item_3.id, order_id: order_7.id, fulfilled: 1, current_price: 100.00, quantity: 5)
-      OrderItem.create!(item_id: item_3.id, order_id: order_8.id, fulfilled: 1, current_price: 100.00, quantity: 20)
+      OrderItem.create!(item_id: item_2.id, order_id: order_2.id, fulfilled: 1, current_price: 200.00, quantity: 5, created_at: 2.days.ago)
+      OrderItem.create!(item_id: item_5.id, order_id: order_5.id, fulfilled: 1, current_price: 50.00, quantity: 16, created_at: 5.days.ago)
+      OrderItem.create!(item_id: item_1.id, order_id: order_1.id, fulfilled: 1, current_price: 2.50, quantity: 13, created_at: 1.days.ago)
+      OrderItem.create!(item_id: item_4.id, order_id: order_4.id, fulfilled: 1, current_price: 100.00, quantity: 5, created_at: 4.days.ago)
+      OrderItem.create!(item_id: item_3.id, order_id: order_3.id, fulfilled: 1, current_price: 100.00, quantity: 5, created_at: 3.days.ago)
+      OrderItem.create!(item_id: item_3.id, order_id: order_6.id, fulfilled: 1, current_price: 100.00, quantity: 5, created_at: 3.days.ago)
+      OrderItem.create!(item_id: item_3.id, order_id: order_7.id, fulfilled: 1, current_price: 100.00, quantity: 5, created_at: 3.days.ago)
+      OrderItem.create!(item_id: item_3.id, order_id: order_8.id, fulfilled: 1, current_price: 100.00, quantity: 20, created_at: 3.days.ago)
 
       visit merchants_path
+
       within '.statistics' do
         within '#fastest-fulfillers' do
+          expect(page).to have_content("Merchant: andre")
+          expect(page).to have_content("Merchant: jobby")
+          expect(page).to have_content("Merchant: cappy")
+        end
+
+        within '#slowest-fulfillers' do
           expect(page).to have_content("Merchant: bob")
           expect(page).to have_content("Merchant: steve")
           expect(page).to have_content("Merchant: cappy")
-        end
-        within '#slowest-fulfillers' do
-          expect(page).to have_content("Mercahnt: andre")
-          expect(page).to have_content("Mercahnt: jobby")
-          expect(page).to have_content("Mercahnt: cappy")
         end
       end
     end
