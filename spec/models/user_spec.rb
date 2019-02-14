@@ -231,7 +231,7 @@ RSpec.describe User, type: :model do
     end
 
     describe 'self.avg_fullfillment_time(asc/desc)' do
-      xit 'returns the top or bottom three merchants by their avg fulfillment time' do
+      it 'returns the top or bottom three merchants by their avg fulfillment time' do
         user = User.create!(username: 'user', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
         merchant_2 = User.create!(username: 'steve', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12@54321", password: "password", role: 1, enabled: 0)
         merchant_1 = User.create!(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "1@54321", password: "password", role: 1, enabled: 0)
@@ -256,15 +256,14 @@ RSpec.describe User, type: :model do
 
         result_desc = User.fulfillment_times("desc")
         result_asc = User.fulfillment_times("asc")
-        binding.pry
 
         expect(result_desc.first.username).to eq("bob")
         expect(result_desc.second.username).to eq("steve")
-        expect(result_desc.third.username).to eq("jobby")
+        expect(result_desc.third.username).to eq("cappy")
 
         expect(result_asc.first.username).to eq("andre")
-        expect(result_asc.second.username).to eq("cappy")
-        expect(result_asc.third.username).to eq("jobby")
+        expect(result_asc.second.username).to eq("jobby")
+        expect(result_asc.third.username).to eq("cappy")
       end
     end
 
