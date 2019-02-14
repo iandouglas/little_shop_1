@@ -10,7 +10,9 @@ class Cart
   end
 
   def add_item(id)
+    if @contents[id] == nil
+      @contents[id] = 0
+    end
     @contents[id] += 1
   end
-
 end

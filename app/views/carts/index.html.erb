@@ -1,0 +1,9 @@
+<%= @items.each do |item, quantity| %>
+  <section id="item-<%= item.id %>">
+    <h1><%= item.name %></h1>
+    <%= image_tag item.thumbnail %>
+    <p><%= item.user.username %></p>
+    <p><%= quantity %></p>
+    <p><%= item.sub_total %></p>
+  </section>
+<% end %>

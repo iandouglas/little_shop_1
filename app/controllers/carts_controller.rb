@@ -11,6 +11,7 @@ class CartsController < ApplicationController
   end
 
   def index
+    @items
   end
 
 end
