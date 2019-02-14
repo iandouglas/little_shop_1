@@ -102,7 +102,7 @@ RSpec.describe 'As an admin', type: :feature do
     fill_in 'Password', with: 'password'
     click_button 'Sign In'
 
-    visit admin_order_path(user)
+    visit admin_order_path(order_1)
 
     expect(page).to have_content("ID: #{order_1.id}")
     expect(page).to have_content("Order Placed: #{order_1.created_at}")

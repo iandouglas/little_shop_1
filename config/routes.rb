@@ -35,5 +35,6 @@ Rails.application.routes.draw do
     get '/role', to: 'users#update', as: 'role'
     get '/users/:id/orders', to:'users/orders#index', as: 'user_orders'
     get '/orders/:id', to: 'orders#show', as: 'order'
+    post '/orders/:id/cancel', to: 'orders#cancel', as: 'cancel_order'
   end
 end

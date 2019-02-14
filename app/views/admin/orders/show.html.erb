@@ -16,3 +16,6 @@
   <% end %>
 <p>Total Items: <%= @order.total_item_quantity %></p>
 <p>Grand Total: <%= number_to_currency(@order.total_item_price) %></p>
+<% if @order.pending? %>
+  <%= button_to "Cancel Order", admin_cancel_order_path %>
+<% end %>
