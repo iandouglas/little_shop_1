@@ -27,4 +27,13 @@ class Order < ApplicationRecord
   def self.for_merchant(id)
     where(status: 0).includes(:items).where(items: {user_id: id})
   end
+
+  def self.top_biggest_orders
+    self.joins(:order_items)
+    .select("orders.id, sum(order_items.quantity) as item_count")
+    .where(status: 1)
+    .order("item_count DESC")
+    .group(:id)
+    .limit(3)
+  end
 end
