@@ -8,6 +8,7 @@ class MerchantsController<ApplicationController
       @fastest_fulfillers = User.fulfillment_times("desc")
       @slowest_fulfillers = User.fulfillment_times("asc")
       @most_sold = User.top_merchants_by_price_and_qty
+      @top_states = User.top_shipped_states
     end
   end
 

@@ -43,4 +43,13 @@
     </ul>
   </div>
 
+  <div id="top-states">
+    <h2>Top States</h2>
+    <ul>
+      <% @top_states.each do |state| %>
+      <li>State: <%= state.state %>, Orders: <%= state.state_count %></li>
+      <% end %>
+    </ul>
+  </div>
+
 </section>
