@@ -20,4 +20,22 @@ class Users::OrdersController < ApplicationController
       redirect_to profile_orders_path
     end
   end
+
+  def cancel
+    order  = Order.find(params[:id])
+    items = OrderItem.where(order_id: params[:id])
+    items.each do |item|
+      if item.fulfilled?
+        restore = Item.find(item.item_id)
+        restore[:quantity] += item.quantity
+        restore.save
+      end
+      item.fulfilled = 0
+      item.save
+    end
+    order.status = 2
+    order.save
+    flash[:success] = "This order has been cancelled"
+    redirect_to profile_order_path(order)
+  end
 end
