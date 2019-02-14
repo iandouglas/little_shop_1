@@ -63,4 +63,13 @@ class User < ApplicationRecord
     .limit(limit)
   end
 
+  def self.top_merchants_by_price_and_qty
+    self.joins(items: :order_items)
+    .select("users.username, sum(order_items.current_price * order_items.quantity) as revenue, sum(order_items.quantity) as total_items")
+    .where(order_items: {fulfilled:1}, enabled: :enabled)
+    .order("revenue desc")
+    .group(:username)
+    .limit(3)
+  end
+
 end
