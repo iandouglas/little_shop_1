@@ -27,12 +27,12 @@ RSpec.describe 'As a registered user', type: :feature do
       expect(page).to have_content("Current Status: pending")
 
       within ".item-#{item_1.id}" do
+        expect(page).to have_xpath("//img[contains(@src, 'https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjbp7n6_cbgAhUj5IMKHVSsBtcQjRx6BAgBEAU&url=https%3A%2F%2Fwww.homedepot.com%2Fp%2FPennington-4-in-Terra-Cotta-Clay-Pot-100043011%2F100332408&psig=AOvVaw2ny7lIDGagN51WGPeqax00&ust=1550637763700146')]")
         expect(page).to have_content("Name: #{item_1.name}")
         expect(page).to have_content("Description: #{item_1.description}")
         expect(page).to have_content("Quantity: #{order_item_1.quantity}")
         expect(page).to have_content("Price: $#{item_1.price}")
         expect(page).to have_content("Sub Total: $#{order_item_1.current_price}")
-        # expect(page).to xpath("thumbnail: #{item_1.thumbnail}")
       end
       expect(page).to have_content("Total Items: #{order_1.total_item_quantity}")
       expect(page).to have_content("Grand Total: $#{order_1.total_item_price}")
