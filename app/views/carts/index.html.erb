@@ -4,6 +4,7 @@
     <%= image_tag item.thumbnail %>
     <p><%= item.user.username %></p>
     <p><%= quantity %></p>
-    <p><%= item.sub_total %></p>
+    <p><%= @cart.subtotal(item) %></p>
   </section>
 <% end %>
+<%= @cart.grand_total %>

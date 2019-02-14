@@ -11,7 +11,7 @@ class CartsController < ApplicationController
   end
 
   def index
-    @items
+    @items = @cart.all_items
   end
 
 end

@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe 'as user', type: :feature do
   before(:each) do
     merchant = User.create!(username: 'test', street: '123 main st', city: 'denver', state: 'CO', zip_code: 80216, email: 'test@bob.net', password: 'password', role: 1)
-    @item = Item.create(name: 'pot', description:'small pot for plants', quantity: 30, price: 2.49, thumbnail: 'thumbnail.jpeg', user_id: merchant.id)
-    @item_2 = Item.create(name: 'crayon', description:'small crayon for plants', quantity: 40, price: 13.5, thumbnail: 'thumbnail.jpeg', user_id: merchant.id)
+    @item = Item.create(name: 'pot', description:'small pot for plants', quantity: 30, price: 2.49, thumbnail: 'https://images.homedepot-static.com/productImages/7f0e4c3d-620a-4b18-a6bb-6ebffbfc3779/svn/terra-cotta-pennington-plant-pots-100043011-64_1000.jpg', user_id: merchant.id)
+    @item_2 = Item.create(name: 'crayon', description:'small crayon for plants', quantity: 40, price: 13.5, thumbnail: 'https://images.homedepot-static.com/productImages/7f0e4c3d-620a-4b18-a6bb-6ebffbfc3779/svn/terra-cotta-pennington-plant-pots-100043011-64_1000.jpg', user_id: merchant.id)
     visit item_path(@item)
     click_button 'Add to Cart'
     visit item_path(@item)
