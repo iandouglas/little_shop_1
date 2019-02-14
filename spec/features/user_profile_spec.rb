@@ -42,7 +42,6 @@ RSpec.describe 'as registered user', type: :feature do
     fill_in 'Email', with: 'bob@bob.net'
 
     first_pass = User.last.password_digest
-    # save_and_open_page
     click_on 'Save Changes'
 
     expect(current_path).to eq(profile_path)
@@ -59,7 +58,6 @@ RSpec.describe 'as registered user', type: :feature do
     first_pass = User.last.password_digest
     click_link 'Edit Profile'
     fill_in 'Password', with: "dave"
-    # save_and_open_page
     fill_in 'Confirm password', with: "dave"
     click_on 'Save Changes'
 

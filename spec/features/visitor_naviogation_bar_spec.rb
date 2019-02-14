@@ -35,8 +35,6 @@ RSpec.describe 'navigation', type: :feature do
     expect(page).to have_http_status(404)
     visit profile_orders_path
     expect(page).to have_http_status(404)
-    visit logout_path
-    expect(page).to have_http_status(404)
     visit dashboard_path
     expect(page).to have_http_status(404)
     visit admin_dashboard_path

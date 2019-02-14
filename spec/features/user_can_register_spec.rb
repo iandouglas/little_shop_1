@@ -16,7 +16,6 @@ RSpec.describe 'as visitor', type: :feature do
     fill_in 'Password', with: 'password'
     fill_in 'Confirm password', with: 'password'
     click_on 'Register Now'
-
     user = User.last
 
     expect(page).to have_content("You've successfully registered your account")

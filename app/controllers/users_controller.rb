@@ -27,29 +27,23 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(current_user.id)
+    @user = current_user
     if profile_params[:password] && profile_params[:confirm_password] == ""
       new_params = profile_params.except(:password, :confirm_password)
       @user.update(new_params)
     elsif profile_params[:password] == profile_params[:confirm_password]
       @user.update(profile_params.except(:confirm_password))
-      @user.save
     end
-
     @user.save
     redirect_to profile_path
   end
 
   def profile
-    unless regular_user?
-      render :file => './public/404.html', status: 404
-    end
+      render :file => './public/404.html', status: 404 unless regular_user?
   end
 
   def dashboard
-    unless merchant_user?
-      render :file => './public/404.html', status: 404
-    end
+      render :file => './public/404.html', status: 404 unless merchant_user?
   end
   private
   def user_params
