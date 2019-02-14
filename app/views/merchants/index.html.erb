@@ -17,7 +17,7 @@
 <% end %>
 
 <section class="statistics">
-  <div id="most-sold">
+  <div class="stat-column" id="most-sold">
     <ul>
       <% @most_sold.each do |merchant| %>
       <li><%= merchant.username %>- <%= number_to_currency(merchant.revenue) %></li>
@@ -25,7 +25,7 @@
     </ul>
   </div>
 
-  <div id="fastest-fulfillers">
+  <div class="stat-column" id="fastest-fulfillers">
     <h2>Fastest Fulfillers</h2>
     <ul>
       <% @fastest_fulfillers.each do |merchant| %>
@@ -34,7 +34,7 @@
     </ul>
   </div>
 
-  <div id="slowest-fulfillers">
+  <div class="stat-column" id="slowest-fulfillers">
     <h2>Slowest Fulfillers</h2>
     <ul>
       <% @slowest_fulfillers.each do |merchant| %>
@@ -43,7 +43,7 @@
     </ul>
   </div>
 
-  <div id="top-states">
+  <div class="stat-column" id="top-states">
     <h2>Top States</h2>
     <ul>
       <% @top_states.each do |state| %>
@@ -52,14 +52,16 @@
     </ul>
   </div>
 
-  <div id="top-cities">
+  <div class="stat-column" id="top-cities">
+    <h2>Top Cities</h2>
     <ul>
       <% @top_cities.each do |city| %>
         <li>City: <%= city.city %>, State: <%= city.state %>, Orders: <%= city.city_count %></li>
       <% end %>
     </ul>
   </div>
-  <div id="largest-orders">
+  <div class="stat-column" id="largest-orders">
+    <h2>Largest Orders</h2>
     <ul>
       <% @largest_orders.each do |order| %>
         <li>Order: <%= order.id %>, Count: <%= order.item_count %></li>

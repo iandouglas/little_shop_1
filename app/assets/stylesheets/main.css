@@ -1,0 +1,21 @@
+.statistics{
+  display: flex;
+  height: 300px;
+  padding: 5px;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+}
+
+.stat-column{
+  display: grid;
+  width: 400px;
+  grid-column: 30%;
+  grid-auto-rows: 50px 50px 50px;
+}
+
+#top-3-users{
+  padding-top: 30px;
+}
