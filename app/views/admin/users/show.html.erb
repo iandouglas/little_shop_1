@@ -7,4 +7,6 @@
   <p>Zip Code: <%= @user.zip_code %> </p>
   <p>Email: <%= @user.email %> </p>
   <p><%= link_to "Edit Profile", edit_profile_path(user_id: @user.id)  %></p>
+  <p><%= link_to "See #{@user.username}'s orders"%></p>
+  <p><%= link_to "Upgrade #{@user.username} to a Merchant"%></p>
 </section>
