@@ -72,8 +72,13 @@ RSpec.describe 'As an admin', type: :feature do
 
     click_link "Upgrade happy to a Merchant"
 
-    expect(current_path).to eq(admin_merchants_path(user))
+    expect(current_path).to eq(admin_merchant_path(user))
     expect(page).to have_content("happy is now a merchant")
+    expect(User.last.role).to eq('merchant')
+
+    visit admin_user_path(user)
+
+    expect(current_path).to eq(admin_merchant_path(user))
 
     click_link 'Logout'
     click_link 'Log In'
