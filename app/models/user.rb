@@ -75,7 +75,7 @@ class User < ApplicationRecord
   # def self.fulfillment_times(order)
   #   self.joins(items: :order_items)
   #   .select("users.username, avg(order_items.updated_at - order_items.created_at) as fulfill_time")
-  #   .where(order_items: {fulfilled:1}, enabled: :enabled)
+  #   .where(order_items: {fulfilled: 1}, enabled: :enabled)
   #   .order("fulfill_time ?", order.upcase)
   #   .group("users.username")
   #   limit(3)
@@ -89,5 +89,13 @@ class User < ApplicationRecord
     .group("users.state")
     .limit(3)
   end
-  #self.joins(:orders).select("users.state, count(orders) as total_orders").where(orders: {status: 1}).order("total_orders DESC").group(:state).last
+
+  def self.top_shipped_cities
+    self.joins(:orders)
+    .select("users.city, count(users.city) as city_count, users.state")
+    .where(orders: {status: 1})
+    .order("city_count DESC, users.state ASC")
+    .group("users.city, users.state")
+    .limit(3)
+  end
 end
