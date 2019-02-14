@@ -27,7 +27,7 @@ RSpec.describe "Login and Logout", type: :feature do
       visit root_path
 
       within '.navbar' do
-        expect(page).to_not have_content('bob')
+        expect(page).to_not have_content('Currently logged in as bob')
       end
 
       click_link 'Log In'
