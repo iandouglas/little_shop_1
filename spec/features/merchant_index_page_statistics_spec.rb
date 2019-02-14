@@ -38,8 +38,8 @@ RSpec.describe 'As a visitor', type: :feature do
       visit merchants_path
       within '.statistics' do
         within '#most-sold' do
-          expect(page).to have_content("#{merchant_3.username}- 100")
-          expect(page).to have_content("#{merchant_2.username}- $1000.00")
+          expect(page).to have_content("#{merchant_3.username}- $3,500.00")
+          expect(page).to have_content("#{merchant_2.username}- $1,000.00")
           expect(page).to have_content("#{merchant_5.username}- $800.00")
         end
       end
@@ -209,13 +209,11 @@ RSpec.describe 'As a visitor', type: :feature do
       OrderItem.create!(item_id: item_3.id, order_id: order_8.id, fulfilled: 1, current_price: 100.00, quantity: 20)
 
       visit merchants_path
-      within '.statistics' do
         within '#largest-orders' do
           expect(page).to have_content("Order: #{order_8.id}, Count: 20")
           expect(page).to have_content("Order: #{order_5.id}, Count: 16")
           expect(page).to have_content("Order: #{order_1.id}, Count: 13")
         end
-      end
     end
   end
 end

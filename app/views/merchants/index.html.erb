@@ -15,3 +15,14 @@
     <p>Date Registered: <%= m.created_at %></p>
   </section>
 <% end %>
+
+<section class="statistics">
+  <div id="most-sold">
+    <ul>
+      <% @most_sold.each do |merchant| %>
+      <li><%= merchant.username %>- <%= number_to_currency(merchant.revenue) %></li>
+      <% end %>
+    </ul>
+  </div>
+
+</section>
