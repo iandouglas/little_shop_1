@@ -18,6 +18,7 @@
 
 <section class="statistics">
   <div class="stat-column" id="most-sold">
+    <h3>Top Sellers</h3>
     <ul>
       <% @most_sold.each do |merchant| %>
       <li><%= merchant.username %>- <%= number_to_currency(merchant.revenue) %></li>
