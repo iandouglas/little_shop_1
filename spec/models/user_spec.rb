@@ -202,27 +202,32 @@ RSpec.describe User, type: :model do
   describe 'class methods' do
     describe 'self.top_merchants_by_price_and_qty' do
       it 'shows the top three merchants who have sold the most by price and quantity' do
-        user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
-        merchant_1 = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "1@54321", password: "password", role: 1, enabled: 0)
-        merchant_2 = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12@54321", password: "password", role: 1, enabled: 0)
-        merchant_4 = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "1234@54321", password: "password", role: 1, enabled: 0)
-        merchant_3 = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "123@54321", password: "password", role: 1, enabled: 0)
-        order_1 = Order.create(user_id: user.id)
-        order_1 = Order.create(user_id: user.id)
-        order_1 = Order.create(user_id: user.id)
-        order_1 = Order.create(user_id: user.id)
-        item_1 = Item.create(name: 'meh', description: "haha", quantity: 12, price: 2.50, thumbnail: "steve.jpg", user_id: merchant_1.id)
-        item_2 = Item.create(name: 'meh', description: "haha", quantity: 12, price: 200.00, thumbnail: "steve.jpg", user_id: merchant_2.id)
-        item_3 = Item.create(name: 'meh', description: "haha", quantity: 12, price: 100.00, thumbnail: "steve.jpg", user_id: merchant_3.id)
-        item_4 = Item.create(name: 'meh', description: "haha", quantity: 12, price: 50.00, thumbnail: "steve.jpg", user_id: merchant_4.id)
-        OrderItem.create(item_id: item_1.id, order_id: order_1.id, fulfilled: 1, current_price: 2.50, quantity: 4)
-        OrderItem.create(item_id: item_2.id, order_id: order_2.id, fulfilled: 1, current_price: 200.00, quantity: 5)
-        OrderItem.create(item_id: item_3.id, order_id: order_3.id, fulfilled: 1, current_price: 100.00, quantity: 5)
-        OrderItem.create(item_id: item_3.id, order_id: order_4.id, fulfilled: 1, current_price: 50.00, quantity: 5)
+        user = User.create!(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
+        merchant_1 = User.create!(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "1@54321", password: "password", role: 1, enabled: 0)
+        merchant_2 = User.create!(username: 'steve', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12@54321", password: "password", role: 1, enabled: 0)
+        merchant_4 = User.create!(username: 'jobby', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "1234@54321", password: "password", role: 1, enabled: 0)
+        merchant_3 = User.create!(username: 'cappy', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "123@54321", password: "password", role: 1, enabled: 0)
+        order_1 = Order.create!(user_id: user.id)
+        order_2 = Order.create!(user_id: user.id)
+        order_3 = Order.create!(user_id: user.id)
+        order_4 = Order.create!(user_id: user.id)
+        item_1 = Item.create!(name: 'meh', description: "haha", quantity: 12, price: 2.50, thumbnail: "steve.jpg", user_id: merchant_1.id)
+        item_2 = Item.create!(name: 'meh', description: "haha", quantity: 12, price: 200.00, thumbnail: "steve.jpg", user_id: merchant_2.id)
+        item_3 = Item.create!(name: 'meh', description: "haha", quantity: 12, price: 100.00, thumbnail: "steve.jpg", user_id: merchant_3.id)
+        item_4 = Item.create!(name: 'meh', description: "haha", quantity: 12, price: 50.00, thumbnail: "steve.jpg", user_id: merchant_4.id)
+        OrderItem.create!(item_id: item_1.id, order_id: order_1.id, fulfilled: 1, current_price: 2.50, quantity: 5)
+        OrderItem.create!(item_id: item_2.id, order_id: order_2.id, fulfilled: 1, current_price: 200.00, quantity: 5)
+        OrderItem.create!(item_id: item_3.id, order_id: order_3.id, fulfilled: 1, current_price: 100.00, quantity: 5)
+        OrderItem.create!(item_id: item_4.id, order_id: order_4.id, fulfilled: 1, current_price: 50.00, quantity: 5)
 
-        result = [merchant_2, merchant_3, merchant_4]
+        result = User.top_merchants_by_price_and_qty
 
-        expect(User.top_merchants_by_price_and_qty).to eq(result)
+        expect(result[0].username).to eq("steve")
+        expect(result[0].revenue).to eq(1000.0)
+        expect(result[1].username).to eq("cappy")
+        expect(result[1].revenue).to eq(500.00)
+        expect(result[2].username).to eq("jobby")
+        expect(result[2].revenue).to eq(250.00)
       end
     end
 
