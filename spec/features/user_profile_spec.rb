@@ -19,7 +19,7 @@ RSpec.describe 'as registered user', type: :feature do
   end
 
   it "can edit the information for that user" do
-    user = User.create!(username: 'bob', street: '123 main st', city: 'denver', state: 'CO', zip_code: 80216, email: 'bob@bob.net', password: 'password')
+    user = User.create(username: 'bob', street: '123 main st', city: 'denver', state: 'CO', zip_code: 80216, email: 'bob@bob.net', password: 'password')
 
     visit root_path
 
@@ -41,14 +41,30 @@ RSpec.describe 'as registered user', type: :feature do
     fill_in 'Zip code', with: "02018"
     fill_in 'Email', with: 'bob@bob.net'
 
+    first_pass = User.last.password_digest
+    # save_and_open_page
     click_on 'Save Changes'
 
     expect(current_path).to eq(profile_path)
+
 
     expect(page).to have_content("Street Address: 555 first st.")
     expect(page).to have_content("City: Boston")
     expect(page).to have_content("State: MA")
     expect(page).to have_content("Zip Code: 02018")
+    expect(User.last.password_digest).to eq(first_pass)
+
+    visit profile_path
+
+    first_pass = User.last.password_digest
+    click_link 'Edit Profile'
+    fill_in 'Password', with: "dave"
+    # save_and_open_page
+    fill_in 'Confirm password', with: "dave"
+    click_on 'Save Changes'
+
+    expect(first_pass).to_not eq(User.last.password_digest)
+    expect(page).to have_content('City: Boston')
   end
 
 
