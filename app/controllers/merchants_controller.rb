@@ -9,6 +9,7 @@ class MerchantsController<ApplicationController
       @slowest_fulfillers = User.fulfillment_times("asc")
       @most_sold = User.top_merchants_by_price_and_qty
       @top_states = User.top_shipped_states
+      @top_cities = User.top_shipped_cities
     end
   end
 

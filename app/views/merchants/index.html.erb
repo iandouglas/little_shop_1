@@ -52,4 +52,12 @@
     </ul>
   </div>
 
+  <div id="top-cities">
+    <ul>
+      <% @top_cities.each do |city| %>
+        <li>City: <%= city.city %>, State: <%= city.state %>, Orders: <%= city.city_count %></li>
+      <% end %>
+    </ul>
+  </div>
+
 </section>
