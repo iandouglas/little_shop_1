@@ -257,13 +257,13 @@ RSpec.describe User, type: :model do
         result_desc = User.fulfillment_times("desc")
         result_asc = User.fulfillment_times("asc")
 
-        expect(result_desc.first.username).to eq("bob")
-        expect(result_desc.second.username).to eq("steve")
-        expect(result_desc.third.username).to eq("cappy")
-
-        expect(result_asc.first.username).to eq("andre")
-        expect(result_asc.second.username).to eq("jobby")
+        expect(result_asc.first.username).to eq("bob")
+        expect(result_asc.second.username).to eq("steve")
         expect(result_asc.third.username).to eq("cappy")
+
+        expect(result_desc.first.username).to eq("andre")
+        expect(result_desc.second.username).to eq("jobby")
+        expect(result_desc.third.username).to eq("cappy")
       end
     end
 

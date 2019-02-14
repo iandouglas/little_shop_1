@@ -59,5 +59,12 @@
       <% end %>
     </ul>
   </div>
+  <div id="largest-orders">
+    <ul>
+      <% @largest_orders.each do |order| %>
+        <li>Order: <%= order.id %>, Count: <%= order.item_count %></li>
+      <% end %>
+    </ul>
+  </div>
 
 </section>
