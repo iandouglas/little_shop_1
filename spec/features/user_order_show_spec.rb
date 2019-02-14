@@ -6,9 +6,9 @@ RSpec.describe 'As a registered user', type: :feature do
     it 'Shows information about the order' do
       user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
       merchant = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12@54321", password: "password", role: 1, enabled: 0)
-      item_1 = Item.create(name: 'meh', description: "haha", quantity: 12, price: 2.50, thumbnail: "steve.jpg", user_id: merchant.id)
-      item_2 = Item.create(name: 'vfjkdnj', description: "fjndkjknk", quantity: 12, price: 2.50, thumbnail: "steve.jpg", user_id: merchant.id)
-      item_3 = Item.create(name: 'fvijodv', description: "oreijvioe", quantity: 12, price: 2.50, thumbnail: "steve.jpg", user_id: merchant.id)
+      item_1 = Item.create(name: 'meh', description: "haha", quantity: 12, price: 2.50, thumbnail: "https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjbp7n6_cbgAhUj5IMKHVSsBtcQjRx6BAgBEAU&url=https%3A%2F%2Fwww.homedepot.com%2Fp%2FPennington-4-in-Terra-Cotta-Clay-Pot-100043011%2F100332408&psig=AOvVaw2ny7lIDGagN51WGPeqax00&ust=1550637763700146", user_id: merchant.id)
+      item_2 = Item.create(name: 'vfjkdnj', description: "fjndkjknk", quantity: 12, price: 2.50, thumbnail: "https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjbp7n6_cbgAhUj5IMKHVSsBtcQjRx6BAgBEAU&url=https%3A%2F%2Fwww.homedepot.com%2Fp%2FPennington-4-in-Terra-Cotta-Clay-Pot-100043011%2F100332408&psig=AOvVaw2ny7lIDGagN51WGPeqax00&ust=1550637763700146", user_id: merchant.id)
+      item_3 = Item.create(name: 'fvijodv', description: "oreijvioe", quantity: 12, price: 2.50, thumbnail: "https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjbp7n6_cbgAhUj5IMKHVSsBtcQjRx6BAgBEAU&url=https%3A%2F%2Fwww.homedepot.com%2Fp%2FPennington-4-in-Terra-Cotta-Clay-Pot-100043011%2F100332408&psig=AOvVaw2ny7lIDGagN51WGPeqax00&ust=1550637763700146", user_id: merchant.id)
       order_1 = Order.create(user_id: user.id)
       order_2 = Order.create(user_id: user.id)
       order_item_1 = OrderItem.create(item_id: item_1.id, order_id: order_1.id, fulfilled: 0, current_price: 5.0, quantity: 2)
