@@ -65,6 +65,19 @@ RSpec.describe 'as registered user', type: :feature do
 
     expect(first_pass).to_not eq(User.last.password_digest)
     expect(page).to have_content('City: Boston')
+
+    click_link 'Logout'
+    click_link 'Log In'
+
+    click_link 'Log In'
+
+    fill_in :email, with: user.email
+    fill_in :password, with: 'dave'
+
+    click_button 'Sign In'
+
+    expect(current_path).to eq(profile_path)
+    expect(page).to have_content("City: Boston")
   end
 
 
