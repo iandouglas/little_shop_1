@@ -23,11 +23,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = current_user
+    which_user
   end
 
   def update
-    @user = current_user
+    which_user
     if profile_params[:password] == ""
       new_params = profile_params.except(:password)
       @user.update(new_params)
@@ -35,7 +35,11 @@ class UsersController < ApplicationController
       @user.update(profile_params)
     end
     if @user.save
-      redirect_to profile_path
+      if admin_user?
+        redirect_to admin_user_show_path(@user)
+      elsif regular_user?
+        redirect_to profile_path
+      end
     else
       flash[:error] = "This should be error block messages"
       render :edit
@@ -56,6 +60,14 @@ class UsersController < ApplicationController
 
   def profile_params
   params.require(:profile).permit(:username, :street, :city, :state, :zip_code, :email, :password, :confirm_password)
+  end
+
+  def which_user
+    if admin_user?
+      @user = User.find(params[:user_id])
+    else
+      @user = current_user
+    end
   end
 
 end
