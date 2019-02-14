@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     get '/users', to: 'users#index', as: 'users'
     get '/dashboard', to: 'users#dashboard', as: 'dashboard'
     get '/users/:id', to: 'users#show', as: 'user'
-    get '/merchants/:id', to: 'users#merchants', as: 'merchants'
+    get '/merchants/:id', to: 'users#merchants', as: 'merchant'
     get '/upgrade', to: 'users#update', as: 'upgrade'
   end
 end
