@@ -360,7 +360,47 @@ RSpec.describe User, type: :model do
     end
 
     describe 'self.top_biggest_orders' do
-      it 'shows the top three orders by qty of items shipped'
+      it 'shows the top three orders by qty of items shipped' do
+        user_1 = User.create!(username: 'user', street: "1234", city: "bob", state: "MA", zip_code: 12345, email: "a@54321", password: "password", role: 0, enabled: 0)
+        user_2 = User.create!(username: 'user', street: "1234", city: "candle", state: "CA", zip_code: 12345, email: "s12345@54321", password: "password", role: 0, enabled: 0)
+        user_3 = User.create!(username: 'user', street: "1234", city: "candle", state: "CO", zip_code: 12345, email: "d12345@54321", password: "password", role: 0, enabled: 0)
+        user_4 = User.create!(username: 'user', street: "1234", city: "carber", state: "bobby", zip_code: 12345, email: "f12345@54321", password: "password", role: 0, enabled: 0)
+        merchant_2 = User.create!(username: 'steve', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12@54321", password: "password", role: 1, enabled: 0)
+        merchant_1 = User.create!(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "1@54321", password: "password", role: 1, enabled: 0)
+        merchant_4 = User.create!(username: 'jobby', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "1234@54321", password: "password", role: 1, enabled: 0)
+        merchant_3 = User.create!(username: 'cappy', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "123@54321", password: "password", role: 1, enabled: 0)
+        merchant_5 = User.create!(username: 'andre', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12312@54321", password: "password", role: 1, enabled: 0)
+        order_1 = Order.create!(user_id: user_1.id, status: 1)
+        order_2 = Order.create!(user_id: user_2.id, status: 1)
+        order_3 = Order.create!(user_id: user_2.id, status: 1)
+        order_4 = Order.create!(user_id: user_3.id, status: 1)
+        order_5 = Order.create!(user_id: user_3.id, status: 1)
+        order_6 = Order.create!(user_id: user_3.id, status: 1)
+        order_7 = Order.create!(user_id: user_1.id, status: 1)
+        order_8 = Order.create!(user_id: user_4.id, status: 1)
+        item_1 = Item.create!(name: 'meh', description: "haha", quantity: 12, price: 2.50, thumbnail: "steve.jpg", user_id: merchant_1.id)
+        item_2 = Item.create!(name: 'meh', description: "haha", quantity: 12, price: 200.00, thumbnail: "steve.jpg", user_id: merchant_2.id)
+        item_3 = Item.create!(name: 'meh', description: "haha", quantity: 12, price: 100.00, thumbnail: "steve.jpg", user_id: merchant_3.id)
+        item_4 = Item.create!(name: 'meh', description: "haha", quantity: 12, price: 50.00, thumbnail: "steve.jpg", user_id: merchant_4.id)
+        item_5 = Item.create!(name: 'meh', description: "haha", quantity: 12, price: 50.00, thumbnail: "steve.jpg", user_id: merchant_5.id)
+        OrderItem.create!(item_id: item_2.id, order_id: order_2.id, fulfilled: 1, current_price: 200.00, quantity: 5)
+        OrderItem.create!(item_id: item_5.id, order_id: order_5.id, fulfilled: 1, current_price: 50.00, quantity: 16)
+        OrderItem.create!(item_id: item_1.id, order_id: order_1.id, fulfilled: 1, current_price: 2.50, quantity: 13)
+        OrderItem.create!(item_id: item_4.id, order_id: order_4.id, fulfilled: 1, current_price: 100.00, quantity: 5)
+        OrderItem.create!(item_id: item_3.id, order_id: order_3.id, fulfilled: 1, current_price: 100.00, quantity: 5)
+        OrderItem.create!(item_id: item_3.id, order_id: order_6.id, fulfilled: 1, current_price: 100.00, quantity: 5)
+        OrderItem.create!(item_id: item_3.id, order_id: order_7.id, fulfilled: 1, current_price: 100.00, quantity: 5)
+        OrderItem.create!(item_id: item_3.id, order_id: order_8.id, fulfilled: 1, current_price: 100.00, quantity: 20)
+
+        result = User.top_biggest_orders
+
+        expect(result.first.order_id).to eq(order_8.id)
+        expect(result.first.item_count).to eq(20)
+        expect(result.second.order_id).to eq(order_5.id)
+        expect(result.second.item_count).to eq(16)
+        expect(result.third.order_id).to eq(order_1.id)
+        expect(result.third.item_count).to eq(13)
+      end
     end
   end
 end
