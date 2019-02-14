@@ -1,5 +1,7 @@
 <header>
-  <%= link_to 'Register', new_user_path%>
+  <% unless current_user %>
+    <%= link_to 'Register', new_user_path%>
+  <% end %>
   <%= link_to "Home", root_path %>
   <%= link_to "Items", items_path %>
   <%= link_to "Merchants", merchants_path %>
