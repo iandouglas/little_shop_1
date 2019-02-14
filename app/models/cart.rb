@@ -10,7 +10,23 @@ class Cart
   end
 
   def add_item(id)
+    if @contents[id] == nil
+      @contents[id] = 0
+    end
     @contents[id] += 1
   end
 
+  def all_items
+    items = {}
+    @contents.each { |item_id, quantity| items[Item.find(item_id)] = quantity}
+    items
+  end
+
+  def subtotal(item)
+    all_items[item] * item.price
+  end
+
+  def grand_total
+    all_items.keys.sum {|item| subtotal(item)}
+  end
 end
