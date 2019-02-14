@@ -9,8 +9,8 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
-      flash[:success] = "You've successfully registered your account"
-      redirect_to profile_path(@user)
+      flash[:success] = "You've successfully registered your account and logged in"
+      redirect_to profile_path
     else
       if User.find_by(email: @user.email)
         flash[:error] = "This E-mail is already registered"
