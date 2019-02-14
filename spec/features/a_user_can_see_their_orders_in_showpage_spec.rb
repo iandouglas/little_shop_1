@@ -46,16 +46,16 @@ RSpec.describe 'as a registered user', type: :feature do
 
       within "#order-#{order_1.id}" do
         expect(page).to have_link("ID: #{order_1.id}")
-        expect(page).to have_link("Order Placed: #{order_1.created_at}")
-        expect(page).to have_link("Last Updated: #{order_1.updated_at}")
-        expect(page).to have_link("Current Status: #{order_1.status}")
-        expect(page).to have_link("Total Items: #{order_1.total_item_quantity}")
-        expect(page).to have_link("Grand Total: #{order_1.total_item_price}")
+        expect(page).to have_content("Order Placed: #{order_1.created_at}")
+        expect(page).to have_content("Last Updated: #{order_1.updated_at}")
+        expect(page).to have_content("Current Status: #{order_1.status}")
+        expect(page).to have_content("Total Items: #{order_1.total_item_quantity}")
+        expect(page).to have_content("Grand Total: #{order_1.total_item_price}")
       end
       within "#order-#{order_2.id}" do
         expect(page).to have_link("ID: #{order_2.id}")
-        expect(page).to have_link("Total Items: #{order_2.total_item_quantity}")
-        expect(page).to have_link("Grand Total: #{order_2.total_item_price}")
+        expect(page).to have_content("Total Items: #{order_2.total_item_quantity}")
+        expect(page).to have_content("Grand Total: #{order_2.total_item_price}")
       end
     end
   end
