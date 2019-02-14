@@ -36,7 +36,7 @@ class UsersController < ApplicationController
     end
     if @user.save
       if admin_user?
-        redirect_to admin_user_show_path(@user)
+        redirect_to admin_user_path(@user)
       elsif regular_user?
         redirect_to profile_path
       end

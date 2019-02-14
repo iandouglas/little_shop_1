@@ -63,7 +63,6 @@ RSpec.describe 'As an admin', type: :feature do
   it 'lets an admin upgrade a user to a merchant' do
     admin = User.create!(username: 'test', street: '123 main st', city: 'denver', state: 'CO', zip_code: 80216, email: 'test@bob.net', password: 'password', role: 2)
     user = User.create!(username: 'happy', street: '432 main st', city: 'steve', state: 'CO', zip_code: 80126, email: 'te@bob.net', password: 'password', role: 0)
-    item = Item.create(name: "blah", description: "meh of meh", quantity: 200, price: 2.50, thumbnail: "haha", user_id: merchant.id)
     visit login_path
     fill_in 'Email', with: 'test@bob.net'
     fill_in 'Password', with: 'password'
@@ -71,18 +70,17 @@ RSpec.describe 'As an admin', type: :feature do
 
     visit admin_user_path(user)
 
-    click_link "Upgrade #{@user.username} to a Merchant"
+    click_link "Upgrade happy to a Merchant"
 
-    expect(current_path).to eq(admin_merchant_path(user))
+    expect(current_path).to eq(admin_merchants_path(user))
     expect(page).to have_content("happy is now a merchant")
 
     click_link 'Logout'
-    visit 'login_path'
+    click_link 'Log In'
     fill_in 'Email', with: 'te@bob.net'
     fill_in 'Password', with: 'password'
     click_button 'Sign In'
 
     expect(current_path).to eq(dashboard_path)
-
   end
 end
