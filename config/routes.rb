@@ -32,5 +32,6 @@ Rails.application.routes.draw do
     get '/users/:id', to: 'users#show', as: 'user'
     get '/merchants/:id', to: 'users#merchants', as: 'merchant'
     get '/role', to: 'users#update', as: 'role'
+    get '/users/:id/orders', to:'users/orders#index', as: 'user_orders'
   end
 end
