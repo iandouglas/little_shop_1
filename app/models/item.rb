@@ -6,4 +6,8 @@ class Item < ApplicationRecord
   def order_quantity(order_id)
     OrderItem.find_by(order_id: order_id).quantity
   end
+
+  def quantity_price(order_id)
+    OrderItem.find_by(order_id: order_id).current_price
+  end
 end
