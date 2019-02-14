@@ -3,6 +3,7 @@
     <h1><%= item.name %></h1>
     <%= image_tag item.thumbnail %>
     <p><%= item.user.username %></p>
+    <p><%= item.price %></p>
     <p><%= quantity %></p>
     <p><%= @cart.subtotal(item) %></p>
   </section>

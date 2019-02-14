@@ -13,4 +13,9 @@ RSpec.describe User, type: :model do
     it {should validate_uniqueness_of :username}
     it {should validate_uniqueness_of :email}
   end
+
+  describe 'realationships' do
+    it {should have_many :orders}
+    it {should have_many :items}
+  end
 end
