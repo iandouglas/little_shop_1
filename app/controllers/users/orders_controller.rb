@@ -1,7 +1,6 @@
 class Users::OrdersController < ApplicationController
+  before_action :require_regular_user
   def index
-    unless regular_user?
-      render :file => './public/404.html', status: 404
-    end
+    @orders = current_user.orders
   end
 end
