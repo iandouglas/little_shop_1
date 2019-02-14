@@ -8,7 +8,7 @@
     <section id="item-<%= item.id %>">
     <p>Name: <%= item.name %></p>
     <p>ID: <%= item.id %></p>
-    <%= image_tag "#{item.thumbnail}" %></p>
+    <%= image_tag "#{item.thumbnail}" %>
     <p>Price: <%= item.price %></p>
     <p>Current Inventory: <%= item.quantity %></p>
     <% if admin_user? && @merchant%>
