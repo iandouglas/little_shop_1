@@ -198,4 +198,48 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe 'class methods' do
+    describe 'self.top_merchants_by_price_and_qty' do
+      it 'shows the top three merchants who have sold the most by price and quantity' do
+        user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
+        merchant_1 = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "1@54321", password: "password", role: 1, enabled: 0)
+        merchant_2 = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12@54321", password: "password", role: 1, enabled: 0)
+        merchant_4 = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "1234@54321", password: "password", role: 1, enabled: 0)
+        merchant_3 = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "123@54321", password: "password", role: 1, enabled: 0)
+        order_1 = Order.create(user_id: user.id)
+        order_1 = Order.create(user_id: user.id)
+        order_1 = Order.create(user_id: user.id)
+        order_1 = Order.create(user_id: user.id)
+        item_1 = Item.create(name: 'meh', description: "haha", quantity: 12, price: 2.50, thumbnail: "steve.jpg", user_id: merchant_1.id)
+        item_2 = Item.create(name: 'meh', description: "haha", quantity: 12, price: 200.00, thumbnail: "steve.jpg", user_id: merchant_2.id)
+        item_3 = Item.create(name: 'meh', description: "haha", quantity: 12, price: 100.00, thumbnail: "steve.jpg", user_id: merchant_3.id)
+        item_4 = Item.create(name: 'meh', description: "haha", quantity: 12, price: 50.00, thumbnail: "steve.jpg", user_id: merchant_4.id)
+        OrderItem.create(item_id: item_1.id, order_id: order_1.id, fulfilled: 1, current_price: 2.50, quantity: 4)
+        OrderItem.create(item_id: item_2.id, order_id: order_2.id, fulfilled: 1, current_price: 200.00, quantity: 5)
+        OrderItem.create(item_id: item_3.id, order_id: order_3.id, fulfilled: 1, current_price: 100.00, quantity: 5)
+        OrderItem.create(item_id: item_3.id, order_id: order_4.id, fulfilled: 1, current_price: 50.00, quantity: 5)
+
+        result = [merchant_2, merchant_3, merchant_4]
+
+        expect(User.top_merchants_by_price_and_qty).to eq(result)
+      end
+    end
+
+    describe 'self.fullfillment_time(order)' do
+      it 'returns the top or bottom three merchants by their avg fulfillment time'
+    end
+
+    describe 'self.top_shipped_states' do
+      it 'shows the top three states by number of shipped items'
+    end
+
+    describe 'self.top_shipped_cities' do
+      it 'shows the top three cities by number of shipped items'
+    end
+
+    describe 'self.top_biggest_orders' do
+      it 'shows the top three orders by qty of items shipped'
+    end
+  end
 end
