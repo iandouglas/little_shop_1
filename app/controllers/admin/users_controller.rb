@@ -35,9 +35,4 @@ before_action :require_admin
       redirect_to admin_user_path(user.id)
     end
   end
-
-  def merchants
-    @merchant = User.find(params[:id])
-  end
-
 end
