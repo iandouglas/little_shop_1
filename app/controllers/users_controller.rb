@@ -28,14 +28,18 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-    if profile_params[:password] && profile_params[:confirm_password] == ""
-      new_params = profile_params.except(:password, :confirm_password)
+    if profile_params[:password] == ""
+      new_params = profile_params.except(:password)
       @user.update(new_params)
-    elsif profile_params[:password] == profile_params[:confirm_password]
-      @user.update(profile_params.except(:confirm_password))
+    elsif profile_params[:password]
+      @user.update(profile_params)
     end
-    @user.save
-    redirect_to profile_path
+    if @user.save
+      redirect_to profile_path
+    else
+      flash[:error] = "This should be error block messages"
+      render :edit
+    end
   end
 
   def profile
