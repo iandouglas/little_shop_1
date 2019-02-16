@@ -14,13 +14,12 @@ RSpec.describe 'as visitor', type: :feature do
     fill_in 'Zip code', with: 80216
     fill_in 'Email', with: 'bob@bob.net'
     fill_in 'Password', with: 'password'
-    fill_in 'Confirm password', with: 'password'
+    fill_in 'Password confirmation', with: 'password'
     click_on 'Register Now'
-
     user = User.last
 
     expect(page).to have_content("You've successfully registered your account")
-    expect(current_path).to eq(profile_path(user))
+    expect(current_path).to eq(profile_path)
     expect(page).to have_content("Welcome #{user.username}!")
   end
 
@@ -35,7 +34,7 @@ RSpec.describe 'as visitor', type: :feature do
     fill_in 'State', with: 'CO'
     fill_in 'Email', with: 'bob@bob.net'
     fill_in 'Password', with: 'password'
-    fill_in 'Confirm password', with: 'password'
+    fill_in 'Password confirmation', with: 'password'
     click_on 'Register Now'
 
     expect(page).to have_content("You are missing information")
@@ -56,7 +55,7 @@ RSpec.describe 'as visitor', type: :feature do
     fill_in 'Zip code', with: 80216
     fill_in 'Email', with: 'bob@bob.net'
     fill_in 'Password', with: 'password'
-    fill_in 'Confirm password', with: 'password'
+    fill_in 'Password confirmation', with: 'password'
     click_on 'Register Now'
 
     expect(page).to have_content('This E-mail is already registered')

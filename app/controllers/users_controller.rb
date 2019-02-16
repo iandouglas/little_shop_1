@@ -9,8 +9,8 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
-      flash[:success] = "You've successfully registered your account"
-      redirect_to profile_path(@user)
+      flash[:success] = "You've successfully registered your account and logged in"
+      redirect_to profile_path
     else
       if User.find_by(email: @user.email)
         flash[:error] = "This E-mail is already registered"
@@ -27,29 +27,27 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(current_user.id)
-    if profile_params[:password] && profile_params[:confirm_password] == ""
-      new_params = profile_params.except(:password, :confirm_password)
+    @user = current_user
+    if profile_params[:password] == ""
+      new_params = profile_params.except(:password)
       @user.update(new_params)
-    elsif profile_params[:password] == profile_params[:confirm_password]
-      @user.update(profile_params.except(:confirm_password))
-      @user.save
+    elsif profile_params[:password]
+      @user.update(profile_params)
     end
-
-    @user.save
-    redirect_to profile_path
+    if @user.save
+      redirect_to profile_path
+    else
+      flash[:error] = "This should be error block messages"
+      render :edit
+    end
   end
 
   def profile
-    unless regular_user?
-      render :file => './public/404.html', status: 404
-    end
+      render :file => './public/404.html', status: 404 unless regular_user?
   end
 
   def dashboard
-    unless merchant_user?
-      render :file => './public/404.html', status: 404
-    end
+      render :file => './public/404.html', status: 404 unless merchant_user?
   end
   private
   def user_params

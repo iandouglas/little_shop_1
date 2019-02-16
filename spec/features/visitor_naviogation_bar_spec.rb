@@ -35,8 +35,6 @@ RSpec.describe 'navigation', type: :feature do
     expect(page).to have_http_status(404)
     visit profile_orders_path
     expect(page).to have_http_status(404)
-    visit logout_path
-    expect(page).to have_http_status(404)
     visit dashboard_path
     expect(page).to have_http_status(404)
     visit admin_dashboard_path
@@ -59,6 +57,7 @@ RSpec.describe 'navigation', type: :feature do
       expect(page).to_not have_link('Dashboard')
       expect(page).to_not have_link('Log In')
       expect(page).to have_link('Logout')
+      expect(page).to_not have_link('Register')
 
 
 
@@ -87,6 +86,7 @@ RSpec.describe 'navigation', type: :feature do
       expect(page).to_not have_link('Orders')
       expect(page).to_not have_link('Log In')
       expect(page).to have_link('Logout')
+      expect(page).to_not have_link('Register')
 
       click_link 'Logout'
       expect(current_path).to eq(root_path)
@@ -117,6 +117,7 @@ RSpec.describe 'navigation', type: :feature do
       expect(current_path).to_not eq(dashboard_path)
       expect(page).to have_content("Logout")
       expect(page).to_not have_content("Log In")
+      expect(page).to_not have_link("Register")
 
       click_link 'Logout'
       expect(current_path).to eq(root_path)

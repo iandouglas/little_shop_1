@@ -26,6 +26,10 @@ RSpec.describe "Login and Logout", type: :feature do
 
       visit root_path
 
+      within '.navbar' do
+        expect(page).to_not have_content('Currently logged in as bob')
+      end
+
       click_link 'Log In'
 
       fill_in :email, with: user.email
@@ -33,8 +37,12 @@ RSpec.describe "Login and Logout", type: :feature do
 
       click_button 'Sign In'
 
+      within '.navbar' do
+        expect(page).to have_content('bob')
+      end
       expect(current_path).to eq(profile_path)
       expect(page).to have_content("You are now logged in")
+
 
     end
 
