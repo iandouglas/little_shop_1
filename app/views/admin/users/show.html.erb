@@ -1,0 +1,10 @@
+<h1>Welcome <%= current_user.username %>!</h1>
+<section class="user-info">
+  <p>Name: <%= @user.username %> </p>
+  <p>Street Address: <%= @user.street %> </p>
+  <p>City: <%= @user.city %> </p>
+  <p>State: <%= @user.state %> </p>
+  <p>Zip Code: <%= @user.zip_code %> </p>
+  <p>Email: <%= @user.email %> </p>
+  <p><%= link_to "Edit Profile", edit_profile_path %></p>
+</section>
