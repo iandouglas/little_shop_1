@@ -26,5 +26,47 @@ RSpec.describe Cart do
         expect(cart.contents).to eq({'1'=>7, '2'=>2})
       end
     end
+
+    describe '.all_items' do
+      it 'should return me all items in the cart' do
+        user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
+        item = Item.create(name: 'pot', description:'small pot for plants', quantity: 30, price: 2.49, thumbnail: 'thumbnail.jpeg', user: user)
+        item_2 = Item.create(name: 'crayon', description:'small crayon for plants', quantity: 40, price: 13.5, thumbnail: 'thumbnail.jpeg', user: user)
+        cart = Cart.new({
+          "#{item.id}" => 6,
+          "#{item_2.id}" => 2
+          })
+
+        expect(cart.all_items).to eq({item => 6, item_2 => 2})
+      end
+    end
+
+    describe '.subtotal' do
+      it 'should return me all items in the cart' do
+        user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
+        item = Item.create(name: 'pot', description:'small pot for plants', quantity: 30, price: 2.49, thumbnail: 'thumbnail.jpeg', user: user)
+        item_2 = Item.create(name: 'crayon', description:'small crayon for plants', quantity: 40, price: 13.5, thumbnail: 'thumbnail.jpeg', user: user)
+        cart = Cart.new({
+          "#{item.id}" => 6,
+          "#{item_2.id}" => 2
+          })
+
+        expect(cart.subtotal(item_2)).to eq(27.0)
+      end
+    end
+
+    describe '.items_subtotal' do
+      it 'should return me all items in the cart' do
+        user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
+        item = Item.create(name: 'pot', description:'small pot for plants', quantity: 30, price: 2.49, thumbnail: 'thumbnail.jpeg', user: user)
+        item_2 = Item.create(name: 'crayon', description:'small crayon for plants', quantity: 40, price: 13.5, thumbnail: 'thumbnail.jpeg', user: user)
+        cart = Cart.new({
+          "#{item.id}" => 6,
+          "#{item_2.id}" => 2
+          })
+
+        expect(cart.grand_total).to eq(41.94)
+      end
+    end
   end
 end
