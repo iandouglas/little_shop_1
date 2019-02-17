@@ -10,7 +10,7 @@
     </section>
   <% end %>
   <h3>Cart Total: <%= number_to_currency(@cart.grand_total) %></p>
-  <%= button_to 'Empty Cart', cart_path(@cart) %>
+  <%= button_to 'Empty Cart', cart_path(@cart), method: :delete %>
 <% else %>
 <h1>You Have No Items In Your Cart</h1>
 <% end %>
