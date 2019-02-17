@@ -9,4 +9,4 @@
   </section>
 <% end %>
 <h3>Cart Total: <%= number_to_currency(@cart.grand_total) %></p>
-<%= link_to 'Empty Cart', cart_path(@cart) %>
+<%= button_to 'Empty Cart', cart_path(@cart) %>
