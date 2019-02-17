@@ -1,4 +1,4 @@
-class CartsController < ApplicationController
+class CartController < ApplicationController
 
   def create
     item = Item.find(params[:item_id])
@@ -16,7 +16,7 @@ class CartsController < ApplicationController
 
   def destroy
     session[:cart].clear
-    redirect_to carts_path
+    redirect_to cart_index_path
   end
 
 end
