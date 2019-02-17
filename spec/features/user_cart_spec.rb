@@ -127,8 +127,12 @@ RSpec.describe 'as visitor', type: :feature do
 
       within "#item-#{item_2.id}" do
         click_button '+'
+      end
+      within "#item-#{item_2.id}" do
         expect(page).to have_content('Quantity: 2')
         click_button '-'
+      end
+      within "#item-#{item_2.id}" do
         expect(page).to have_content('Quantity: 1')
       end
     end

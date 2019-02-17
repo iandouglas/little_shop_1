@@ -29,4 +29,8 @@ class Cart
   def grand_total
     all_items.keys.sum {|item| subtotal(item)}
   end
+
+  def update_items_quantity(type, id)
+    @contents[id] += 1
+  end
 end

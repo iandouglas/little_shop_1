@@ -8,6 +8,7 @@
       <p>Quantity: <%= quantity %></p>
       <p>Total: <%= number_to_currency(@cart.subtotal(item)) %></p>
       <%= button_to '+', add_cart_item_path(item.id), method: :put %>
+      <%= button_to '-', remove_cart_item_path(item.id), method: :put %>
       <%= button_to 'Remove Item', delete_cart_item_path(item.id), method: :delete %>
     </section>
   <% end %>
