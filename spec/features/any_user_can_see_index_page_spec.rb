@@ -23,6 +23,14 @@ RSpec.describe 'When I visit the items catalog', type: :feature do
         expect(page).to have_content("Items in stock: 30")
         expect(page).to have_content("Price: $2.50")
       end
+
+      within "#item-#{item_2.id}" do
+        expect(page).to have_content("pot_2")
+        expect(page).to have_link("#{item_2.name}", href: item_path(item_2))
+        expect(page).to have_content("Merchant: Jon")
+        expect(page).to have_content("Items in stock: 20")
+        expect(page).to have_content("Price: $3.00")
+      end
     end
   end
 
