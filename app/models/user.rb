@@ -6,5 +6,5 @@ class User < ApplicationRecord
 
   has_many :orders
   has_many :items
- enum role: ['user', 'merchant', 'admin']
+  enum role: ['user', 'merchant', 'admin']
 end
