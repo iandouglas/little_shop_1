@@ -162,6 +162,23 @@ RSpec.describe 'as visitor', type: :feature do
         expect(page).to have_content('Quantity: 5')
       end
     end
+
+    it 'removes the item from my cart if i remove quantity to 0' do
+      user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
+      item = Item.create(name: 'pot', description:'small pot for plants', quantity: 30, price: 2.49, thumbnail: 'https://images-na.ssl-images-amazon.com/images/I/81%2BG9LfH-uL._SL1500_.jpg', user: user)
+      item_2 = Item.create(name: 'crayon', description:'draw things', quantity: 5, price: 0.01, thumbnail: 'https://images-na.ssl-images-amazon.com/images/I/81%2BG9LfH-uL._SL1500_.jpg', user: user)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+      visit item_path(item.id)
+      click_button 'Add to Cart'
+      visit item_path(item_2.id)
+      click_button 'Add to Cart'
+      click_link 'Cart(2)'
+
+      within "#item-#{item_2.id}" do
+        click_button '-'
+      end
+      expect(page).to_not have_content("#{item_2.name}")
+    end
   end
 
 end

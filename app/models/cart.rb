@@ -36,6 +36,9 @@ class Cart
       @contents[id] += 1 unless item_stock == @contents[id]
     elsif type == 'remove'
       @contents[id] -= 1
+      if @contents[id] == 0
+        @contents.delete(id)
+      end
     end
   end
 end
