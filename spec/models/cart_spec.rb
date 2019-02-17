@@ -68,5 +68,20 @@ RSpec.describe Cart do
         expect(cart.grand_total).to eq(41.94)
       end
     end
+
+    describe '.empty_cart' do
+      it 'clears all contents in the cart' do
+        user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
+        item = Item.create(name: 'pot', description:'small pot for plants', quantity: 30, price: 2.49, thumbnail: 'thumbnail.jpeg', user: user)
+        item_2 = Item.create(name: 'crayon', description:'small crayon for plants', quantity: 40, price: 13.5, thumbnail: 'thumbnail.jpeg', user: user)
+        cart = Cart.new({
+          "#{item.id}" => 6,
+          "#{item_2.id}" => 2
+          })
+        cart.empty_cart
+
+        expect(cart.contents).to eq({})
+      end
+    end
   end
 end
