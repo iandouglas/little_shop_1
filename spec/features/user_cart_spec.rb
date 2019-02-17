@@ -112,7 +112,7 @@ RSpec.describe 'as visitor', type: :feature do
     it 'lets me modify the item quanititys in my cart' do
       user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
       item = Item.create(name: 'pot', description:'small pot for plants', quantity: 30, price: 2.49, thumbnail: 'https://images-na.ssl-images-amazon.com/images/I/81%2BG9LfH-uL._SL1500_.jpg', user: user)
-      item_2 = Item.create(name: 'bigger pot', description:'small pot for plants', quantity: 5, price: 0.01, thumbnail: 'https://images-na.ssl-images-amazon.com/images/I/81%2BG9LfH-uL._SL1500_.jpg', user: user)
+      item_2 = Item.create(name: 'crayon', description:'draw things', quantity: 5, price: 0.01, thumbnail: 'https://images-na.ssl-images-amazon.com/images/I/81%2BG9LfH-uL._SL1500_.jpg', user: user)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
       visit item_path(item.id)
       click_button 'Add to Cart'
