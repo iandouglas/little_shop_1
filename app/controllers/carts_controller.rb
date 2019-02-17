@@ -15,7 +15,7 @@ class CartsController < ApplicationController
   end
 
   def destroy
-    @cart.empty_cart
+    session[:cart].clear
     redirect_to carts_path
   end
 
