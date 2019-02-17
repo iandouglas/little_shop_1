@@ -1,12 +1,16 @@
-<%= @items.each do |item, quantity| %>
-  <section id="item-<%= item.id %>">
-    <h1><%= item.name %></h1>
-    <%= image_tag item.thumbnail %>
-    <p>Merchant: <%= item.user.username %></p>
-    <p>Price: <%= number_to_currency(item.price) %></p>
-    <p>Quantity: <%= quantity %></p>
-    <p>Total: <%= number_to_currency(@cart.subtotal(item)) %></p>
-  </section>
+<% if @cart.contents.count != 0 %>
+  <%= @items.each do |item, quantity| %>
+    <section id="item-<%= item.id %>">
+      <h1><%= item.name %></h1>
+      <%= image_tag item.thumbnail %>
+      <p>Merchant: <%= item.user.username %></p>
+      <p>Price: <%= number_to_currency(item.price) %></p>
+      <p>Quantity: <%= quantity %></p>
+      <p>Total: <%= number_to_currency(@cart.subtotal(item)) %></p>
+    </section>
+  <% end %>
+  <h3>Cart Total: <%= number_to_currency(@cart.grand_total) %></p>
+  <%= button_to 'Empty Cart', cart_path(@cart) %>
+<% else %>
+<h1>You Have No Items In Your Cart</h1>
 <% end %>
-<h3>Cart Total: <%= number_to_currency(@cart.grand_total) %></p>
-<%= link_to 'Empty Cart', cart_path(@cart) %>

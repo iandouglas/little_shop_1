@@ -82,7 +82,15 @@ RSpec.describe 'as visitor', type: :feature do
       expect(page).to have_content("Quantity: 1")
       expect(page).to have_content("Total: $2.49")
       expect(page).to have_content("Cart Total: $2.50")
-      expect(page).to have_link("Empty Cart")
+      expect(page).to have_button("Empty Cart")
+    end
+
+    it 'tells me i have no items in my cart if i have not added items to my cart yet' do
+      visit items_path
+      click_link 'Cart(0)'
+
+      expect(page).to have_content('You Have No Items In Your Cart')
+      expect(page).to_not have_button('Empty Cart')
     end
   end
 
