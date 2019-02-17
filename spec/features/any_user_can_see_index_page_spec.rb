@@ -13,16 +13,15 @@ RSpec.describe 'When I visit the items catalog', type: :feature do
 
       visit items_path
 
+      expect(page).to have_content("Items Catalog")
+
       within "#item-#{item_1.id}" do
         expect(page).to have_content("pot_1")
         expect(page).to have_link("#{item_1.name}", href: item_path(item_1))
-        expect(page).to have_xpath("//img[contains(@src,'#{File.basename(item_1.thumbnail)}')]")
-        expect(page).to have_link("#{item_1.thumbnail}", href: item_path(item_1))
+        # expect(page).to have_link("#{item_1.thumbnail}", href: item_path(item_1))
         expect(page).to have_content("Merchant: Jon")
         expect(page).to have_content("Items in stock: 30")
         expect(page).to have_content("Price: $2.50")
-        expect(page).to have_content("Year: 1111")
-
       end
     end
   end

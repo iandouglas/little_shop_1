@@ -1,1 +1,11 @@
+<h1>Items Catalog</h1>
 
+<% @items.each do |item| %>
+  <section id="item-<%=item.id%>">
+    <%= link_to item.name, item_path(item) %>
+    <%= link_to image_tag(item.thumbnail, width: '200'), item_path(item) %>
+    <p>Merchant: <%= item.user.username %></p>
+    <p>Items in stock: <%= item.quantity %></p>
+    <p>Price: <%= number_to_currency(item.price) %></p>
+  </section>
+<% end %>
