@@ -31,6 +31,10 @@ class Cart
   end
 
   def update_items_quantity(type, id)
-    @contents[id] += 1
+    if type == 'add'
+      @contents[id] += 1
+    elsif type == 'remove'
+      @contents[id] -= 1
+    end 
   end
 end

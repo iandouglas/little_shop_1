@@ -24,16 +24,9 @@ class CartController < ApplicationController
     redirect_to cart_index_path
   end
 
-  def add_item_quanity
-    @cart.update_items_quantity('add', params[:id])
+  def update_item_quantity
+    @cart.update_items_quantity(params[:type], params[:id])
     session[:cart] = @cart.contents
     redirect_to cart_index_path
   end
-
-  def remove_item_quanity
-    @cart.update_items_quantity('remove', params[:id])
-    session[:cart] = @cart.contents
-    redirect_to cart_index_path
-  end
-
 end
