@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :cart, only: [:index, :create, :destroy]
 
   delete '/cart/item/:id', to: 'cart#delete_item', as: 'delete_cart_item'
+  put '/cart/item/:id', to: 'cart#add_item', as: 'add_cart_item'
   # resources :carts, only: [:index]
   get '/login', to: 'sessions#new'
   get '/logout', to: 'sessions#destroy'

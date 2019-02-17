@@ -125,10 +125,10 @@ RSpec.describe 'as visitor', type: :feature do
       end
       expect(page).to_not have_content("#{item.name}")
 
-      within "#item-#{item.id}" do
-        click_button 'Add 1'
+      within "#item-#{item_2.id}" do
+        click_button '+'
         expect(page).to have_content('Quantity: 2')
-        click_button 'Remove 1'
+        click_button '-'
         expect(page).to have_content('Quantity: 1')
       end
     end

@@ -11,6 +11,7 @@ class CartController < ApplicationController
   end
 
   def index
+    binding.pry
     @items = @cart.all_items
   end
 
@@ -21,6 +22,12 @@ class CartController < ApplicationController
 
   def delete_item
     session[:cart].delete(params[:id])
+    redirect_to cart_index_path
+  end
+
+  def add_item
+    @cart.update_items_quantity('add', params[:id])
+    session[:cart] = @cart.contents
     redirect_to cart_index_path
   end
 
