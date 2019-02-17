@@ -31,10 +31,11 @@ class Cart
   end
 
   def update_items_quantity(type, id)
+    item_stock = Item.find(id).quantity
     if type == 'add'
-      @contents[id] += 1
+      @contents[id] += 1 unless item_stock == @contents[id]
     elsif type == 'remove'
       @contents[id] -= 1
-    end 
+    end
   end
 end

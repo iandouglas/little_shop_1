@@ -96,5 +96,22 @@ RSpec.describe Cart do
         expect(cart.contents).to eq(expected_2)
       end
     end
+
+    describe '.update_items_quantity' do
+      it 'should not let users add more items than are in stock' do
+        user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
+        item = Item.create(name: 'pot', description:'small pot for plants', quantity: 5, price: 2.49, thumbnail: 'thumbnail.jpeg', user: user)
+        cart = Cart.new({
+          "#{item.id}" => 5,
+          })
+
+        cart.update_items_quantity('add', item.id.to_s)
+        expected = {
+          "#{item.id}" => 5,
+          }
+
+        expect(cart.contents).to eq(expected)
+      end
+    end
   end
 end
