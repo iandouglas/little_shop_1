@@ -33,7 +33,7 @@ RSpec.describe 'When I visit the items catalog', type: :feature do
       end
 
       expect(page).not_to have_content("pot_3")
-      expect(page).to have_link("#{item_3.name}", href: item_path(item_3))
+      expect(page).not_to have_link("#{item_3.name}", href: item_path(item_3))
     end
   end
 

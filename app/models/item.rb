@@ -4,4 +4,5 @@ class Item < ApplicationRecord
   has_many :orders, through: :order_items
 
   validates_presence_of :name, :description, :quantity, :price, :thumbnail, :enabled, :user_id
+  enum enabled: ['enabled', 'disabled']
 end
