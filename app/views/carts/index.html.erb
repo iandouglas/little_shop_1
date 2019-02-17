@@ -2,10 +2,11 @@
   <section id="item-<%= item.id %>">
     <h1><%= item.name %></h1>
     <%= image_tag item.thumbnail %>
-    <p><%= item.user.username %></p>
-    <p><%= item.price %></p>
-    <p><%= quantity %></p>
-    <p><%= @cart.subtotal(item) %></p>
+    <p>Merchant: <%= item.user.username %></p>
+    <p>Price: <%= number_to_currency(item.price) %></p>
+    <p>Quantity: <%= quantity %></p>
+    <p>Total: <%= number_to_currency(@cart.subtotal(item)) %></p>
   </section>
 <% end %>
-<%= @cart.grand_total %>
+<h3>Cart Total: <%= number_to_currency(@cart.grand_total) %></p>
+<%= link_to 'Empty Cart', cart_path(@cart) %>
