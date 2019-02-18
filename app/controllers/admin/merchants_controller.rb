@@ -15,13 +15,13 @@ class Admin::MerchantsController < ApplicationController
     redirect_to merchants_path
   end
 
-  # def enable
-  #   user = User.find(params[:id])
-  #   if user.disabled?
-  #     user.enabled = 'enabled'
-  #     user.save
-  #   end
-  #   flash[:success] = "#{user.username} is now enabled"
-  #   redirect_to admin_users_path
-  # end
+  def enable
+    user = User.find(params[:id])
+    if user.disabled?
+      user.enabled = 'enabled'
+      user.save
+    end
+    flash[:success] = "#{user.username} is now enabled"
+    redirect_to merchants_path
+  end
 end
