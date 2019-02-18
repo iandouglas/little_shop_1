@@ -18,12 +18,17 @@ before_action :require_admin
 
   def update
     user = User.find(params[:user_id])
+
     if user.role == 'user'
       user[:role] = 1
       user.save
       flash[:success] = "#{user.username} is now a merchant"
       redirect_to admin_merchant_path(user.id)
     elsif user.role == 'merchant'
+      items = Item.where(user_id: user.id)
+      items.each do |item|
+        item.disable_item
+      end
       user[:role] = 0
       user.save
       flash[:success] = "#{user.username} is now a user"
@@ -34,4 +39,5 @@ before_action :require_admin
   def merchants
     @merchant = User.find(params[:id])
   end
+
 end
