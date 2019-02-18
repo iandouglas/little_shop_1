@@ -99,7 +99,7 @@ RSpec.describe 'As an admin', type: :feature do
 
     visit admin_merchant_path(merchant)
 
-    click_link "Downgrade To User"
+    click_link "Downgrade"
 
     expect(current_path).to eq(admin_user_path(merchant))
     expect(page).to have_content("happy is now a user")
@@ -111,6 +111,6 @@ RSpec.describe 'As an admin', type: :feature do
     fill_in 'Password', with: 'password'
     click_button 'Sign In'
 
-    expect(current_path).to eq(user_path)
+    expect(current_path).to eq(profile_path)
   end
 end

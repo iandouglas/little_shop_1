@@ -23,10 +23,15 @@ before_action :require_admin
       user.save
       flash[:success] = "#{user.username} is now a merchant"
       redirect_to admin_merchant_path(user.id)
+    elsif user.role == 'merchant'
+      user[:role] = 0
+      user.save
+      flash[:success] = "#{user.username} is now a user"
+      redirect_to admin_user_path(user.id)
     end
   end
 
   def merchants
-
+    @merchant = User.find(params[:id])
   end
 end
