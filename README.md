@@ -1,7 +1,7 @@
 # Little Shop
 
 ## Introduction
-Little Shop is a web based application which runs on the Ruby On Rails framework. It is an online store that sells items, from multiple merchants to multiple registered users. A user can either be a visitor, registered user, merchant or admin. Users place orders by placing items in their cart before checking out, while merchants fulfill these orders based on their inventory. This application is assigned as a group project at the Turing School of Software & Design during their backend engineering program.
+Little Shop is a web based application which runs on the Ruby On Rails framework. It is an online store that sells items, from multiple merchants to multiple registered users. A user can either be a visitor, registered user, merchant or admin. Users place orders by placing items in their cart before checking out, while merchants fulfill these orders based on their inventory. Admins can edit data and mark orders as fulfilled. This application is assigned as a group project at the Turing School of Software & Design during their backend engineering program.
 
 - Link to original Turing repository: https://github.com/turingschool-projects/little_shop_v2
 
