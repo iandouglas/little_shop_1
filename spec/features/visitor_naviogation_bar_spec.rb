@@ -19,7 +19,7 @@ RSpec.describe 'navigation', type: :feature do
     expect(current_path).to eq(merchants_path)
 
     click_link "Cart"
-    expect(current_path).to eq(carts_path)
+    expect(current_path).to eq(cart_index_path)
 
 
     visit new_user_path

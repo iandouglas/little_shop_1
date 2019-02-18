@@ -7,7 +7,11 @@ Rails.application.routes.draw do
   # get '/profile', to 'user#show', as: user_path
   resources :merchants, only: [:index]
 
-  resources :carts, only: [:index, :create, :destroy]
+  resources :cart, only: [:index, :create, :destroy]
+
+  delete '/cart/item/:id', to: 'cart#delete_item', as: 'delete_cart_item'
+  put '/cart/item/:id', to: 'cart#update_item_quantity', as: 'update_cart_item'
+  # put '/cart/item/:id', to: 'cart#remove_item_quantity', as: 'remove_cart_item'
   # resources :carts, only: [:index]
   get '/login', to: 'sessions#new'
   get '/logout', to: 'sessions#destroy'

@@ -17,7 +17,7 @@ RSpec.describe 'as user', type: :feature do
   end
 
   it 'should show me all items in my cart' do
-    visit carts_path
+    visit cart_index_path
 
     within "#item-#{@item.id}" do
       expect(page).to have_content("#{@item.name}")

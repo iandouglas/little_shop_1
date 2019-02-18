@@ -7,7 +7,7 @@
   <%= link_to "Items", items_path %>
   <%= link_to "Merchants", merchants_path %>
   <% unless merchant_or_admin? %>
-    <%= link_to "Cart(#{@cart.total})", carts_path %>
+    <%= link_to "Cart(#{@cart.total})", cart_index_path %>
   <% end %>
   <% if current_user %>
     <p>Currently logged in as <%= current_user.username %>(<%= link_to "Logout", logout_path %>)</p>
