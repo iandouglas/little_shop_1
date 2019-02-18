@@ -225,12 +225,9 @@ RSpec.describe 'as visitor', type: :feature do
       click_link 'Cart(2)'
 
       click_button 'Checkout'
-      expect(current_path).to eq(profile_orders_path)
+      expect(current_path).to eq(profile_path)
       expect(page).to have_content('Cart(0)')
       expect(page).to have_content('Your order has been placed.')
-      within '.orders' do
-        expect(page).to have_content('Order: ')
-      end
     end
   end
 end
