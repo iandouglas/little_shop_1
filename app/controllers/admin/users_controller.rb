@@ -9,7 +9,7 @@ before_action :require_admin
   end
 
   def index
-
+    @users = User.where(role: 'user')
   end
 
   def dashboard
