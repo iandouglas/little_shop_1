@@ -10,10 +10,11 @@ class Users::OrdersController < ApplicationController
 
   def create
     order = Order.new(user: current_user)
-    @cart.contents.each do |item_id, quantity|
-      OrderItem.new(order_id: order.id, item_id: item_id, quantity: quantity)
-    end
     if order.save
+      @cart.contents.each do |item_id, quantity|
+        current_price = Item.find(item_id).price * quantity
+        order.order_items.create(item_id: item_id, quantity: quantity, current_price: current_price)
+      end
       session[:cart].clear
       flash[:success] = 'Your order has been placed.'
       redirect_to profile_path
