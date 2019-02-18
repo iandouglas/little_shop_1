@@ -26,6 +26,10 @@ Rails.application.routes.draw do
 
   get '/dashboard', to: 'merchants#dashboard', as: 'dashboard'
   get '/dashboard/orders/:id', to: 'merchants/orders#show', as: 'dashboard_orders'
+
+  patch '/dashboard/orders/:id/enable', to: 'merchants/orders#enable', as: 'merchant_enable_item'
+  patch '/dashboard/orders/:id/disable', to: 'merchants/orders#disable', as: 'merchant_disable_item'
+
   put '/dashboard/orders/:id/edit', to: 'merchants/orders#edit', as: 'dashboard_edit_order'
   get '/dashboard/items', to: 'merchants/items#index', as: 'dashboard_items'
   post '/login', to: 'sessions#create'
