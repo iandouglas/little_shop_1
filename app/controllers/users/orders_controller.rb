@@ -17,7 +17,7 @@ class Users::OrdersController < ApplicationController
       end
       session[:cart].clear
       flash[:success] = 'Your order has been placed.'
-      redirect_to profile_path
+      redirect_to profile_orders_path
     end
   end
 end
