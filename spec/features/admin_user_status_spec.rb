@@ -62,6 +62,26 @@ RSpec.describe 'As an Admin', type: :feature do
 
       expect(current_path).to eq(login_path)
     end
+
+    it 'lets an admin enable a merchant' do
+      admin = User.create!(username: 'test', street: '123 main st', city: 'denver', state: 'CO', zip_code: 80216, email: 'test@bob.net', password: 'password', role: 2)
+      merchant = User.create!(username: 'happy', street: '123 main st', city: 'denver', state: 'CO', zip_code: 80216, email: '1test@bob.net', password: 'password', role: 1, enabled: 'disabled')
+      login_as(admin)
+
+      visit merchants_path
+      save_and_open_page
+
+      within "#merchant-#{merchant.id}" do
+        click_button "Enable"
+      end
+
+      expect(current_path).to eq(merchants_path)
+      expect(page).to have_content("#{merchant.username} is now enabled")
+
+      login_as(merchant)
+
+      expect(current_path).to eq(dashboard_path)
+    end
   end
 
   describe 'admin can upgrade/downgrade users to merchants' do
