@@ -3,7 +3,7 @@
     <% if admin_user? %>
       <p><%= link_to "Name: #{m.username}", admin_merchant_path(m.id) %></p>
       <% if m.enabled? %>
-        <%= button_to "Disable" %>
+        <%= button_to "Disable", admin_disable_merchant_path(m), method: :patch %>
       <% elsif m.disabled? %>
         <%= button_to "Enable" %>
       <% end %>
