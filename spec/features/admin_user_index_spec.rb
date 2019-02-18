@@ -34,7 +34,5 @@ RSpec.describe 'As an admin', type: :feature do
 
     click_link "User: #{user_1.username}"
     expect(current_path).to eq(admin_user_path(user_1))
-
   end
-
 end
