@@ -209,7 +209,7 @@ RSpec.describe 'as visitor', type: :feature do
         click_button 'Sign In'
         click_link 'Cart(2)'
 
-        expect(page).to have_content('Checkout')
+        expect(page).to have_button('Checkout')
         expect(page).to_not have_content('Please Login or Register your account to checkout.')
     end
 
