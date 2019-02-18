@@ -18,6 +18,9 @@
     <% elsif item.fulfilled? %>
     <p>Item Fulfilled</p>
     <% end %>
+
   </div>
   <% end %>
 </section>
+
+get '/dashboard/orders/:id/disable', to: 'merchants/orders#disable', as: 'merchant_disable_item'

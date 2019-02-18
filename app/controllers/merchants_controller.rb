@@ -21,5 +21,6 @@ class MerchantsController < ApplicationController
       @top_users_by_price = @user.top_users_by_price(3)
     end
   end
+  
 
 end
