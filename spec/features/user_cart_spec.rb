@@ -212,5 +212,25 @@ RSpec.describe 'as visitor', type: :feature do
         expect(page).to have_content('Checkout')
         expect(page).to_not have_content('Please Login or Register your account to checkout.')
     end
+
+    it 'creates an order when i as registered user click checkout' do
+      user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
+      item = Item.create(name: 'pot', description:'small pot for plants', quantity: 30, price: 2.49, thumbnail: 'https://images-na.ssl-images-amazon.com/images/I/81%2BG9LfH-uL._SL1500_.jpg', user: user)
+      item_2 = Item.create(name: 'crayon', description:'draw things', quantity: 5, price: 0.01, thumbnail: 'https://images-na.ssl-images-amazon.com/images/I/81%2BG9LfH-uL._SL1500_.jpg', user: user)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+      visit item_path(item.id)
+      click_button 'Add to Cart'
+      visit item_path(item_2.id)
+      click_button 'Add to Cart'
+      click_link 'Cart(2)'
+
+      click_button 'Checkout'
+      expect(current_path).to eq(profile_orders_path)
+      expect(page).to have_content('Cart(0)')
+      expect(page).to have_content('Your order has been placed.')
+      within '.orders' do
+        expect(page).to have_content('Order: ')
+      end
+    end
   end
 end
