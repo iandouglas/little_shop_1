@@ -90,14 +90,13 @@ RSpec.describe 'As an admin', type: :feature do
       expect(page).to have_content("Description: #{item_1.description}")
       expect(page).to have_content("Quantity: #{item_1.quantity}")
       expect(page).to have_content("Price: $#{item_1.price}")
-      # expect(page).to have_content("Sub Total: $#{order_item_1.current_price}")
+      expect(page).to have_content("Sub Total: $#{order_item_1.current_price}")
     end
     within ".item-#{item_2.id}" do
       expect(page).to have_content("#{item_2.name}")
       expect(page).to have_content("Description: #{item_2.description}")
       expect(page).to have_content("Quantity: #{item_2.quantity}")
       expect(page).to have_content("Price: $#{item_2.price}")
-      # expect(page).to have_content("Sub Total: $#{order_item_2.current_price}")
     end
     expect(page).to have_content("Total Items: #{order_1.total_item_quantity}")
     expect(page).to have_content("Grand Total: $#{order_1.total_item_price}")
