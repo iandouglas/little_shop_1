@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
 
   def index
+    @items = Item.where(enabled: "enabled")
   end
 
   def show
