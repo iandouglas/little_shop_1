@@ -6,12 +6,16 @@ class Item < ApplicationRecord
 
   validates_presence_of :name, :description, :quantity, :price, :thumbnail, :enabled, :user_id
   enum enabled: ['enabled', 'disabled']
-  
+
   def order_quantity(order_id)
     OrderItem.find_by(order_id: order_id).quantity
   end
 
   def quantity_price(order_id)
     OrderItem.find_by(order_id: order_id).current_price
+  end
+
+  def disable_item
+    self.enabled = 1
   end
 end
