@@ -20,7 +20,6 @@ Rails.application.routes.draw do
   get '/profile/orders', to: 'users/orders#index', as: 'profile_orders'
   post '/profile/orders', to: 'users/orders#create', as: 'new_profile_order'
   get '/profile/orders/:id', to: 'users/orders#show', as: 'profile_order'
-
   get '/profile/edit', to: 'users#edit', as: 'edit_profile'
 
   get '/dashboard', to: 'users#dashboard', as: 'dashboard'
@@ -32,5 +31,7 @@ Rails.application.routes.draw do
     get '/users/:id', to: 'users#show', as: 'user'
     get '/merchants/:id', to: 'users#merchants', as: 'merchant'
     get '/role', to: 'users#update', as: 'role'
+    get '/users/:id/orders', to:'users/orders#index', as: 'user_orders'
+    get '/orders/:id', to: 'orders#show', as: 'order'
   end
 end
