@@ -13,7 +13,7 @@ Little Shop is a web based application which runs on the Ruby On Rails framework
 - Rene Casco – rene.casco@icloud.com
 - Ty Mazey - 43197720+TyMazey@users.noreply.github.com
 - Vincent Provenzano - 40582072+Vjp888@users.noreply.github.com
-- Noah Flint - 421236+n-flint@users.noreply.github.com
+- Noah Flint - 34421236+n-flint@users.noreply.github.com
 
 ## Contributing
 - Fork it from (https://github.com/n-flint/little_shop)
