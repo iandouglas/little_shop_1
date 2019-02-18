@@ -179,6 +179,37 @@ RSpec.describe 'as visitor', type: :feature do
       end
       expect(page).to_not have_content("#{item_2.name}")
     end
-  end
 
+    it 'promts me to login or register if i have not to checkout my cart' do
+        user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
+        item = Item.create(name: 'pot', description:'small pot for plants', quantity: 30, price: 2.49, thumbnail: 'https://images-na.ssl-images-amazon.com/images/I/81%2BG9LfH-uL._SL1500_.jpg', user: user)
+        item_2 = Item.create(name: 'crayon', description:'draw things', quantity: 5, price: 0.01, thumbnail: 'https://images-na.ssl-images-amazon.com/images/I/81%2BG9LfH-uL._SL1500_.jpg', user: user)
+        visit item_path(item.id)
+        click_button 'Add to Cart'
+        visit item_path(item_2.id)
+        click_button 'Add to Cart'
+        click_link 'Cart(2)'
+
+        within '.cart' do
+          expect(page).to have_content('Please Login or Register your account to checkout.')
+          click_link ('Register')
+        end
+        expect(current_path).to eq(new_user_path)
+
+
+        click_link 'Cart(2)'
+        within '.cart' do
+          expect(page).to have_content('Please Login or Register your account to checkout.')
+          click_link ('Login')
+        end
+        expect(current_path).to eq(login_path)
+
+        fill_in 'Email', with: '12345@54321'
+        fill_in 'Password', with: 'password'
+        click_button 'Sign In'
+        click_link 'Cart(2)'
+
+        expect(page).to have_content('Checkout')
+    end
+  end
 end
