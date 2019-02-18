@@ -7,7 +7,7 @@ RSpec.describe 'As a Visitor', type: :feature do
 
       merchant_1 = User.create!(username: 'supperhappy', street: '432 main st', city: 'steve', state: 'CO', zip_code: 80126, email: '1tester@bob.net', password: 'password', role: 1)
       merchant_2 = User.create!(username: 'hellahappy', street: '432 main st', city: 'stephen', state: 'CO', zip_code: 80126, email: '2tester@bob.net', password: 'password', role: 1)
-      merchant_3 = User.create!(username: 'nothappy', street: '432 main st', city: 'stephen', state: 'CO', zip_code: 80126, email: '2tester@bob.net', password: 'password', role: 1, enabled: 1)
+      merchant_3 = User.create!(username: 'nothappy', street: '432 main st', city: 'stephen', state: 'CO', zip_code: 80126, email: '3tester@bob.net', password: 'password', role: 1, enabled: 1)
 
       visit merchants_path
 
