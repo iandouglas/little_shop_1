@@ -31,6 +31,6 @@ Rails.application.routes.draw do
     get '/dashboard', to: 'users#dashboard', as: 'dashboard'
     get '/users/:id', to: 'users#show', as: 'user'
     get '/merchants/:id', to: 'users#merchants', as: 'merchant'
-    get '/upgrade', to: 'users#update', as: 'upgrade'
+    get '/role', to: 'users#update', as: 'role'
   end
 end

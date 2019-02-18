@@ -56,5 +56,16 @@ RSpec.describe Item, type: :model do
       end
     end
 
+    describe '.disable_item' do
+      it 'should change item from enabled to disabled' do
+        merchant = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12@54321", password: "password", role: 1, enabled: 0)
+        item_1 = Item.create(name: 'meh', description: "haha", quantity: 12, price: 2.5, thumbnail: "steve.jpg", user_id: merchant.id)
+
+        item_1.disable_item
+
+        expect(item_1.enabled?).to be false
+      end
+    end
+
   end
 end

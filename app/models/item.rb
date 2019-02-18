@@ -13,4 +13,9 @@ class Item < ApplicationRecord
   def quantity_price(order_id)
     OrderItem.find_by(order_id: order_id).current_price
   end
+
+  def disable_item
+    self.enabled = "disabled"
+    self.save
+  end
 end
