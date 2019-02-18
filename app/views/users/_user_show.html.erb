@@ -1,0 +1,13 @@
+<h1>Welcome <%= current_user.username %>!</h1>
+<section class="user-info">
+  <p>Name: <%= current_user.username %> </p>
+  <p>Street Address: <%= current_user.street %> </p>
+  <p>City: <%= current_user.city %> </p>
+  <p>State: <%= current_user.state %> </p>
+  <p>Zip Code: <%= current_user.zip_code %> </p>
+  <p>Email: <%= current_user.email %> </p>
+  <% unless merchant_user? %>
+    <p><%= link_to "Edit Profile", edit_profile_path %></p>
+    <p><%= link_to 'View Orders', profile_orders_path%></p>
+  <% end %>
+</section>
