@@ -19,16 +19,16 @@ RSpec.describe 'As an admin', type: :feature do
 
     expect(current_path).to eq(admin_users_path)
 
-    within "#user-#{user_1.id}" do
+    within ".user-#{user_1.id}" do
       expect(page).to have_link("User: #{user_1.username}")
-      expect(page).to have_content("Registerd: #{user_1.created_at}")
+      expect(page).to have_content("Registered: #{user_1.created_at}")
       expect(page).to have_button("Disable")
 
     end
 
-    within "#user-#{user_4.id}" do
+    within ".user-#{user_4.id}" do
       expect(page).to have_link("User: #{user_4.username}")
-      expect(page).to have_content("Registerd: #{user_4.created_at}")
+      expect(page).to have_content("Registered: #{user_4.created_at}")
       expect(page).to have_button("Enable")
     end
   end
