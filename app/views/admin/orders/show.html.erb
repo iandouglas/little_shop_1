@@ -8,6 +8,9 @@
     <p>Description: <%= item.description %> </p>
     <p>Quantity: <%= item.quantity %> </p>
     <p>Price: <%= number_to_currency(item.price) %> </p>
+    <p>Price: <%= number_to_currency(item.price) %> </p>
+    <p>Sub Total: <%= number_to_currency(item.quantity_price(@order.id)) %> </p>
+
   </section>
   <% end %>
 <p>Total Items: <%= @order.total_item_quantity %></p>
