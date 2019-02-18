@@ -61,6 +61,49 @@ RSpec.describe 'As an admin', type: :feature do
     expect(page).to have_content("Upgrade happy to a Merchant")
   end
 
+  it 'lets an admin see a users order show page' do
+    admin = User.create!(username: 'test', street: '123 main st', city: 'denver', state: 'CO', zip_code: 80216, email: 'test@bob.net', password: 'password', role: 2)
+    user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
+    merchant = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12@54321", password: "password", role: 1, enabled: 0)
+    item_1 = Item.create(name: 'meh', description: "haha", quantity: 12, price: 2.50, thumbnail: "steve.jpg", user_id: merchant.id)
+    item_2 = Item.create(name: 'vfjkdnj', description: "fjndkjknk", quantity: 12, price: 2.50, thumbnail: "steve.jpg", user_id: merchant.id)
+    item_3 = Item.create(name: 'fvijodv', description: "oreijvioe", quantity: 12, price: 2.50, thumbnail: "steve.jpg", user_id: merchant.id)
+    order_1 = Order.create(user_id: user.id)
+    order_2 = Order.create(user_id: user.id)
+    order_item_1 = OrderItem.create(item_id: item_1.id, order_id: order_1.id, fulfilled: 0, current_price: 5.0, quantity: 2)
+    order_item_2 = OrderItem.create(item_id: item_2.id, order_id: order_1.id, fulfilled: 0, current_price: 7.50, quantity: 3)
+
+    visit login_path
+    fill_in 'Email', with: 'test@bob.net'
+    fill_in 'Password', with: 'password'
+    click_button 'Sign In'
+
+    visit admin_order_path(user)
+
+    expect(page).to have_content("ID: #{order_1.id}")
+    expect(page).to have_content("Order Placed: #{order_1.created_at}")
+    expect(page).to have_content("Last Updated: #{order_1.updated_at}")
+    expect(page).to have_content("Current Status: pending")
+
+    within ".item-#{item_1.id}" do
+      expect(page).to have_content("#{item_1.name}")
+      expect(page).to have_content("Description: #{item_1.description}")
+      expect(page).to have_content("Quantity: #{item_1.quantity}")
+      expect(page).to have_content("Price: $#{item_1.price}")
+      # expect(page).to have_content("Sub Total: $#{order_item_1.current_price}")
+    end
+    within ".item-#{item_2.id}" do
+      expect(page).to have_content("#{item_2.name}")
+      expect(page).to have_content("Description: #{item_2.description}")
+      expect(page).to have_content("Quantity: #{item_2.quantity}")
+      expect(page).to have_content("Price: $#{item_2.price}")
+      # expect(page).to have_content("Sub Total: $#{order_item_2.current_price}")
+    end
+    expect(page).to have_content("Total Items: #{order_1.total_item_quantity}")
+    expect(page).to have_content("Grand Total: $#{order_1.total_item_price}")
+    expect(page).to_not have_content("ID: #{order_2.id}")
+  end
+
   it 'lets an admin upgrade a user to a merchant' do
     admin = User.create!(username: 'test', street: '123 main st', city: 'denver', state: 'CO', zip_code: 80216, email: 'test@bob.net', password: 'password', role: 2)
     user = User.create!(username: 'happy', street: '432 main st', city: 'steve', state: 'CO', zip_code: 80126, email: 'te@bob.net', password: 'password', role: 0)
