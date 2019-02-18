@@ -27,4 +27,5 @@ RSpec.describe 'As an Admin', type: :feature do
 
     expect(current_path).to eq(login_path)
   end
+  
 end
