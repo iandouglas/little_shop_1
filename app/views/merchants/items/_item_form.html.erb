@@ -3,10 +3,17 @@
     <%= content_tag :div, message, class: 'error' %>
   <% end %>
 <% end %>
+
 <% if @item.id %>
-  <% path = dashboard_edit_item_path(@item) %>
-<% else %>
-  <% path =  dashboard_create_new_item_path %>
+<% if admin_user? %>
+  <% path = admin_merchant_edit_item_path(@merchant, @item) %>
+  <% end %>
+  <% path = dashboard_edit_item_path(@item) unless admin_user? %>
+<% elsif @item.id == nil %>
+  <% if admin_user? %>
+    <% path = admin_merchant_create_new_item_path(@merchant.id) %>
+  <% end %>
+  <% path = dashboard_create_new_item_path unless admin_user? %>
 <% end %>
 <%= form_for @item, url: path do |f| %>
 <%= f.label :name %>
