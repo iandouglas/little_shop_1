@@ -69,7 +69,6 @@ RSpec.describe 'As an Admin', type: :feature do
       login_as(admin)
 
       visit merchants_path
-      save_and_open_page
 
       within "#merchant-#{merchant.id}" do
         click_button "Enable"
