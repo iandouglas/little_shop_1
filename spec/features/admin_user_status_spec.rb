@@ -14,11 +14,13 @@ RSpec.describe 'As an Admin', type: :feature do
       click_button "Disable"
     end
 
+    expect(page).to have_content("#{user_1.username} is now disabled")
     expect(current_path).to eq(admin_users_path)
 
     login_as(user_1)
 
     expect(current_path).to eq(login_path)
   end
+
 
 end
