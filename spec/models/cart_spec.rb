@@ -68,5 +68,59 @@ RSpec.describe Cart do
         expect(cart.grand_total).to eq(41.94)
       end
     end
+
+    describe '.update_items_quantity' do
+      it 'should change the quantity of one item by one more or one less' do
+        user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
+        item = Item.create(name: 'pot', description:'small pot for plants', quantity: 30, price: 2.49, thumbnail: 'thumbnail.jpeg', user: user)
+        item_2 = Item.create(name: 'crayon', description:'small crayon for plants', quantity: 40, price: 13.5, thumbnail: 'thumbnail.jpeg', user: user)
+        cart = Cart.new({
+          "#{item.id}" => 6,
+          "#{item_2.id}" => 2
+          })
+
+        cart.update_items_quantity('add', item.id.to_s)
+        expected = {
+          "#{item.id}" => 7,
+          "#{item_2.id}" => 2
+          }
+
+        expect(cart.contents).to eq(expected)
+
+        cart.update_items_quantity('remove', item_2.id.to_s)
+        expected_2 = {
+          "#{item.id}" => 7,
+          "#{item_2.id}" => 1
+          }
+
+        expect(cart.contents).to eq(expected_2)
+      end
+      it 'should not let users add more items than are in stock' do
+        user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
+        item = Item.create(name: 'pot', description:'small pot for plants', quantity: 5, price: 2.49, thumbnail: 'thumbnail.jpeg', user: user)
+        cart = Cart.new({
+          "#{item.id}" => 5,
+          })
+
+        cart.update_items_quantity('add', item.id.to_s)
+        expected = {
+          "#{item.id}" => 5,
+          }
+
+        expect(cart.contents).to eq(expected)
+      end
+      it 'should not let users add more items than are in stock' do
+        user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
+        item = Item.create(name: 'pot', description:'small pot for plants', quantity: 5, price: 2.49, thumbnail: 'thumbnail.jpeg', user: user)
+        cart = Cart.new({
+          "#{item.id}" => 1
+          })
+
+        cart.update_items_quantity('remove', item.id.to_s)
+        expected = {}
+
+        expect(cart.contents).to eq(expected)
+      end
+    end
   end
 end

@@ -29,4 +29,16 @@ class Cart
   def grand_total
     all_items.keys.sum {|item| subtotal(item)}
   end
+
+  def update_items_quantity(type, id)
+    item_stock = Item.find(id).quantity
+    if type == 'add'
+      @contents[id] += 1 unless item_stock == @contents[id]
+    elsif type == 'remove'
+      @contents[id] -= 1
+      if @contents[id] == 0
+        @contents.delete(id)
+      end
+    end
+  end
 end
