@@ -41,6 +41,8 @@ before_action :require_admin
       user.enabled = 'disabled'
       user.save
     end
+
+    flash[:success] = "#{user.username} is now disabled"
     redirect_to admin_users_path
   end
 
