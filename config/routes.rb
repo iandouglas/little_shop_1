@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get '/profile', to: 'users#profile', as: 'profile'
   put '/profile', to: 'users#update'
   get '/profile/orders', to: 'users/orders#index', as: 'profile_orders'
+  get '/profile/orders/:id', to: 'users/orders#show', as: 'profile_order'
 
   get '/profile/edit', to: 'users#edit', as: 'edit_profile'
 
