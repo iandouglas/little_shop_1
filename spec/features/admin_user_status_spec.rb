@@ -22,5 +22,23 @@ RSpec.describe 'As an Admin', type: :feature do
     expect(current_path).to eq(login_path)
   end
 
+  it 'lets an admin enable a user' do
+  admin = User.create!(username: 'test', street: '123 main st', city: 'denver', state: 'CO', zip_code: 80216, email: 'test@bob.net', password: 'password', role: 2)
+  user_1 = User.create!(username: 'happy', street: '432 main st', city: 'steve', state: 'CO', zip_code: 80126, email: '1@bob.net', password: 'password', role: 0, enabled: 1)
 
+  login_as(admin)
+
+  visit admin_users_path
+
+  within ".user-#{user_1.id}" do
+    click_button "Enable"
+  end
+
+  expect(page).to have_content("#{user_1.username} is now enabled")
+  expect(current_path).to eq(admin_users_path)
+
+  login_as(user_1)
+
+  expect(current_path).to eq(profile_path)
+end
 end

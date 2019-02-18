@@ -165,7 +165,6 @@ RSpec.describe 'As an admin', type: :feature do
     click_button 'Sign In'
 
     visit admin_merchant_path(merchant)
-    # save_and_open_page
 
     click_link "Downgrade"
 
