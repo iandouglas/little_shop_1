@@ -88,4 +88,29 @@ RSpec.describe 'As an admin', type: :feature do
 
     expect(current_path).to eq(dashboard_path)
   end
+
+  it 'lets an admin downgrade a merchant to a regular user' do
+    admin = User.create!(username: 'test', street: '123 main st', city: 'denver', state: 'CO', zip_code: 80216, email: 'test@bob.net', password: 'password', role: 2)
+    merchant = User.create!(username: 'happy', street: '123 main st', city: 'denver', state: 'CO', zip_code: 80216, email: '1test@bob.net', password: 'password', role: 1)
+    visit login_path
+    fill_in 'Email', with: 'test@bob.net'
+    fill_in 'Password', with: 'password'
+    click_button 'Sign In'
+
+    visit admin_merchant_path(merchant)
+
+    click_link "Downgrade To User"
+
+    expect(current_path).to eq(admin_user_path(merchant))
+    expect(page).to have_content("happy is now a user")
+    expect(User.last.role).to eq('user')
+
+    click_link 'Logout'
+    click_link 'Log In'
+    fill_in 'Email', with: '1test@bob.net'
+    fill_in 'Password', with: 'password'
+    click_button 'Sign In'
+
+    expect(current_path).to eq(user_path)
+  end
 end
