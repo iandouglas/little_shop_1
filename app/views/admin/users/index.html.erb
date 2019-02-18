@@ -1,0 +1,11 @@
+<% @users.each do |user| %>
+<section class="user-<%= user.id %>">
+  <p><%= link_to "User: #{user.username}", admin_user_path(user) %></p>
+  <p>Registered: <%= user.created_at %> </p>
+    <% if user.enabled? %>
+    <p>  <%= button_to 'Disable'%></p>
+    <% else %>
+    <p>  <%= button_to 'Enable'%></p>
+    <% end %>
+</section>
+<% end %>

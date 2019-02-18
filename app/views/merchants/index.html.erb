@@ -1,0 +1,8 @@
+<% @merchants.each do |merchant| %>
+<section class="merchant-<%= merchant.id %>">
+  <p>Name: <%= merchant.username %> </p>
+  <p>City: <%= merchant.city %> </p>
+  <p>State: <%= merchant.state %> </p>
+  <p>Date Registered: <%= merchant.created_at %> </p>
+</section>
+<% end %>

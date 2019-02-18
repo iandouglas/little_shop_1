@@ -18,7 +18,7 @@
     <% unless regular_user? %>
       <p>'Please <%= link_to 'Login', login_path %> or <%= link_to 'Register', new_user_path %> your account to checkout.'</p>
     <% else %>
-      <%= button_to 'Checkout', root_path %>
+      <%= button_to 'Checkout', new_profile_order_path %>
     <% end %>
   <% else %>
   <h1>You Have No Items In Your Cart</h1>

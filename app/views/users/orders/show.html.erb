@@ -8,11 +8,11 @@
   <p>Name: <%= item.name %> </p>
   <p>Description: <%= item.description %></p>
   <p>Quantity: <%= item.order_quantity(@order.id) %></p>
-  <p>Price: <%= item.price %> </p>
-  <p>Sub Total: <%= item.quantity_price(@order.id) %></p>
+  <p>Price: <%= number_to_currency(item.price) %> </p>
+  <p>Sub Total: <%= number_to_currency(item.quantity_price(@order.id)) %></p>
   <%= item.thumbnail %>
 </div>
 <% end %>
 <p>Total Items: <%= @order.total_item_quantity %></p>
-<p>Grand Total: <%= @order.total_item_price %></p>
+<p>Grand Total: <%= number_to_currency(@order.total_item_price) %></p>
 </section>
