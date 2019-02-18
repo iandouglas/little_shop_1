@@ -209,7 +209,7 @@ RSpec.describe 'as visitor', type: :feature do
         click_button 'Sign In'
         click_link 'Cart(2)'
 
-        expect(page).to have_content('Checkout')
+        expect(page).to have_button('Checkout')
         expect(page).to_not have_content('Please Login or Register your account to checkout.')
     end
 
@@ -228,9 +228,10 @@ RSpec.describe 'as visitor', type: :feature do
       expect(current_path).to eq(profile_orders_path)
       expect(page).to have_content('Cart(0)')
       expect(page).to have_content('Your order has been placed.')
-      within '.orders' do
-        expect(page).to have_content('Order: ')
-      end
+      expect(page).to have_content('ID: ')
+      expect(page).to have_content('Order Placed: ')
+      expect(page).to have_content('Total Items: 2')
+      expect(page).to have_content('Grand Total: $2.50')
     end
   end
 end
