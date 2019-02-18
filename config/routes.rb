@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # get '/profile', to 'user#show', as: user_path
   resources :merchants, only: [:index]
 
-  resources :carts, only: [:index, :create]
+  resources :carts, only: [:index, :create, :destroy]
   # resources :carts, only: [:index]
   get '/login', to: 'sessions#new'
   get '/logout', to: 'sessions#destroy'
@@ -23,5 +23,8 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/users', to: 'users#index', as: 'users'
     get '/dashboard', to: 'users#dashboard', as: 'dashboard'
+    get '/users/:id', to: 'users#show', as: 'user'
+    get '/merchants/:id', to: 'users#merchants', as: 'merchant'
+    get '/upgrade', to: 'users#update', as: 'upgrade'
   end
 end
