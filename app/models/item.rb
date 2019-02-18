@@ -48,8 +48,6 @@ class Item < ApplicationRecord
     if time
       time = time.average_time
       "#{time.split("days")[0]}days#{time.split("days")[1][0..2]} hours"
-    else
-      "no fulfillment data available "
     end
   end
 
