@@ -56,6 +56,7 @@ class UsersController < ApplicationController
       @orders = Order.for_merchant(current_user.id)
       @items = User.find(current_user.id).top_items_for_merchant(5)
       @states = User.find(current_user.id).top_states_for_merchant(3)
+      @cities = User.find(current_user.id).top_cities_for_merchant(3)
     end
   end
 
