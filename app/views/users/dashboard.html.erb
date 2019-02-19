@@ -24,6 +24,10 @@
     <p><%= city.city %>, <%= city.state %> - <%= city.quantity %></p>
     <% end %>
   </div>
+  <div id="top-users-orders-items">
+    <p>Most Orders from You: <%= @top_user_by_orders.name %>, with <%= @top_user_by_orders.quantity %> orders.</p>
+    <p>Most Orders from You: <%= @top_user_by_items.name %>, with <%= @top_user_by_items.quantity %> orders.</p>
+  </div>
 </section>
 <section class='orders'>
   <% @orders.each do |order| %>

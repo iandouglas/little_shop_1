@@ -91,7 +91,7 @@ RSpec.describe 'as merchant', type: :feature do
         expect(page).to have_content('tom, tommy')
       end
       within '#top-users-orders-items' do
-        expect(page).to have_content('Most Orders from You: bob, with 2 orders')
+        expect(page).to have_content('Most Orders from You: bob, with 2 orders.')
         expect(page).to have_content('Most Items bought from you: bob, with 9 items.')
     end
       within '#top-users-price' do
