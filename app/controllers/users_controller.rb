@@ -54,7 +54,7 @@ class UsersController < ApplicationController
     render :file => './public/404.html', status: 404 unless merchant_user?
     if current_user
       @orders = Order.for_merchant(current_user.id)
-      @items = OrderItems.for_merchant(current_user.id)
+      @items = Items.for_merchant(current_user.id)
     end
   end
   private
