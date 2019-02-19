@@ -18,6 +18,12 @@
     <p><%= state.state %> - <%= state.quantity %></p>
     <% end %>
   </div>
+  <div id="top-cities">
+    <h3>Top 3 Cities:</h3>
+    <% @cities.each do |city| %>
+    <p><%= city.city %>, <%= city.state %> - <%= city.quantity %></p>
+    <% end %>
+  </div>
 </section>
 <section class='orders'>
   <% @orders.each do |order| %>
