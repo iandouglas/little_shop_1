@@ -1,4 +1,4 @@
-equire 'rails_helper'
+require 'rails_helper'
 
 RSpec.describe "When I visit an item's show page from the items catalog", type: :feature do
   describe 'as visitor' do
@@ -13,7 +13,7 @@ RSpec.describe "When I visit an item's show page from the items catalog", type: 
       expect(page).to have_content( "#{item_1.name}" )
       expect(page).to have_content( "#{item_1.description}" )
       expect(page).to have_xpath("//img[contains(@src,'#{File.basename(item_1.thumbnail)}')]")
-      expect(page).to have_content( "#{user.username}" )
+      expect(page).to have_content( "#{item_1.user.username}" )
       expect(page).to have_content( "#{item_1.quantity}" )
       expect(page).to have_content( "#{item_1.price}" )
       expect(page).to have_content( "#{item_1.average_fulfilled_time}" )

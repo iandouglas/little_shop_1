@@ -36,6 +36,4 @@ class Item < ApplicationRecord
     .order("total_fulfilled asc")
     .limit(5)
   end
-
-
 end

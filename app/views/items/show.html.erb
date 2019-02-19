@@ -1,3 +1,13 @@
 <% unless merchant_or_admin? %>
   <%= button_to "Add to Cart", cart_index_path(item_id: @item.id ) %>
 <% end %>
+
+
+<section class>
+  <h3><%= @item.name %></h3>
+  <p> <%= @item.description %></p>
+  <img src=<%= @item.thumbnail %>" alt="<%= @item.name %> image" width='200'>
+  <p> <%= @item.user.username %></p>
+  <p> <%= @item.quantity %></p>
+  <p> <%= @item.price %></p>
+</section>
