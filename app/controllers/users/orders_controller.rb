@@ -20,4 +20,7 @@ class Users::OrdersController < ApplicationController
       redirect_to profile_orders_path
     end
   end
+
+  def dashboard
+  end
 end

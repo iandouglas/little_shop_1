@@ -29,6 +29,8 @@ RSpec.describe 'as merchant', type: :feature do
     OrderItem.create(item_id: item_2.id, order_id: order_1.id, fulfilled: 0, current_price: 7.50, quantity: 3)
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant)
 
+    visit dashboard_path
+
     within '.orders' do
       expect(page).to have_link("ID: #{order_1.id}")
       expect(page).to have_content("Date Made: #{order_1.created_at}")

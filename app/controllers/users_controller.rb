@@ -51,7 +51,8 @@ class UsersController < ApplicationController
   end
 
   def dashboard
-      render :file => './public/404.html', status: 404 unless merchant_user?
+    @orders = Order.for_merchant(current_user.id)
+    render :file => './public/404.html', status: 404 unless merchant_user?
   end
   private
   def user_params

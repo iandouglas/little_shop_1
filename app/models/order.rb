@@ -13,4 +13,8 @@ class Order < ApplicationRecord
   def total_item_price
     order_items.sum(:current_price)
   end
+
+  def self.for_merchant(id)
+    where(status: 0).includes(:items).where(items: {user_id: id})
+  end
 end
