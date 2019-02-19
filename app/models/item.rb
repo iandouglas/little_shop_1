@@ -18,4 +18,24 @@ class Item < ApplicationRecord
     self.enabled = "disabled" # shouldn't this be self.enabled = 1 ?
     self.save
   end
+
+  def self.five_most_popular
+    Item.joins(:orders)
+    .select("items.*, sum(order_items.quantity) as total_fulfilled")
+    .where(order_items: {fulfilled: 'fulfilled'}, items: {enabled: 'enabled'})
+    .group(:id)
+    .order("total_fulfilled desc")
+    .limit(5)
+  end
+
+  def self.five_least_popular
+    Item.joins(:orders)
+    .select("items.*, sum(order_items.quantity) as total_fulfilled")
+    .where(order_items: {fulfilled: 'fulfilled'}, items: {enabled: 'enabled'})
+    .group(:id)
+    .order("total_fulfilled asc")
+    .limit(5)
+  end
+
+
 end

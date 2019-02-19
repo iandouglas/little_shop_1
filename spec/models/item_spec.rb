@@ -71,7 +71,7 @@ RSpec.describe Item, type: :model do
 
   describe 'class methods' do
     describe 'five_most_popular' do
-      it 'should find the 5 most popular books by fulfilled' do
+      it 'should find the 5 most popular and 5 least items by fulfilled' do
         merchant_1 = User.create(username: 'Jon', street: "1234", city: "Dallas", state: "TX", zip_code: 12345, email: "merchant1@54321", password: "password", role: 1, enabled: 0)
         merchant_2 = User.create(username: 'Bob', street: "4321", city: "Denver", state: "CO", zip_code: 80000, email: "merchant2@54321", password: "passwords", role: 1, enabled: 0)
 
@@ -88,8 +88,6 @@ RSpec.describe Item, type: :model do
         item_9 = Item.create(name: 'pot_9', description:'this is also a small pot for plants', quantity: 44, price: 19.00, thumbnail: "https://i.etsystatic.com/13875023/r/il/0db0e5/1570825768/il_570xN.1570825768_anvx.jpg", enabled: 0, user: merchant_1)
         item_10 = Item.create(name: 'pot_10', description:'this is also a small pot for plants', quantity: 11, price: 8.00, thumbnail: "https://i.etsystatic.com/13875023/r/il/0db0e5/1570825768/il_570xN.1570825768_anvx.jpg", enabled: 0, user: merchant_2)
         item_11 = Item.create(name: 'pot_11', description:'this is also a small pot for plants', quantity: 3, price: 22.00, thumbnail: "https://i.etsystatic.com/13875023/r/il/0db0e5/1570825768/il_570xN.1570825768_anvx.jpg", enabled: 0, user: merchant_1)
-
-        @items = Item.where(enabled: "enabled")
 
         order_1 = Order.create(user: user)
         order_2 = Order.create(user: user)
@@ -108,8 +106,8 @@ RSpec.describe Item, type: :model do
         OrderItem.create(item: item_10, order: order_2, fulfilled: 1, current_price: 15.0, quantity: 10)
         OrderItem.create(item: item_11, order: order_3, fulfilled: 0, current_price: 89.0, quantity: 30)
 
-        expect(@items.five_most_popular).to eq([item_10,item_9,item_8,item_7,item_6])
-        expect(@items.five_least_popular).to eq([item_1,item_2,item_3,item_4,item_5])
+        expect(Item.five_most_popular).to eq([item_10,item_9,item_8,item_7,item_6])
+        expect(Item.five_least_popular).to eq([item_1,item_2,item_4,item_5,item_6])
       end
     end
   end
