@@ -12,6 +12,8 @@
   <p>Quantity: <%= item.order_quantity(@order.id) %></p>
   <p>Price: <%= number_to_currency(item.price) %> </p>
   <p>Sub Total: <%= number_to_currency(item.quantity_price(@order.id)) %></p>
+  <%= item.thumbnail %>
+
 </div>
 <% end %>
 <p>Total Items: <%= @order.total_item_quantity %></p>
