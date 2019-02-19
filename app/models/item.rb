@@ -18,11 +18,4 @@ class Item < ApplicationRecord
     self.enabled = "disabled"
     self.save
   end
-
-  def self.for_merchant(id)
-    where(user_id: id)
-    .joins(:order_items)
-    .group(:name)
-    .sum("order_items.quantity")
-  end
 end

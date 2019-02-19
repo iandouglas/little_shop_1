@@ -2,12 +2,24 @@
 <section class="statistics">
   <div id="top-items">
     <h3>Top 5 Items:</h3>
-    <% @items.top_sold(3).each do |item, quantity| %>
-    <p><%= item.name %> - <%= item.quantity %></p>
+    <% @items.each do |item| %>
+      <p><%= item.name %> - <%= item.total_quan %></p>
+    <% end %>
+  </div>
+  <div id="total-quantity">
+    <% total_sold =  @items.sum {|item| item.total_quan } %>
+    <% total_inventory = @items.sum {|item| item.quantity } %>
+    <p>Total Quantity Sold: <%= total_sold %></p>
+    <p>Sold <%= @items.sum {|item| item.total_quan } %> items, which is <%= ((total_sold.to_f / total_inventory.to_f) * 100).round(2) %>% of your total inventory.</p>
+  </div>
+  <div id="top-states">
+    <h3>Top 3 States:</h3>
+    <% @states.each do |state| %>
+    <p><%= state %> - <%= state.quantity %></p>
   </div>
 </section>
 <section class='orders'>
-  <%= @orders.each do |order| %>
+  <% @orders.each do |order| %>
     <section id="order-#{order.id}">
       <h3><%= link_to "ID: #{order.id}", dashboard_orders_path(order) %></h3>
       <p>Date Made: <%= order.created_at %></p>

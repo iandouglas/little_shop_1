@@ -54,9 +54,10 @@ class UsersController < ApplicationController
     render :file => './public/404.html', status: 404 unless merchant_user?
     if current_user
       @orders = Order.for_merchant(current_user.id)
-      @items = Items.for_merchant(current_user.id)
+      @items = User.find(current_user.id).top_items_for_merchant(5)
     end
   end
+
   private
   def user_params
     params.require(:user).permit(:username, :street, :city, :state, :zip_code, :email, :password)

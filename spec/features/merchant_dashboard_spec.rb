@@ -44,25 +44,26 @@ RSpec.describe 'as merchant', type: :feature do
   it 'shows me statistics on my dashboard' do
     user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
     user_tom = User.create(username: 'tom', street: "1234", city: "tom", state: "tommy", zip_code: 12345, email: "tommy", password: "tommy", role: 0, enabled: 0)
-    user_don = User.create(username: 'don', street: "1234", city: "don", state: "donmy", zip_code: 12345, email: "tommy", password: "tommy", role: 0, enabled: 0)
+    user_don = User.create(username: 'don', street: "1234", city: "don", state: "donmy", zip_code: 12345, email: "donnmmy", password: "tommy", role: 0, enabled: 0)
     merchant = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12@54321", password: "password", role: 1, enabled: 0)
     item_1 = Item.create(name: 'meh', description: "haha", quantity: 12, price: 2.50, thumbnail: "steve.jpg", user_id: merchant.id)
     item_2 = Item.create(name: 'pot', description: "fjndkjknk", quantity: 40, price: 9.50, thumbnail: "steve.jpg", user_id: merchant.id)
     item_3 = Item.create(name: 'crayon', description: "oreijvioe", quantity: 15, price: 3.75, thumbnail: "steve.jpg", user_id: merchant.id)
     item_4 = Item.create(name: 'marker', description: "oreijvioe", quantity: 50, price: 80, thumbnail: "steve.jpg", user_id: merchant.id)
-    item_5 = Item.create(name: 'house', description: "oreijvioe", quantity: 80, price: 1.99, thumbnail: "steve.jpg", user_id: merchant.id)
+    item_5 = Item.create!(name: 'house', description: "oreijvioe", quantity: 80, price: 1.99, thumbnail: "steve.jpg", user_id: merchant.id)
     order_1 = Order.create(user_id: user.id)
     order_2 = Order.create(user_id: user.id)
     order_3 = Order.create(user_id: user_tom.id)
     order_4 = Order.create(user_id: user_don.id)
-    OrderItem.create(item_id: item_1.id, order_id: order_1.id, fulfilled: 0, current_price: 2.50, quantity: 2)
-    OrderItem.create(item_id: item_2.id, order_id: order_1.id, fulfilled: 0, current_price: 9.50, quantity: 3)
-    OrderItem.create(item_id: item_3.id, order_id: order_2.id, fulfilled: 0, current_price: 3.75, quantity: 4)
-    OrderItem.create(item_id: item_4.id, order_id: order_3.id, fulfilled: 0, current_price: 80, quantity: 5)
-    OrderItem.create(item_id: item_5.id, order_id: order_4.id, fulfilled: 0, current_price: 1.99, quantity: 6)
+    OrderItem.create(item_id: item_1.id, order_id: order_1.id, fulfilled: 1, current_price: 2.50, quantity: 2)
+    OrderItem.create(item_id: item_2.id, order_id: order_1.id, fulfilled: 1, current_price: 9.50, quantity: 3)
+    OrderItem.create(item_id: item_3.id, order_id: order_2.id, fulfilled: 1, current_price: 3.75, quantity: 4)
+    OrderItem.create(item_id: item_4.id, order_id: order_3.id, fulfilled: 1, current_price: 80, quantity: 5)
+    OrderItem.create(item_id: item_5.id, order_id: order_4.id, fulfilled: 1, current_price: 1.99, quantity: 6)
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant)
 
     visit dashboard_path
+
 
     within '.statistics' do
       within '#top-items' do
@@ -75,13 +76,13 @@ RSpec.describe 'as merchant', type: :feature do
       end
       within '#total-quantity' do
         expect(page).to have_content("Total Quantity Sold: 20")
-        expect(page).to have_content("Sold 20 items, which is 10% of your total inventory")
+        expect(page).to have_content("Sold 20 items, which is 10.15% of your total inventory")
       end
       within '#top-states' do
         expect(page).to have_content('Top 3 States:')
-        expect(page).to have_content("bobby")
-        expect(page).to have_content("donmy")
-        expect(page).to have_content("tommy")
+        expect(page).to have_content("bobby - 9")
+        expect(page).to have_content("donmy - 6")
+        expect(page).to have_content("tommy - 5")
       end
       within '#top-cities' do
         expect(page).to have_content('Top 3 Cities:')
