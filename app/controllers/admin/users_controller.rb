@@ -58,8 +58,4 @@ before_action :require_admin
   def merchants
     @merchant = User.find(params[:id])
   end
-
-private
-
-
 end
