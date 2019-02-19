@@ -15,7 +15,8 @@
   <div id="top-states">
     <h3>Top 3 States:</h3>
     <% @states.each do |state| %>
-    <p><%= state %> - <%= state.quantity %></p>
+    <p><%= state.state %> - <%= state.quantity %></p>
+    <% end %>
   </div>
 </section>
 <section class='orders'>
