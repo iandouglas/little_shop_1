@@ -17,4 +17,25 @@ RSpec.describe 'as merchant', type: :feature do
     expect(page).to_not have_content(user.password)
     expect(page).to_not have_link('Edit Profile')
   end
+
+  it 'shows me a list of any orders with pending items that i sell' do
+    user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
+    merchant = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12@54321", password: "password", role: 1, enabled: 0)
+    item_1 = Item.create(name: 'meh', description: "haha", quantity: 12, price: 2.5, thumbnail: "steve.jpg", user_id: merchant.id)
+    item_2 = Item.create(name: 'vfjkdnj', description: "fjndkjknk", quantity: 12, price: 2.50, thumbnail: "steve.jpg", user_id: merchant.id)
+    item_3 = Item.create(name: 'fvijodv', description: "oreijvioe", quantity: 12, price: 2.50, thumbnail: "steve.jpg", user_id: merchant.id)
+    order_1 = Order.create(user_id: user.id)
+    OrderItem.create(item_id: item_1.id, order_id: order_1.id, fulfilled: 0, current_price: 5.0, quantity: 2)
+    OrderItem.create(item_id: item_2.id, order_id: order_1.id, fulfilled: 0, current_price: 7.50, quantity: 3)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant)
+
+    within '.orders' do
+      expect(page).to have_link("ID: #{order_1.id}")
+      expect(page).to have_content("Date Made: #{order_1.created_at}")
+      expect(page).to have_content("Number of Items: 2")
+      expect(page).to have_content("Total Cost: $12.50")
+      click_link "ID: #{order_1.id}"
+    end
+    expect(current_path).to eq(dashboard_orders_path(order_1))
+  end
 end

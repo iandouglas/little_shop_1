@@ -1,1 +1,11 @@
 <%= render 'user_show' %>
+<section class='orders'>
+  <%= @orders.each do |order| %>
+    <section id="order-#{order.id}">
+      <h3><%= link_to "ID: #{order.id}", dashboard_orders_path(order) %></h3>
+      <p>Date Made: <%= order.created_at %></p>
+      <p>Number of Items: <%= order.total_item_quantity %></p>
+      <p>Total Cost: <%= order.total_item_price %></p>
+    </section>
+  <% end %>
+</section>
