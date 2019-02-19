@@ -1,72 +1,8 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-# require 'factory_bot_rails'
-#
-# include FactoryBot::Syntax::Methods
-#
-# OrderItem.destroy_all
-# Order.destroy_all
-# Item.destroy_all
-# User.destroy_all
-#
-# admin = create(:admin)
-# user = create(:user)
-# merchant_1 = create(:merchant)
-#
-# merchant_2, merchant_3, merchant_4 = create_list(:merchant, 3)
-#
-# inactive_merchant_1 = create(:inactive_merchant)
-# inactive_user_1 = create(:inactive_user)
-#
-# item_1 = create(:item, user: merchant_1)
-# item_2 = create(:item, user: merchant_2)
-# item_3 = create(:item, user: merchant_3)
-# item_4 = create(:item, user: merchant_4)
-# create_list(:item, 10, user: merchant_1)
-#
-# inactive_item_1 = create(:inactive_item, user: merchant_1)
-# inactive_item_2 = create(:inactive_item, user: inactive_merchant_1)
-#
-# Random.new_seed
-# rng = Random.new
-#
-# order = create(:completed_order, user: user)
-# create(:fulfilled_order_item, order: order, item: item_1, current_price: 1, quantity: 1, created_at: (rng.rand(3)+1).days.ago, updated_at: rng.rand(59).minutes.ago)
-# create(:fulfilled_order_item, order: order, item: item_2, current_price: 2, quantity: 1, created_at: (rng.rand(23)+1).hour.ago, updated_at: rng.rand(59).minutes.ago)
-# create(:fulfilled_order_item, order: order, item: item_3, current_price: 3, quantity: 1, created_at: (rng.rand(5)+1).days.ago, updated_at: rng.rand(59).minutes.ago)
-# create(:fulfilled_order_item, order: order, item: item_4, current_price: 4, quantity: 1, created_at: (rng.rand(23)+1).hour.ago, updated_at: rng.rand(59).minutes.ago)
-#
-# # pending order
-# order = create(:order, user: user)
-# create(:order_item, order: order, item: item_1, current_price: 1, quantity: 1)
-# create(:fulfilled_order_item, order: order, item: item_2, current_price: 2, quantity: 1, created_at: (rng.rand(23)+1).days.ago, updated_at: rng.rand(23).hours.ago)
-#
-# order = create(:cancelled_order, user: user)
-# create(:order_item, order: order, item: item_2, current_price: 2, quantity: 1, created_at: (rng.rand(23)+1).hour.ago, updated_at: rng.rand(59).minutes.ago)
-# create(:order_item, order: order, item: item_3, current_price: 3, quantity: 1, created_at: (rng.rand(23)+1).hour.ago, updated_at: rng.rand(59).minutes.ago)
-#
-# order = create(:completed_order, user: user)
-# create(:fulfilled_order_item, order: order, item: item_1, current_price: 1, quantity: 1, created_at: (rng.rand(4)+1).days.ago, updated_at: rng.rand(59).minutes.ago)
-# create(:fulfilled_order_item, order: order, item: item_2, current_price: 2, quantity: 1, created_at: (rng.rand(23)+1).hour.ago, updated_at: rng.rand(59).minutes.ago)
-#
-#
-#
-#
-#
-# puts 'seed data finished'
-# puts "Users created: #{User.count.to_i}"
-# puts "Orders created: #{Order.count.to_i}"
-# puts "Items created: #{Item.count.to_i}"
-# puts "OrderItems created: #{OrderItem.count.to_i}"
 
-vault_guy = User.create(username: "Vault Dweller", street: 'b56', city: "Vault 13", state: "Vault-Tec", zip_code: "47010", email: 'dweller@vt.com', password: '1234')
+
+vault_guy = User.create(username: "Vault Dweller", street: '13', city: "Vault", state: "Vault-Tec", zip_code: "47010", email: 'dweller@vt.com', password: '1234')
 chosen_one = User.create(username: "Chosen One", street: '1', city: "Arroyo", state: "California", zip_code: "52801", email: 'chosen1@ca.com', password: '1234')
-lone_wanderer = User.create(username: "Lone Wanderer", street: 'b4', city: "Vault 101", state: "Vault-tec", zip_code: "43231", email: 'solonely@vt.com', password: '1234', role:1)
+lone_wanderer = User.create(username: "Lone Wanderer", street: '101', city: "Vault", state: "Vault-tec", zip_code: "43231", email: 'solonely@vt.com', password: '1234', role:1)
 courier = User.create(username: "Courier 6", street: '1450', city: "Cemetery", state: "Goodsprings", zip_code: "56721", email: 'mailman6@ups.com', password: '1234', role: 1)
 moira = User.create(username: "Moira Brown", street: 'Craterside Supply', city: "Megaton", state: "DC", zip_code: "23143", email: 'anything@bomb.com', password: '1234', role: 1)
 User.create(username: "Sole Survivor", street: '1082', city: "Sanctuary Hills", state: "Massachusetts", zip_code: "94518", email: 'superchill@bo.com', password: '1234', role: 2)
