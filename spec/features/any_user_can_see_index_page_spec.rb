@@ -198,19 +198,19 @@ RSpec.describe 'When I visit the items catalog', type: :feature do
       within ".item-statistics" do
         within "#statistics-column-1" do
           expect(page).to have_content("5 Most Popular Items")
-          expect(page).to have_content("#{item_10.name}: #{item_10.total_fulfilled}")
-          expect(page).to have_content("#{item_9.name}: #{item_9.total_fulfilled}")
-          expect(page).to have_content("#{item_8.name}: #{item_8.total_fulfilled}")
-          expect(page).to have_content("#{item_7.name}: #{item_7.total_fulfilled}")
-          expect(page).to have_content("#{item_6.name}: #{item_6.total_fulfilled}")
+          expect(page).to have_content("#{item_10.name}: 24")
+          expect(page).to have_content("#{item_9.name}: 22")
+          expect(page).to have_content("#{item_8.name}: 20")
+          expect(page).to have_content("#{item_7.name}: 18")
+          expect(page).to have_content("#{item_6.name}: 16")
         end
         within "#statistics-column-2" do
           expect(page).to have_content("5 Least Popular Items")
-          expect(page).to have_content("#{item_1.name}: #{item_1.total_fulfilled}")
-          expect(page).to have_content("#{item_2.name}: #{item_2.total_fulfilled}")
-          expect(page).to have_content("#{item_3.name}: #{item_3.total_fulfilled}")
-          expect(page).to have_content("#{item_4.name}: #{item_4.total_fulfilled}")
-          expect(page).to have_content("#{item_5.name}: #{item_5.total_fulfilled}")
+          expect(page).to have_content("#{item_1.name}: 5")
+          expect(page).to have_content("#{item_2.name}: 8")
+          expect(page).to have_content("#{item_4.name}: 12")
+          expect(page).to have_content("#{item_5.name}: 14")
+          expect(page).to have_content("#{item_6.name}: 16")
         end
       end
     end
