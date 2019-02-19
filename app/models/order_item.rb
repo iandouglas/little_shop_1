@@ -7,4 +7,6 @@ class OrderItem < ApplicationRecord
   validates_presence_of :fulfilled
   validates_presence_of :current_price
   validates_presence_of :quantity
+
+  enum fulfilled: ['unfulfilled', 'fulfilled']
 end

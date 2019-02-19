@@ -15,7 +15,7 @@ class Item < ApplicationRecord
   end
 
   def disable_item
-    self.enabled = "disabled"
+    self.enabled = "disabled" # shouldn't this be self.enabled = 1 ?
     self.save
   end
 end
