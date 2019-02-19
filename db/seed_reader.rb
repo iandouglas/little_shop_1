@@ -28,22 +28,22 @@ order_2 = Order.create(user_id: vault_guy.id)
 order_3 = Order.create(user_id: vault_guy.id)
 
 order_4 = Order.create(user_id: chosen_one.id)
-order_5 = Order.create(user_id: chosen_one.id)
+order_5 = Order.create(user_id: chosen_one.id, status: 2)
 
 OrderItem.create(order_id: order_1.id, item_id: dandy.id, quantity: 3, current_price: 45.75)
 OrderItem.create(order_id: order_1.id, item_id: dcw.id, quantity: 1, current_price: 32.50)
 
 OrderItem.create(order_id: order_2.id, item_id: flare_gun.id, quantity: 1, current_price: 743.00)
-OrderItem.create(order_id: order_2.id, item_id: flares.id, quantity: 20, current_price: 30.00)
+OrderItem.create(order_id: order_2.id, item_id: flares.id, quantity: 20, current_price: 30.00, fulfilled: 1)
 OrderItem.create(order_id: order_2.id, item_id: stimpak.id, quantity: 3, current_price: 75.00)
 
-OrderItem.create(order_id: order_3.id, item_id: stimpak.id, quantity: 5, current_price: 125.00)
+OrderItem.create(order_id: order_3.id, item_id: stimpak.id, quantity: 5, current_price: 125.00, fulfilled: 1)
 OrderItem.create(order_id: order_3.id, item_id: nuka.id, quantity: 2, current_price: 40.00)
 
 OrderItem.create(order_id: order_4.id, item_id: pork.id, quantity: 4, current_price: 36.00)
 OrderItem.create(order_id: order_4.id, item_id: bobble.id, quantity: 1, current_price: 26.00)
 
-OrderItem.create(order_id: order_5.id, item_id: nuka.id, quantity: 1, current_price: 20.00)
-OrderItem.create(order_id: order_5.id, item_id: bobble.id, quantity: 1, current_price: 26.00)
-OrderItem.create(order_id: order_5.id, item_id: dcw.id, quantity: 1, current_price: 32.50)
-OrderItem.create(order_id: order_5.id, item_id: stimpak.id, quantity: 10, current_price: 250.00)
+OrderItem.create(order_id: order_5.id, item_id: nuka.id, quantity: 1, current_price: 20.00, fulfilled: 1)
+OrderItem.create(order_id: order_5.id, item_id: bobble.id, quantity: 1, current_price: 26.00, fulfilled: 1)
+OrderItem.create(order_id: order_5.id, item_id: dcw.id, quantity: 1, current_price: 32.50, fulfilled: 1)
+OrderItem.create(order_id: order_5.id, item_id: stimpak.id, quantity: 10, current_price: 250.00, fulfilled: 1)
