@@ -34,8 +34,8 @@ RSpec.describe 'as merchant', type: :feature do
     within '.orders' do
       expect(page).to have_link("ID: #{order_1.id}")
       expect(page).to have_content("Date Made: #{order_1.created_at}")
-      expect(page).to have_content("Number of Items: 2")
-      expect(page).to have_content("Total Cost: $12.50")
+      expect(page).to have_content("Number of Items: 5")
+      expect(page).to have_content("Total Cost: $32.5")
       click_link "ID: #{order_1.id}"
     end
     expect(current_path).to eq(dashboard_orders_path(order_1))

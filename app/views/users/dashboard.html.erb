@@ -4,8 +4,8 @@
     <section id="order-#{order.id}">
       <h3><%= link_to "ID: #{order.id}", dashboard_orders_path(order) %></h3>
       <p>Date Made: <%= order.created_at %></p>
-      <p>Number of Items: <%= order.total_item_quantity %></p>
-      <p>Total Cost: <%= order.total_item_price %></p>
+      <p>Number of Items: <%= order.total_item_quantity_for_merchant(current_user.id) %></p>
+      <p>Total Cost: <%= number_to_currency(order.total_item_price_for_merchant(current_user.id)) %></p>
     </section>
   <% end %>
 </section>
