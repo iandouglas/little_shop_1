@@ -68,8 +68,8 @@ RSpec.describe User, type: :model do
         expect(result.length).to eq(3)
         expect(result.first.state).to eq('bobby')
         expect(result.first.quantity).to eq(9)
-        expect(result.first.state).to eq('dommny')
-        expect(result.first.quantity).to eq(6)
+        expect(result[1].state).to eq('donmy')
+        expect(result[1].quantity).to eq(6)
       end
     end
   end

@@ -18,4 +18,13 @@ class User < ApplicationRecord
     .limit(limit)
   end
 
+  def top_states_for_merchant(limit)
+    items.joins(order_items: [{order: :user}])
+    .select("users.state, sum(order_items.quantity) as quantity")
+    .where(order_items: {fulfilled: 1}, enabled: :enabled)
+    .order("quantity desc")
+    .group(:state)
+    .limit(limit)
+  end
+
 end
