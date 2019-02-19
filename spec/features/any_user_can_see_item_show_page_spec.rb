@@ -11,12 +11,12 @@ RSpec.describe "When I visit an item's show page from the items catalog", type: 
       visit item_path(item_1)
 
       expect(page).to have_content( "#{item_1.name}" )
-      expect(page).to have_content( "#{item_1.description}" )
+      expect(page).to have_content( "Description: #{item_1.description}" )
       expect(page).to have_xpath("//img[contains(@src,'#{File.basename(item_1.thumbnail)}')]")
-      expect(page).to have_content( "#{item_1.user.username}" )
-      expect(page).to have_content( "#{item_1.quantity}" )
-      expect(page).to have_content( "#{item_1.price}" )
-      expect(page).to have_content( "#{item_1.average_fulfilled_time}" )
+      expect(page).to have_content( "Merchant: #{item_1.user.username}" )
+      expect(page).to have_content( "Items available: #{item_1.quantity}" )
+      expect(page).to have_content( "Unit Price: #{item_1.price}" )
+      expect(page).to have_content( "Average fulfillment time: #{item_1.average_fulfilled_time}" )
 
       expect(page).to_not have_content( "#{item_2.name}" )
       expect(page).to_not have_content( "#{item_2.description}" )

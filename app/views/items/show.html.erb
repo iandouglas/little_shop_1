@@ -5,9 +5,10 @@
 
 <section class>
   <h3><%= @item.name %></h3>
-  <p> <%= @item.description %></p>
+  <p>Description: <%= @item.description %></p>
   <img src=<%= @item.thumbnail %>" alt="<%= @item.name %> image" width='200'>
-  <p> <%= @item.user.username %></p>
-  <p> <%= @item.quantity %></p>
-  <p> <%= @item.price %></p>
+  <p>Merchant: <%= @item.user.username %></p>
+  <p>Items available: <%= @item.quantity %></p>
+  <p>Unit Price: <%= @item.price %></p>
+  <p>Average fulfillment time: <%= @item_1.average_fulfilled_time %></p>
 </section>
