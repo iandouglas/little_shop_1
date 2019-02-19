@@ -180,7 +180,7 @@ RSpec.describe 'as visitor', type: :feature do
       expect(page).to_not have_content("#{item_2.name}")
     end
 
-    xit 'promts me to login or register if i have not to checkout my cart' do
+    it 'promts me to login or register if i have not to checkout my cart' do
         user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
         item = Item.create(name: 'pot', description:'small pot for plants', quantity: 30, price: 2.49, thumbnail: 'https://images-na.ssl-images-amazon.com/images/I/81%2BG9LfH-uL._SL1500_.jpg', user: user)
         item_2 = Item.create(name: 'crayon', description:'draw things', quantity: 5, price: 0.01, thumbnail: 'https://images-na.ssl-images-amazon.com/images/I/81%2BG9LfH-uL._SL1500_.jpg', user: user)
@@ -213,7 +213,7 @@ RSpec.describe 'as visitor', type: :feature do
         expect(page).to_not have_content('Please Login or Register your account to checkout.')
     end
 
-    xit 'creates an order when i as registered user click checkout' do
+    it 'creates an order when i as registered user click checkout' do
       user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
       item = Item.create(name: 'pot', description:'small pot for plants', quantity: 30, price: 2.49, thumbnail: 'https://images-na.ssl-images-amazon.com/images/I/81%2BG9LfH-uL._SL1500_.jpg', user: user)
       item_2 = Item.create(name: 'crayon', description:'draw things', quantity: 5, price: 0.01, thumbnail: 'https://images-na.ssl-images-amazon.com/images/I/81%2BG9LfH-uL._SL1500_.jpg', user: user)
