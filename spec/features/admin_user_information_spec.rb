@@ -50,6 +50,17 @@ RSpec.describe 'As an admin', type: :feature do
     merchant = User.create!(username: 'happy', street: '432 main st', city: 'steve', state: 'CO', zip_code: 80126, email: 'tester@bob.net', password: 'password', role: 1)
     item = Item.create(name: "blah", description: "meh of meh", quantity: 200, price: 2.50, thumbnail: "haha", user_id: merchant.id)
     # order = Order.create(user_id: user.id)
+    user = User.create(username: 'happy', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
+    merchant = User.create(username: 'bobith', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12@54321", password: "password", role: 1, enabled: 0)
+    item_1 = Item.create(name: 'meh', description: "haha", quantity: 12, price: 2.50, thumbnail: "steve.jpg", user_id: merchant.id)
+    item_2 = Item.create(name: 'vfjkdnj', description: "fjndkjknk", quantity: 12, price: 2.50, thumbnail: "steve.jpg", user_id: merchant.id)
+    item_3 = Item.create(name: 'fvijodv', description: "oreijvioe", quantity: 12, price: 2.50, thumbnail: "steve.jpg", user_id: merchant.id)
+    order_1 = Order.create(user_id: user.id)
+    order_2 = Order.create(user_id: user.id)
+    order_item_1 = OrderItem.create(item_id: item_1.id, order_id: order_1.id, fulfilled: 0, current_price: 5.00, quantity: 2)
+    OrderItem.create(item_id: item_2.id, order_id: order_1.id, fulfilled: 0, current_price: 7.50, quantity: 3)
+    OrderItem.create(item_id: item_3.id, order_id: order_2.id, fulfilled: 0, current_price: 10.0, quantity: 4)
+
     visit login_path
     fill_in 'Email', with: 'test@bob.net'
     fill_in 'Password', with: 'password'
@@ -59,6 +70,19 @@ RSpec.describe 'As an admin', type: :feature do
 
     expect(page).to have_content("See happy's orders")
     expect(page).to have_content("Upgrade happy to a Merchant")
+
+    click_link "See happy's orders"
+
+    expect(current_path).to eq(admin_user_orders_path(user))
+
+    within "#order-#{order_1.id}" do
+      expect(page).to have_link("ID: #{order_1.id}")
+      expect(page).to have_content("Order Placed: #{order_1.created_at}")
+      expect(page).to have_content("Last Updated: #{order_1.updated_at}")
+      expect(page).to have_content("Current Status: #{order_1.status}")
+      expect(page).to have_content("Total Items: #{order_1.total_item_quantity}")
+      expect(page).to have_content("Grand Total: $12.50")
+    end
   end
 
   it 'lets an admin see a users order show page' do
