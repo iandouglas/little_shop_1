@@ -36,4 +36,8 @@ class Item < ApplicationRecord
     .order("total_fulfilled asc")
     .limit(5)
   end
+
+  def average_fulfilled_time
+    
+  end
 end
