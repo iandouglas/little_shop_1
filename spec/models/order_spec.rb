@@ -75,6 +75,27 @@ RSpec.describe Order, type: :model do
         expect(total_price).to eq(25.0)
       end
     end
+
+    describe '.items_for_merchant' do
+      it 'should return items in order for specific merchant and current_price and quantity' do
+        user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
+        merchant = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12@54321", password: "password", role: 1, enabled: 0)
+        merchant_2 = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "123@54321", password: "password", role: 1, enabled: 0)
+        item_1 = Item.create(name: 'meh', description: "haha", quantity: 12, price: 2.5, thumbnail: "steve.jpg", user_id: merchant.id)
+        item_2 = Item.create(name: 'vfjkdnj', description: "fjndkjknk", quantity: 12, price: 2.5, thumbnail: "steve.jpg", user_id: merchant_2.id)
+        order = Order.create(user_id: user.id)
+        OrderItem.create(item_id: item_1.id, order_id: order.id, fulfilled: 0, current_price: 2.5, quantity: 2)
+        OrderItem.create(item_id: item_2.id, order_id: order.id, fulfilled: 0, current_price: 2.5, quantity: 3)
+
+        result = order.items_for_merchant(merchant)
+
+        expect(result.length).to eq(1)
+        expect(result.first.name).to eq('meh')
+        expect(result.first.thumbnail).to eq('steve.jpg')
+        expect(result.first.current_price).to eq(2.5)
+        expect(result.first.quantity).to eq(2)
+      end
+    end
   end
 
   describe 'class methods' do
