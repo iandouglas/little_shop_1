@@ -36,22 +36,22 @@ class User < ApplicationRecord
     .limit(limit)
   end
 
-  def top_user_by_orders
+  def top_user_by_orders(limit)
     items.joins(order_items: [{order: :user}])
     .select("users.username, count(distinct orders.id) as quantity")
     .where(order_items: {fulfilled: 1}, enabled: :enabled)
     .order("quantity desc")
     .group(:username)
-    .limit(1)
+    .limit(limit)
   end
 
-  def top_user_by_items
+  def top_user_by_items(limit)
     items.joins(order_items: [{order: :user}])
     .select("users.username, sum(order_items.quantity) as quantity")
     .where(order_items: {fulfilled: 1}, enabled: :enabled)
     .order("quantity desc")
     .group(:username)
-    .limit(1)
+    .limit(limit)
   end
 
 end

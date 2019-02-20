@@ -25,8 +25,18 @@
     <% end %>
   </div>
   <div id="top-users-orders-items">
-    <p>Most Orders from You: <%= @top_user_by_orders.name %>, with <%= @top_user_by_orders.quantity %> orders.</p>
-    <p>Most Orders from You: <%= @top_user_by_items.name %>, with <%= @top_user_by_items.quantity %> orders.</p>
+    <% @top_user_by_orders.each do |user| %>
+    <p>Most Orders from You: <%= user.username %>, with <%= user.quantity %> orders.</p>
+    <% end %>
+    <% @top_user_by_items.each do |user| %>
+    <p>Most Items bought from you: <%= user.username %>, with <%= user.quantity %> items.</p>
+    <% end %>
+  </div>
+  <div id="top-users-price">
+    <h3>Top 3 Users by amount spent on your Items: </h3>
+    <% @top_users_by_price.each do |user| %>
+    <p><%= user.name %> - <%= number_to_currency(user.money_spent) %></p>
+    <% end %>
   </div>
 </section>
 <section class='orders'>

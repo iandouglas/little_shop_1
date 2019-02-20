@@ -58,8 +58,9 @@ class UsersController < ApplicationController
       @items = @merchant.top_items_for_merchant(5)
       @states = @merchant.top_states_for_merchant(3)
       @cities = @merchant.top_cities_for_merchant(3)
-      @top_user_by_orders = @merchant.top_user_by('orders')
-      @top_user_by_orders = @merchant.top_user_by('items')
+      @top_user_by_orders = @merchant.top_user_by_orders(1)
+      @top_user_by_items = @merchant.top_user_by_items(1)
+      @top_users_by_price = @merchant.top_users_by_price(3)
     end
   end
 

@@ -128,7 +128,7 @@ RSpec.describe User, type: :model do
         OrderItem.create(item_id: item_4.id, order_id: order_3.id, fulfilled: 1, current_price: 80, quantity: 5)
         OrderItem.create(item_id: item_5.id, order_id: order_4.id, fulfilled: 1, current_price: 1.99, quantity: 6)
 
-        result = merchant.top_user_by_orders
+        result = merchant.top_user_by_orders(1)
 
         expect(result.length).to eq(1)
         expect(result.first.username).to eq('bob')
@@ -159,7 +159,7 @@ RSpec.describe User, type: :model do
         OrderItem.create(item_id: item_4.id, order_id: order_3.id, fulfilled: 1, current_price: 80, quantity: 5)
         OrderItem.create(item_id: item_5.id, order_id: order_4.id, fulfilled: 1, current_price: 1.99, quantity: 6)
 
-        result = merchant.top_user_by_items
+        result = merchant.top_user_by_items(1)
 
         expect(result.length).to eq(1)
         expect(result.first.username).to eq('bob')
