@@ -36,4 +36,22 @@ class User < ApplicationRecord
     .limit(limit)
   end
 
+  def top_user_by_orders
+    items.joins(order_items: [{order: :user}])
+    .select("users.username, count(distinct orders.id) as quantity")
+    .where(order_items: {fulfilled: 1}, enabled: :enabled)
+    .order("quantity desc")
+    .group(:username)
+    .limit(1)
+  end
+
+  def top_user_by_items
+    items.joins(order_items: [{order: :user}])
+    .select("users.username, sum(order_items.quantity) as quantity")
+    .where(order_items: {fulfilled: 1}, enabled: :enabled)
+    .order("quantity desc")
+    .group(:username)
+    .limit(1)
+  end
+
 end

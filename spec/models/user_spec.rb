@@ -105,8 +105,8 @@ RSpec.describe User, type: :model do
       end
     end
 
-    describe '.top_cities_for_merchant' do
-      it 'returns the cities where merchant has sent the most items and the quantity' do
+    describe '.top_user_by_orders' do
+      it 'returns the user whos made the most orders by a merchant' do
         user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
         user_tom = User.create(username: 'tom', street: "1234", city: "tom", state: "tommy", zip_code: 12345, email: "tommy", password: "tommy", role: 0, enabled: 0)
         user_don = User.create(username: 'don', street: "1234", city: "don", state: "donmy", zip_code: 12345, email: "donnmmy", password: "tommy", role: 0, enabled: 0)
@@ -118,19 +118,52 @@ RSpec.describe User, type: :model do
         item_5 = Item.create!(name: 'house', description: "oreijvioe", quantity: 80, price: 1.99, thumbnail: "steve.jpg", user_id: merchant.id)
         order_1 = Order.create(user_id: user.id)
         order_2 = Order.create(user_id: user.id)
+        order_5 = Order.create(user_id: user.id)
         order_3 = Order.create(user_id: user_tom.id)
         order_4 = Order.create(user_id: user_don.id)
         OrderItem.create(item_id: item_1.id, order_id: order_1.id, fulfilled: 1, current_price: 2.50, quantity: 2)
         OrderItem.create(item_id: item_2.id, order_id: order_1.id, fulfilled: 1, current_price: 9.50, quantity: 3)
         OrderItem.create(item_id: item_3.id, order_id: order_2.id, fulfilled: 1, current_price: 3.75, quantity: 4)
+        OrderItem.create(item_id: item_3.id, order_id: order_5.id, fulfilled: 1, current_price: 3.75, quantity: 4)
         OrderItem.create(item_id: item_4.id, order_id: order_3.id, fulfilled: 1, current_price: 80, quantity: 5)
         OrderItem.create(item_id: item_5.id, order_id: order_4.id, fulfilled: 1, current_price: 1.99, quantity: 6)
 
-        result = merchant.top_user_by('orders')
+        result = merchant.top_user_by_orders
 
         expect(result.length).to eq(1)
-        expect(result.first.username).to eq('tom')
-        expect(result.first.quantity).to eq(2)
+        expect(result.first.username).to eq('bob')
+        expect(result.first.quantity).to eq(3)
+      end
+    end
+
+    describe '.top_user_by_items' do
+      it 'returns the user whos made the most orders by a merchant' do
+        user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
+        user_tom = User.create(username: 'tom', street: "1234", city: "tom", state: "tommy", zip_code: 12345, email: "tommy", password: "tommy", role: 0, enabled: 0)
+        user_don = User.create(username: 'don', street: "1234", city: "don", state: "donmy", zip_code: 12345, email: "donnmmy", password: "tommy", role: 0, enabled: 0)
+        merchant = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12@54321", password: "password", role: 1, enabled: 0)
+        item_1 = Item.create(name: 'meh', description: "haha", quantity: 12, price: 2.50, thumbnail: "steve.jpg", user_id: merchant.id)
+        item_2 = Item.create(name: 'pot', description: "fjndkjknk", quantity: 40, price: 9.50, thumbnail: "steve.jpg", user_id: merchant.id)
+        item_3 = Item.create(name: 'crayon', description: "oreijvioe", quantity: 15, price: 3.75, thumbnail: "steve.jpg", user_id: merchant.id)
+        item_4 = Item.create(name: 'marker', description: "oreijvioe", quantity: 50, price: 80, thumbnail: "steve.jpg", user_id: merchant.id)
+        item_5 = Item.create!(name: 'house', description: "oreijvioe", quantity: 80, price: 1.99, thumbnail: "steve.jpg", user_id: merchant.id)
+        order_1 = Order.create(user_id: user.id)
+        order_2 = Order.create(user_id: user.id)
+        order_5 = Order.create(user_id: user.id)
+        order_3 = Order.create(user_id: user_tom.id)
+        order_4 = Order.create(user_id: user_don.id)
+        OrderItem.create(item_id: item_1.id, order_id: order_1.id, fulfilled: 1, current_price: 2.50, quantity: 2)
+        OrderItem.create(item_id: item_2.id, order_id: order_1.id, fulfilled: 1, current_price: 9.50, quantity: 3)
+        OrderItem.create(item_id: item_3.id, order_id: order_2.id, fulfilled: 1, current_price: 3.75, quantity: 4)
+        OrderItem.create(item_id: item_3.id, order_id: order_5.id, fulfilled: 1, current_price: 3.75, quantity: 4)
+        OrderItem.create(item_id: item_4.id, order_id: order_3.id, fulfilled: 1, current_price: 80, quantity: 5)
+        OrderItem.create(item_id: item_5.id, order_id: order_4.id, fulfilled: 1, current_price: 1.99, quantity: 6)
+
+        result = merchant.top_user_by_items
+
+        expect(result.length).to eq(1)
+        expect(result.first.username).to eq('bob')
+        expect(result.first.quantity).to eq(13)
       end
     end
   end

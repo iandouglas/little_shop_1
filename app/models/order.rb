@@ -27,4 +27,13 @@ class Order < ApplicationRecord
   def self.for_merchant(id)
     where(status: 0).includes(:items).where(items: {user_id: id})
   end
+
+  def self.method_name
+    joins(order_items: [{item: :user}])
+    .select("users.username, count(orders.id) as quantity")
+    .where(order_items: {fulfilled: 1}, items: {enabled: :enabled})
+    .order("quantity desc")
+    .group(:username)
+    .limit(1)
+  end
 end
