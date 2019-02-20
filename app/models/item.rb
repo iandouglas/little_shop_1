@@ -38,6 +38,12 @@ class Item < ApplicationRecord
   end
 
   def average_fulfilled_time
-    
+    time = Item.joins(:orders)
+    .select("avg(order_items.updated_at - order_items.created_at) as average_time")
+    .where(id: self.id, order_items: {fulfilled: 'fulfilled'}, items: {enabled: 'enabled'})
+    .group(:id).first
+    .average_time
+
+    "#{time.split("days")[0]}days#{time.split("days")[1][0..2]} hours"
   end
 end
