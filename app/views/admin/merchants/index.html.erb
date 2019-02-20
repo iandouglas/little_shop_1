@@ -1,0 +1,12 @@
+<% @merchants.each do |m| %>
+  <section id="merchant-<%= m.id %>">
+    <p><%= link_to "Name: #{m.username}", admin_merchant_path(m.id) %></p>
+    <p>State: <%= m.state %></p>
+    <p>City: <%= m.city %></p>
+    <% if m.enabled? %>
+      <%= button_to "Disable" %>
+    <% elsif m.disabled? %>
+      <%= button_to "Enable" %>
+    <% end %>
+  </section>
+<% end %>

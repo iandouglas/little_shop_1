@@ -1,69 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-# require 'factory_bot_rails'
-#
-# include FactoryBot::Syntax::Methods
-#
-# OrderItem.destroy_all
-# Order.destroy_all
-# Item.destroy_all
-# User.destroy_all
-#
-# admin = create(:admin)
-# user = create(:user)
-# merchant_1 = create(:merchant)
-#
-# merchant_2, merchant_3, merchant_4 = create_list(:merchant, 3)
-#
-# inactive_merchant_1 = create(:inactive_merchant)
-# inactive_user_1 = create(:inactive_user)
-#
-# item_1 = create(:item, user: merchant_1)
-# item_2 = create(:item, user: merchant_2)
-# item_3 = create(:item, user: merchant_3)
-# item_4 = create(:item, user: merchant_4)
-# create_list(:item, 10, user: merchant_1)
-#
-# inactive_item_1 = create(:inactive_item, user: merchant_1)
-# inactive_item_2 = create(:inactive_item, user: inactive_merchant_1)
-#
-# Random.new_seed
-# rng = Random.new
-#
-# order = create(:completed_order, user: user)
-# create(:fulfilled_order_item, order: order, item: item_1, current_price: 1, quantity: 1, created_at: (rng.rand(3)+1).days.ago, updated_at: rng.rand(59).minutes.ago)
-# create(:fulfilled_order_item, order: order, item: item_2, current_price: 2, quantity: 1, created_at: (rng.rand(23)+1).hour.ago, updated_at: rng.rand(59).minutes.ago)
-# create(:fulfilled_order_item, order: order, item: item_3, current_price: 3, quantity: 1, created_at: (rng.rand(5)+1).days.ago, updated_at: rng.rand(59).minutes.ago)
-# create(:fulfilled_order_item, order: order, item: item_4, current_price: 4, quantity: 1, created_at: (rng.rand(23)+1).hour.ago, updated_at: rng.rand(59).minutes.ago)
-#
-# # pending order
-# order = create(:order, user: user)
-# create(:order_item, order: order, item: item_1, current_price: 1, quantity: 1)
-# create(:fulfilled_order_item, order: order, item: item_2, current_price: 2, quantity: 1, created_at: (rng.rand(23)+1).days.ago, updated_at: rng.rand(23).hours.ago)
-#
-# order = create(:cancelled_order, user: user)
-# create(:order_item, order: order, item: item_2, current_price: 2, quantity: 1, created_at: (rng.rand(23)+1).hour.ago, updated_at: rng.rand(59).minutes.ago)
-# create(:order_item, order: order, item: item_3, current_price: 3, quantity: 1, created_at: (rng.rand(23)+1).hour.ago, updated_at: rng.rand(59).minutes.ago)
-#
-# order = create(:completed_order, user: user)
-# create(:fulfilled_order_item, order: order, item: item_1, current_price: 1, quantity: 1, created_at: (rng.rand(4)+1).days.ago, updated_at: rng.rand(59).minutes.ago)
-# create(:fulfilled_order_item, order: order, item: item_2, current_price: 2, quantity: 1, created_at: (rng.rand(23)+1).hour.ago, updated_at: rng.rand(59).minutes.ago)
-#
-#
-#
-#
-#
-# puts 'seed data finished'
-# puts "Users created: #{User.count.to_i}"
-# puts "Orders created: #{Order.count.to_i}"
-# puts "Items created: #{Item.count.to_i}"
-# puts "OrderItems created: #{OrderItem.count.to_i}"
-
 
 
 vault_guy = User.create(username: "Vault Dweller", street: '13', city: "Vault", state: "Vault-Tec", zip_code: "47010", email: 'dweller@vt.com', password: '1234')
@@ -74,7 +8,7 @@ moira = User.create(username: "Moira Brown", street: 'Craterside Supply', city: 
 User.create(username: "Sole Survivor", street: '1082', city: "Sanctuary Hills", state: "Massachusetts", zip_code: "94518", email: 'superchill@bo.com', password: '1234', role: 2)
 
 dandy =Item.create(name: "Dandy Boy Apples", description: "A little stale but still full of sugar!", quantity: 15, price: 15.25, thumbnail: 'https://vignette.wikia.nocookie.net/fallout/images/0/05/Fo4_Dandy_Boy_Apples.png/revision/latest?cb=20160427211903', user_id: courier.id)
-Item.create(name: "Fancy Lad Snack Cakes", description: "Tastes better than a bullet, still puts a hole in your teeth like one.", quantity: 22, price: 4.00, thumbnail: 'https://vignette.wikia.nocookie.net/fallout/images/5/57/Fallout4_Fancy_lads_snack_cakes.png/revision/latest?cb=20160118215034', user_id: courier.id, enabled: 1)
+Item.create(name: "Fancy Lad Snack Cakes", description: "Tastes better than a bullet, still puts a hole in your teeth like one.", quantity: 22, price: 4.00, thumbnail: 'https://vignette.wikia.nocookie.net/fallout/images/5/57/Fallout4_Fancy_lads_snack_cakes.png/revision/latest?cb=20160118215034', user_id: courier.id)
 dcw = Item.create(name: "Deathclaw Wellingham", description: "Don't ask how we got the meat.", quantity: 6, price: 32.50, thumbnail: 'https://vignette.wikia.nocookie.net/fallout/images/5/5a/Deathclaw_Wellingham.png/revision/latest?cb=20170317165651', user_id: courier.id)
 Item.create(name: "Euclid's C-Finder", description: "Adds a whole new meaning to danger close", quantity: 1, price: 743.00, thumbnail: 'https://vignette.wikia.nocookie.net/fallout/images/a/a9/Euclid%27s_C-Findercropped1.png/revision/latest?cb=20110208215156', user_id: courier.id)
 flare_gun = Item.create(name: "Flare Gun", description: "Aim up pull trigger, pretty simple right?", quantity: 3, price: 743.00, thumbnail: 'https://vignette.wikia.nocookie.net/fallout/images/a/a1/Flare_gun.png/revision/latest?cb=20110921025012', user_id: courier.id)
