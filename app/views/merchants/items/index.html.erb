@@ -14,7 +14,7 @@
       <%= button_to 'Enable Item', merchant_enable_item_path(item), method: :patch %>
     <% end %>
     <% if @unsold_items.include?(item) %>
-      <%= link_to 'Delete Item' %>
+      <%= button_to 'Delete Item', dashboard_delete_item_path(item), method: :delete %>
     <% end %>
   </section>
 <% end %>

@@ -50,6 +50,14 @@ class Merchants::ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    item_name = Item.find(params[:id]).name
+    Item.destroy(params[:id])
+
+    flash[:success] = "You have succesfully deleted #{item_name} from your items."
+    redirect_to dashboard_items_path
+  end
+
   private
   def item_params
     params.require(:item).permit(:name, :description, :price, :inventory, :quantity)

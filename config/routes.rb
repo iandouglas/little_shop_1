@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   post '/dashboard/items/new', to: 'merchants/items#create', as: 'dashboard_create_new_item'
   get '/dashboard/items/:id/edit', to: 'merchants/items#edit', as: 'dashboard_edit_item'
   patch '/dashboard/items/:id/edit', to: 'merchants/items#update', as: 'dashboard_update_item'
+  delete '/dashboard/items/:id/delete', to: 'merchants/items#destroy', as: 'dashboard_delete_item'
   post '/login', to: 'sessions#create'
 
   namespace :admin do

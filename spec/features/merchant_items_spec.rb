@@ -32,7 +32,7 @@ RSpec.describe 'as merchant', type: :feature do
     end
     within "#item-#{item_3.id}" do
       expect(page).to have_content("Name: house")
-      expect(page).to have_link('Delete Item')
+      expect(page).to have_button('Delete Item')
     end
     expect(page).to_not have_content('plant')
     end
@@ -164,9 +164,13 @@ RSpec.describe 'as merchant', type: :feature do
       visit dashboard_items_path
 
       within "#item-#{item_1.id}" do
-        click_link 'Delete Item'
+        click_button 'Delete Item'
       end
 
-      expect(page).to_not have_content('meh')
+      expect(current_path).to eq(dashboard_items_path)
+      expect(page).to have_content('You have succesfully deleted meh from your items.')
+      expect(page).to_not have_content('haha')
+      expect(page).to_not have_content('12')
+      expect(page).to_not have_content('$2.50')
     end
   end
