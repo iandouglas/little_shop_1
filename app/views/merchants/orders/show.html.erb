@@ -5,9 +5,14 @@
 </div>
 <section id="items">
   <% @items.each do |item| %>
+  <div id="item-<%= item.id %>">
     <p>Item: <%= link_to "#{item.name}" %></p>
     <%= image_tag "#{item.thumbnail}" %>
     <p>Price: <%= number_to_currency(item.price) %></p>
     <p>Quantity: <%= item.quantity %></p>
+    <% if @items.unfulfill? %>
+      <%= button_to 'Fulfill Item', fulfill_item_path(item) %>
+    <% end %>
+  </div>
   <% end %>
 </section>

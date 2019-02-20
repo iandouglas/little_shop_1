@@ -157,17 +157,17 @@ RSpec.describe 'as merchant', type: :feature do
 
     expect(page).to have_content("Order: #{order_1.id}")
     within "#item-#{item_1.id}" do
-      expect(page).to have_button('Fulfill Order')
+      expect(page).to have_button('Fulfill Item')
     end
     within "#item-#{item_2.id}" do
-      expect(page).to_not have_button('Fulfill Order')
+      expect(page).to_not have_button('Fulfill Item')
     end
     within "#item-#{item_3.id}" do
-      expect(page).to_not have_button('Fulfill Order')
+      expect(page).to_not have_button('Fulfill Item')
     end
     within "#item-#{item_4.id}" do
-      expect(page).to have_button('Fulfill Order')
-      click_button 'Fulfill Order'
+      expect(page).to have_button('Fulfill Item')
+      click_button 'Fulfill Item'
     end
     expect(current_path).to eq(dashboard_orders_path(order_1))
     expect(page).to have_content("You have successfully fulfilled markers for this order.")
