@@ -190,7 +190,6 @@ RSpec.describe 'as merchant', type: :feature do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant)
 
     visit dashboard_path
-    save_and_open_page
 
     click_link 'View Your Items'
     expect(current_path).to eq(dashboard_items_path)

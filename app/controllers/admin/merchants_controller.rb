@@ -2,9 +2,16 @@ class Admin::MerchantsController < ApplicationController
   before_action :require_admin
 
   def show
-    @merchant = User.find(params[:id])
-    if @merchant.role == 'user'
-      redirect_to admin_user_path(@merchant)
+    @user = User.find(params[:id])
+    @orders = Order.for_merchant(@user.id)
+    @items = @user.top_items_for_merchant(5)
+    @states = @user.top_states_for_merchant(3)
+    @cities = @user.top_cities_for_merchant(3)
+    @top_user_by_orders = @user.top_user_by_orders(1)
+    @top_user_by_items = @user.top_user_by_items(1)
+    @top_users_by_price = @user.top_users_by_price(3)
+    if @user.role == 'user'
+      redirect_to admin_user_path(@user)
     end
   end
 
@@ -18,17 +25,6 @@ class Admin::MerchantsController < ApplicationController
     merchant.save
     flash[:success] = "#{merchant.username} is now a user"
     redirect_to admin_user_path(merchant.id)
-  end
-  
-  def show
-    @user = User.find(params[:id])
-    @orders = Order.for_merchant(@user.id)
-    @items = @user.top_items_for_merchant(5)
-    @states = @user.top_states_for_merchant(3)
-    @cities = @user.top_cities_for_merchant(3)
-    @top_user_by_orders = @user.top_user_by_orders(1)
-    @top_user_by_items = @user.top_user_by_items(1)
-    @top_users_by_price = @user.top_users_by_price(3)
   end
 
   def disable

@@ -13,7 +13,7 @@ before_action :require_admin
   end
 
   def dashboard
-    
+
   end
 
   def upgrade
