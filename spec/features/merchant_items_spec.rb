@@ -24,11 +24,11 @@ RSpec.describe 'as merchant', type: :feature do
       expect(page).to have_content("Price: #{item_1.price}")
       expect(page).to have_content("Current Inventory: #{item_1.quantity}")
       expect(page).to have_link("Edit Item")
-      expect(page).to have_link('Disable Item')
+      expect(page).to have_button('Disable Item')
     end
     within "#item-#{item_2.id}" do
       expect(page).to have_content("Name: pot")
-      expect(page).to have_link('Enable Item')
+      expect(page).to have_button('Enable Item')
     end
     within "#item-#{item_3.id}" do
       expect(page).to have_content("Name: house")

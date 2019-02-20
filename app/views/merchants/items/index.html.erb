@@ -9,9 +9,9 @@
     <p>Current Inventory: <%= item.quantity %></p>
     <%= link_to "Edit Item" %>
     <% if item.enabled?%>
-      <%= button_to 'Disable', merchant_disable_item_path(item), method: :patch %>
+      <%= button_to 'Disable Item', merchant_disable_item_path(item), method: :patch %>
     <% elsif item.disabled?%>
-    <%= button_to 'Enable', merchant_enable_item_path(item), method: :patch %>
+      <%= button_to 'Enable Item', merchant_enable_item_path(item), method: :patch %>
     <% end %>
     <% if @unsold_items.include?(item) %>
       <%= link_to 'Delete Item' %>
