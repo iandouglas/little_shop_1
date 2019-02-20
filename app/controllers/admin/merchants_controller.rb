@@ -2,6 +2,25 @@ class Admin::MerchantsController < ApplicationController
   before_action :require_admin
 
   def show
+    @merchant = User.find(params[:id])
+    if @merchant.role == 'user'
+      redirect_to admin_user_path(@merchant)
+    end
+  end
+
+  def downgrade
+    merchant = User.find(params[:user_id])
+    items = Item.where(user_id: merchant.id)
+    items.each do |item|
+      item.disable_item
+    end
+    merchant[:role] = 0
+    merchant.save
+    flash[:success] = "#{merchant.username} is now a user"
+    redirect_to admin_user_path(merchant.id)
+  end
+  
+  def show
     @user = User.find(params[:id])
     @orders = Order.for_merchant(@user.id)
     @items = @user.top_items_for_merchant(5)

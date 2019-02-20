@@ -1,3 +1,4 @@
 <%= render 'merchants/merchant_show' %>
 <%= render 'users/user_show' %>
-<p><%= link_to "Downgrade", admin_role_path(user_id: @user.id) %></p>
+<p><%= link_to "Downgrade", admin_merchant_downgrade_path(user_id: @merchant.id) %></p>
+

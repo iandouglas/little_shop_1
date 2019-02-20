@@ -13,26 +13,15 @@ before_action :require_admin
   end
 
   def dashboard
-
+    
   end
 
-  def update
+  def upgrade
     user = User.find(params[:user_id])
-    if user.user?
-      user[:role] = 1
-      user.save
-      flash[:success] = "#{user.username} is now a merchant"
-      redirect_to admin_merchant_path(user.id)
-    elsif user.merchant?
-      items = Item.where(user_id: user.id)
-      items.each do |item|
-        item.disable_item
-      end
-      user[:role] = 0
-      user.save
-      flash[:success] = "#{user.username} is now a user"
-      redirect_to admin_user_path(user.id)
-    end
+    user[:role] = 1
+    user.save
+    flash[:success] = "#{user.username} is now a merchant"
+    redirect_to admin_merchant_path(user.id)
   end
 
   def disable
