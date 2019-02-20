@@ -109,5 +109,17 @@ RSpec.describe Item, type: :model do
         expect(Item.five_least_popular).to eq([item_1,item_2,item_4,item_5,item_6])
       end
     end
+
+    describe '.change_quantity' do
+      it 'changes the quantity of one item by a given amount' do
+        merchant_1 = User.create(username: 'Jon', street: "1234", city: "Dallas", state: "TX", zip_code: 12345, email: "merchant1@54321", password: "password", role: 1, enabled: 0)
+        item_1 = Item.create(name: 'pot_1', description:'a small pot for plants', quantity: 30, price: 2.50, thumbnail: "https://i.etsystatic.com/13875023/r/il/0db0e5/1570825768/il_570xN.1570825768_anvx.jpg", user: merchant_1)
+
+        Item.change_quantity(13, item_1.id)
+        item_change = Item.find(item_1.id)
+
+        expect(item_change.quantity).to eq(17)
+      end
+    end
   end
 end

@@ -37,5 +37,10 @@ class Item < ApplicationRecord
     .limit(5)
   end
 
+  def self.change_quantity(amount, item_id)
+    new_quantity = find(item_id).quantity - amount
+    find(item_id).update_attributes(quantity: new_quantity)
+  end
+
 
 end
