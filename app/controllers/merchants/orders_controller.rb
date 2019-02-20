@@ -7,7 +7,7 @@ class Merchants::OrdersController <  ApplicationController
   end
 
   def edit
-    OrderItem.fulfill_item(params[:item])
+    OrderItem.fulfill_item(:id, params[:item])
     Item.change_quantity(params[:orderquan])
     redirect_to dashboard_orders_path(params[:id])
   end

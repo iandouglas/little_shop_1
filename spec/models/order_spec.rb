@@ -93,7 +93,7 @@ RSpec.describe Order, type: :model do
         expect(result.first.name).to eq('meh')
         expect(result.first.thumbnail).to eq('steve.jpg')
         expect(result.first.current_price).to eq(2.5)
-        expect(result.first.quantity).to eq(2)
+        expect(result.first.orderquan).to eq(2)
         expect(result.first.fulfilled?).to eq(false)
       end
     end
