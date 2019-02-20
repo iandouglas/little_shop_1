@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   get '/profile/edit', to: 'users#edit', as: 'edit_profile'
 
   get '/dashboard', to: 'users#dashboard', as: 'dashboard'
+  get '/dashboard/orders/:id', to: 'users/orders#dashboard', as: 'dashboard_orders'
+  post '/login', to: 'sessions#create'
 
   namespace :admin do
     get '/users', to: 'users#index', as: 'users'

@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
   def require_regular_user
     render :file => './public/404.html', status: 404 unless regular_user?
   end
-  
+
   def set_cart
     @cart ||= Cart.new(session[:cart])
   end

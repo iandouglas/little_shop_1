@@ -66,7 +66,6 @@ RSpec.describe Item, type: :model do
         expect(item_1.enabled?).to be false
       end
     end
-
   end
 
   describe 'class methods' do
