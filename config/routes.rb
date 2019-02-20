@@ -34,6 +34,8 @@ Rails.application.routes.draw do
     get '/dashboard', to: 'users#dashboard', as: 'dashboard'
     get '/users/:id', to: 'users#show', as: 'user'
     get '/merchants/:id', to: 'merchants#show', as: 'merchant'
+    get '/merchants/:id/orders/:order_id', to: 'merchants/orders#show', as: 'merchant_order'
+    put '/merchant/:id/orders/:order_id/edit', to: 'merchants/orders#edit', as: 'merchant_edit_order'
     get '/role', to: 'users#update', as: 'role'
     get '/users/:id/orders', to:'users/orders#index', as: 'user_orders'
     patch '/users/:id/enable', to:'users#enable', as: 'enable_user'
