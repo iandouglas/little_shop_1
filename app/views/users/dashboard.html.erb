@@ -35,7 +35,7 @@
   <div id="top-users-price">
     <h3>Top 3 Users by amount spent on your Items: </h3>
     <% @top_users_by_price.each do |user| %>
-    <p><%= user.name %> - <%= number_to_currency(user.money_spent) %></p>
+    <p><%= user.username %> - <%= number_to_currency(user.money_spent) %></p>
     <% end %>
   </div>
 </section>

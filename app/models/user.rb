@@ -54,7 +54,7 @@ class User < ApplicationRecord
     .limit(limit)
   end
 
-  def top_user_by_price(limit)
+  def top_users_by_price(limit)
     items.joins(order_items: [{order: :user}])
     .select("users.username, sum(order_items.current_price * order_items.quantity) as money_spent")
     .where(order_items: {fulfilled: 1}, enabled: :enabled)
