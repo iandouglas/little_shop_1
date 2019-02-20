@@ -158,12 +158,18 @@ RSpec.describe 'as merchant', type: :feature do
     expect(page).to have_content("Order: #{order_1.id}")
     within "#item-#{item_1.id}" do
       expect(page).to have_button('Fulfill Item')
+      expect(page).to_not have_content('Cannot Fulfill')
+      expect(page).to_not have_content('Item Fulfilled')
     end
     within "#item-#{item_2.id}" do
       expect(page).to_not have_button('Fulfill Item')
+      expect(page).to_not have_content('Cannot Fulfill')
+      expect(page).to have_content('Item Fulfilled')
     end
     within "#item-#{item_3.id}" do
       expect(page).to_not have_button('Fulfill Item')
+      expect(page).to have_content('Cannot Fulfill')
+      expect(page).to_not have_content('Item Fulfilled')
     end
     within "#item-#{item_4.id}" do
       expect(page).to have_button('Fulfill Item')
@@ -174,6 +180,7 @@ RSpec.describe 'as merchant', type: :feature do
 
     within "#item-#{item_4.id}" do
       expect(page).to_not have_button('Fulfill Item')
+      expect(page).to have_content('Item Fulfilled')
     end
   end
 end
