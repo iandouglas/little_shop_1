@@ -19,6 +19,13 @@ RSpec.describe 'as admin', type: :feature do
       click_link "#{@merchant.username}"
 
       expect(current_path).to eq(admin_merchant_path(@merchant))
+      expect(page).to have_content("Name: #{@merchant.username}")
+      expect(page).to have_content("Street Address: #{@merchant.street}")
+      expect(page).to have_content("City: #{@merchant.city}")
+      expect(page).to have_content("State: #{@merchant.state}")
+      expect(page).to have_content("Zip Code: #{@merchant.zip_code}")
+      expect(page).to have_content("Email: #{@merchant.email}")
+      expect(page).to_not have_content(@merchant.password)
     end
   end
 end
