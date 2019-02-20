@@ -182,10 +182,10 @@ RSpec.describe 'as merchant', type: :feature do
 
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant)
 
+    visit dashboard_path
     expect(page).to have_link('View your Items')
 
     click_link 'View Your Items'
-
     expect(current_path).to eq(dashboard_items_path(order_1))
   end
 end
