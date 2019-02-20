@@ -5,9 +5,14 @@
 </div>
 <section id="items">
   <% @items.each do |item| %>
+  <div id="item-<%= item.id %>">
     <p>Item: <%= link_to "#{item.name}" %></p>
     <%= image_tag "#{item.thumbnail}" %>
     <p>Price: <%= number_to_currency(item.price) %></p>
-    <p>Quantity: <%= item.quantity %></p>
+    <p>Quantity: <%= item.orderquan %></p>
+    <% if item.fulfilled? != true && item.orderquan <= item.quantity%>
+      <%= button_to 'Fulfill Item', dashboard_edit_order_path, method: :put, params: [{orderquan: item.orderquan, item: item.id}] %>
+    <% end %>
+  </div>
   <% end %>
 </section>
