@@ -66,6 +66,26 @@ RSpec.describe Item, type: :model do
         expect(item_1.enabled?).to be false
       end
     end
+
+    describe '.average_fulfilled_time' do
+      it 'returns the average fulfillment time for an item' do
+        merchant_1 = User.create(username: 'Jon', street: "1234", city: "Dallas", state: "TX", zip_code: 12345, email: "merchant1@54321", password: "password", role: 1, enabled: 0)
+
+        user = User.create(username: 'Mary', street: "8765", city: "San Francisco", state: "CA", zip_code: 00000, email: "mary@54321", password: "password", role: 0, enabled: 0)
+
+        item_1 = Item.create!(name: 'pot_1', description:'a small pot for plants', quantity: 30, price: 2.50, thumbnail: "https://i.etsystatic.com/13875023/r/il/0db0e5/1570825768/il_570xN.1570825768_anvx.jpg", user: merchant_1)
+
+        order_1 = Order.create(user: user)
+        order_2 = Order.create(user: user)
+        order_3 = Order.create(user: user)
+
+        OrderItem.create(item: item_1, order: order_1, fulfilled: 1, current_price: 5.0, quantity: 5, created_at: 3.days.ago)
+        OrderItem.create(item: item_1, order: order_2, fulfilled: 1, current_price: 7.50, quantity: 8, created_at: 2.days.ago)
+        OrderItem.create(item: item_1, order: order_3, fulfilled: 1, current_price: 15.0, quantity: 10, created_at: 6.days.ago)
+
+        expect(item_1.average_fulfilled_time).to eq("3 days 16 hours")
+      end
+    end
   end
 
   describe 'class methods' do
