@@ -193,7 +193,7 @@ RSpec.describe User, type: :model do
         expect(result.length).to eq(3)
         expect(result.first.username).to eq('tom')
         expect(result.first.money_spent).to eq(400)
-        expect(result.last.username).to eq('dom')
+        expect(result.last.username).to eq('don')
         expect(result.last.money_spent).to eq(11.94)
       end
     end
