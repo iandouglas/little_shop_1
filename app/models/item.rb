@@ -50,4 +50,10 @@ class Item < ApplicationRecord
       "no fulfillment data available "
     end
   end
+
+  def self.unsold_items(items)
+    includes(:order_items)
+    .where(order_items: {id: nil})
+    .where(id: items)
+  end
 end

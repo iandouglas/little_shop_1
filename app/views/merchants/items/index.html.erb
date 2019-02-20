@@ -1,0 +1,17 @@
+<h1>My Items</h1>
+<%= link_to 'Add New Item' %>
+<% @items.each do |item| %>
+    <section id="item-<%= item.id %>">
+    <p>Name: <%= item.name %></p>
+    <p>ID: <%= item.id %></p>
+    <%= image_tag "#{item.thumbnail}" %></p>
+    <p>Price: <%= item.price %></p>
+    <p>Current Inventory: <%= item.quantity %></p>
+    <%= link_to "Edit Item" %>
+    <%= link_to "Enable Item" %>
+    <%= link_to "Disable Item" %>
+  </section>
+  <% if @unsold_items.include?(item_id: item.id) %>
+    <%= link_to 'Delete Item' %>
+  <% end %>
+<% end %>
