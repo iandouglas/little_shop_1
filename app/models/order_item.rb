@@ -9,8 +9,4 @@ class OrderItem < ApplicationRecord
   validates_presence_of :quantity
 
   enum fulfilled: ['unfulfilled', 'fulfilled']
-
-  def self.fulfill_item(order_id, item_id)
-    where(item_id: item_id).where(order_id: order_id).update_all(fulfilled: 1)
-  end
 end

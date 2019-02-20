@@ -7,8 +7,15 @@ class Merchants::OrdersController <  ApplicationController
   end
 
   def edit
-    OrderItem.fulfill_item(:id, params[:item])
-    Item.change_quantity(params[:orderquan], params[:item])
+    OrderItem.where(item_id: params[:item]).where(order_id: params[:id]).each do |oi|
+      oi.fulfilled = 1
+      oi.save
+    end
+    item = Item.find(params[:item])
+    item.quantity - params[:orderquan].to_i
+    item.save
+    plural_item = item.name.pluralize(params[:orderquan].to_i)
+    flash[:success] = "You have successfully fulfilled #{plural_item} for this order."
     redirect_to dashboard_orders_path(params[:id])
   end
 end

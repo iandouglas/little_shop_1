@@ -171,7 +171,9 @@ RSpec.describe 'as merchant', type: :feature do
     end
     expect(current_path).to eq(dashboard_orders_path(order_1))
     expect(page).to have_content("You have successfully fulfilled markers for this order.")
-    expect(item_4.quantity).to eq(45)
-    expect(change.fulfilled).to eq(1)
+
+    within "#item-#{item_4.id}" do
+      expect(page).to_not have_button('Fulfill Item')
+    end
   end
 end
