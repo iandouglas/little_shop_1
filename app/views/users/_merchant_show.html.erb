@@ -1,0 +1,50 @@
+<section class="statistics">
+  <div id="top-items">
+    <h3>Top 5 Items:</h3>
+    <% @items.each do |item| %>
+      <p><%= item.name %> - <%= item.total_quan %></p>
+    <% end %>
+  </div>
+  <div id="total-quantity">
+    <% total_sold =  @items.sum {|item| item.total_quan } %>
+    <% total_inventory = @items.sum {|item| item.quantity } %>
+    <p>Total Quantity Sold: <%= total_sold %></p>
+    <p>Sold <%= @items.sum {|item| item.total_quan } %> items, which is <%= ((total_sold.to_f / total_inventory.to_f) * 100).round(2) %>% of your total inventory.</p>
+  </div>
+  <div id="top-states">
+    <h3>Top 3 States:</h3>
+    <% @states.each do |state| %>
+    <p><%= state.state %> - <%= state.quantity %></p>
+    <% end %>
+  </div>
+  <div id="top-cities">
+    <h3>Top 3 Cities:</h3>
+    <% @cities.each do |city| %>
+    <p><%= city.city %>, <%= city.state %> - <%= city.quantity %></p>
+    <% end %>
+  </div>
+  <div id="top-users-orders-items">
+    <% @top_user_by_orders.each do |user| %>
+    <p>Most Orders from You: <%= user.username %>, with <%= user.quantity %> orders.</p>
+    <% end %>
+    <% @top_user_by_items.each do |user| %>
+    <p>Most Items bought from you: <%= user.username %>, with <%= user.quantity %> items.</p>
+    <% end %>
+  </div>
+  <div id="top-users-price">
+    <h3>Top 3 Users by amount spent on your Items: </h3>
+    <% @top_users_by_price.each do |user| %>
+    <p><%= user.username %> - <%= number_to_currency(user.money_spent) %></p>
+    <% end %>
+  </div>
+</section>
+<section class='orders'>
+  <% @orders.each do |order| %>
+    <section id="order-#{order.id}">
+      <h3><%= link_to "ID: #{order.id}", dashboard_orders_path(order) %></h3>
+      <p>Date Made: <%= order.created_at %></p>
+      <p>Number of Items: <%= order.total_item_quantity_for_merchant(current_user.id) %></p>
+      <p>Total Cost: <%= number_to_currency(order.total_item_price_for_merchant(current_user.id)) %></p>
+    </section>
+  <% end %>
+</section>
