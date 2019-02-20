@@ -176,4 +176,16 @@ RSpec.describe 'as merchant', type: :feature do
       expect(page).to_not have_button('Fulfill Item')
     end
   end
+
+  it "I lets me see a link to view my own items" do
+    merchant = User.create(username: 'merch', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12@54321", password: "password", role: 1, enabled: 0)
+
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant)
+
+    expect(page).to have_link('View your Items')
+
+    click_link 'View Your Items'
+
+    expect(current_path).to eq(dashboard_items_path(order_1))
+  end
 end
