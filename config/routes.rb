@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   put '/profile', to: 'users#update'
   get '/profile/orders', to: 'users/orders#index', as: 'profile_orders'
   post '/profile/orders', to: 'users/orders#create', as: 'new_profile_order'
+  post '/profile/orders/:id/cancel', to: 'users/orders#cancel', as: 'profile_cancel_order'
   get '/profile/orders/:id', to: 'users/orders#show', as: 'profile_order'
   get '/profile/edit', to: 'users#edit', as: 'edit_profile'
 
