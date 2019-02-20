@@ -26,7 +26,7 @@ Rails.application.routes.draw do
 
   get '/dashboard', to: 'merchants#dashboard', as: 'dashboard'
   get '/dashboard/orders/:id', to: 'merchants/orders#show', as: 'dashboard_orders'
-  put '/dashboard/orders/:id/item/:id', to: 'merchants/orders#fulfill', as: 'fulfill_item'
+  put '/dashboard/orders/:id/edit', to: 'merchants/orders#edit', as: 'dashboard_edit_order'
   post '/login', to: 'sessions#create'
 
   namespace :admin do
