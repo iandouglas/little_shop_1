@@ -11,4 +11,24 @@ class Admin::MerchantsController < ApplicationController
     @top_user_by_items = @user.top_user_by_items(1)
     @top_users_by_price = @user.top_users_by_price(3)
   end
+
+  def disable
+    user = User.find(params[:id])
+    if user.enabled?
+      user.enabled = 'disabled'
+      user.save
+    end
+    flash[:success] = "#{user.username} is now disabled"
+    redirect_to merchants_path
+  end
+
+  def enable
+    user = User.find(params[:id])
+    if user.disabled?
+      user.enabled = 'enabled'
+      user.save
+    end
+    flash[:success] = "#{user.username} is now enabled"
+    redirect_to merchants_path
+  end
 end
