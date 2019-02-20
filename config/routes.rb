@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   put '/profile', to: 'users#update'
   get '/profile/orders', to: 'users/orders#index', as: 'profile_orders'
   post '/profile/orders', to: 'users/orders#create', as: 'new_profile_order'
+  post '/profile/orders/:id/cancel', to: 'users/orders#cancel', as: 'profile_cancel_order'
   get '/profile/orders/:id', to: 'users/orders#show', as: 'profile_order'
   get '/profile/edit', to: 'users#edit', as: 'edit_profile'
 
@@ -38,5 +39,6 @@ Rails.application.routes.draw do
     patch '/users/:id/enable', to:'users#enable', as: 'enable_user'
     patch '/users/:id/disable', to:'users#disable', as: 'disable_user'
     get '/orders/:id', to: 'orders#show', as: 'order'
+    post '/orders/:id/cancel', to: 'orders#cancel', as: 'cancel_order'
   end
 end

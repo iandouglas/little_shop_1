@@ -4,6 +4,7 @@
 <p>Current Status: <%= @order.status%></p>
 <% @order.items.each do |item| %>
   <section class="item-<%= item.id %>">
+    <%= image_tag(item.thumbnail)  %>
     <p><%= item.name %> </p>
     <p>Description: <%= item.description %> </p>
     <p>Quantity: <%= item.quantity %> </p>
@@ -15,3 +16,6 @@
   <% end %>
 <p>Total Items: <%= @order.total_item_quantity %></p>
 <p>Grand Total: <%= number_to_currency(@order.total_item_price) %></p>
+<% if @order.pending? %>
+  <%= button_to "Cancel Order", admin_cancel_order_path %>
+<% end %>

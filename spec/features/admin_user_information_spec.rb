@@ -89,9 +89,9 @@ RSpec.describe 'As an admin', type: :feature do
     admin = User.create!(username: 'test', street: '123 main st', city: 'denver', state: 'CO', zip_code: 80216, email: 'test@bob.net', password: 'password', role: 2)
     user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 0, enabled: 0)
     merchant = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12@54321", password: "password", role: 1, enabled: 0)
-    item_1 = Item.create(name: 'meh', description: "haha", quantity: 12, price: 2.50, thumbnail: "steve.jpg", user_id: merchant.id)
-    item_2 = Item.create(name: 'vfjkdnj', description: "fjndkjknk", quantity: 12, price: 2.50, thumbnail: "steve.jpg", user_id: merchant.id)
-    item_3 = Item.create(name: 'fvijodv', description: "oreijvioe", quantity: 12, price: 2.50, thumbnail: "steve.jpg", user_id: merchant.id)
+    item_1 = Item.create(name: 'meh', description: "haha", quantity: 12, price: 2.50, thumbnail: "https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwiZmf7V4sjgAhUe3YMKHZlsDyYQjRx6BAgBEAU&url=https%3A%2F%2Fwww.homedepot.com%2Fp%2FPennington-8-in-Terra-Cotta-Clay-Pot-100043015%2F100333339&psig=AOvVaw0wGUQTqb1vGanpmydM3DY4&ust=1550699158284985", user_id: merchant.id)
+    item_2 = Item.create(name: 'vfjkdnj', description: "fjndkjknk", quantity: 12, price: 2.50, thumbnail: "https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwiZmf7V4sjgAhUe3YMKHZlsDyYQjRx6BAgBEAU&url=https%3A%2F%2Fwww.homedepot.com%2Fp%2FPennington-8-in-Terra-Cotta-Clay-Pot-100043015%2F100333339&psig=AOvVaw0wGUQTqb1vGanpmydM3DY4&ust=1550699158284985", user_id: merchant.id)
+    item_3 = Item.create(name: 'fvijodv', description: "oreijvioe", quantity: 12, price: 2.50, thumbnail: "https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwiZmf7V4sjgAhUe3YMKHZlsDyYQjRx6BAgBEAU&url=https%3A%2F%2Fwww.homedepot.com%2Fp%2FPennington-8-in-Terra-Cotta-Clay-Pot-100043015%2F100333339&psig=AOvVaw0wGUQTqb1vGanpmydM3DY4&ust=1550699158284985", user_id: merchant.id)
     order_1 = Order.create(user_id: user.id)
     order_2 = Order.create(user_id: user.id)
     order_item_1 = OrderItem.create(item_id: item_1.id, order_id: order_1.id, fulfilled: 0, current_price: 5.0, quantity: 2)
@@ -102,7 +102,7 @@ RSpec.describe 'As an admin', type: :feature do
     fill_in 'Password', with: 'password'
     click_button 'Sign In'
 
-    visit admin_order_path(user)
+    visit admin_order_path(order_1)
 
     expect(page).to have_content("ID: #{order_1.id}")
     expect(page).to have_content("Order Placed: #{order_1.created_at}")
