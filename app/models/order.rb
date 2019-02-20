@@ -24,6 +24,12 @@ class Order < ApplicationRecord
     order_items.where(item_id: merchant_items).sum { |order| order.current_price * order.quantity }
   end
 
+  def items_for_merchant(id)
+    items.where(user_id: id)
+    .joins(:order_items)
+    .select("items.*, order_items.current_price, order_items.fulfilled, order_items.quantity as orderquan")
+  end
+
   def self.for_merchant(id)
     where(status: 0).includes(:items).where(items: {user_id: id})
   end

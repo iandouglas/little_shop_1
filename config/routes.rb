@@ -24,8 +24,9 @@ Rails.application.routes.draw do
   get '/profile/orders/:id', to: 'users/orders#show', as: 'profile_order'
   get '/profile/edit', to: 'users#edit', as: 'edit_profile'
 
-  get '/dashboard', to: 'users#dashboard', as: 'dashboard'
-  get '/dashboard/orders/:id', to: 'users/orders#dashboard', as: 'dashboard_orders'
+  get '/dashboard', to: 'merchants#dashboard', as: 'dashboard'
+  get '/dashboard/orders/:id', to: 'merchants/orders#show', as: 'dashboard_orders'
+  put '/dashboard/orders/:id/edit', to: 'merchants/orders#edit', as: 'dashboard_edit_order'
   post '/login', to: 'sessions#create'
 
   namespace :admin do
