@@ -14,7 +14,8 @@ RSpec.describe 'as an admin' do
 
       click_link 'Merchants'
 
-      expect(current_path).to eq(admin_merchants_path)
+      expect(current_path).to eq(merchants_path)
+      save_and_open_page
 
       within "#merchant-#{merchant_1.id}" do
         expect(page).to have_link("Name: supperhappy")
