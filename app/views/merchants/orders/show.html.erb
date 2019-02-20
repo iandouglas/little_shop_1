@@ -13,6 +13,9 @@
     <% if item.fulfilled? != true && item.orderquan <= item.quantity%>
       <%= button_to 'Fulfill Item', dashboard_edit_order_path, method: :put, params: [{orderquan: item.orderquan, item: item.id}] %>
     <% end %>
+    <% if item.orderquan >= item.quantity && item.fulfilled? != true %>
+      <p>Cannot Fulfill</p>
+    <% end %>
   </div>
   <% end %>
 </section>
