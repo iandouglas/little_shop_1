@@ -154,4 +154,19 @@ RSpec.describe 'as merchant', type: :feature do
       expect(page).to have_content("Name can't be blank")
       expect(page).to have_content("Description can't be blank")
     end
+
+    it "allows me to delete an item" do
+      user = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "123321", password: "password", role: 0, enabled: 0)
+      merchant = User.create(username: 'bob', street: "1234", city: "bob", state: "bobby", zip_code: 12345, email: "12345@54321", password: "password", role: 1, enabled: 0)
+      item_1 = Item.create(name: 'meh', description: "haha", quantity: 12, price: 2.5, thumbnail: "https://66.media.tumblr.com/60aeee62dc1aee0c3c0fbad1702eb860/tumblr_inline_pfp352ORsk1r4hkfd_250.png", user_id: merchant.id)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant)
+
+      visit dashboard_items_path
+
+      within "#item-#{item_1.id}" do
+        click_link 'Delete Item'
+      end
+
+      expect(page).to_not have_content('meh')
+    end
   end
