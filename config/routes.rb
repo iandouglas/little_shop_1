@@ -37,5 +37,6 @@ Rails.application.routes.draw do
     patch '/users/:id/enable', to:'users#enable', as: 'enable_user'
     patch '/users/:id/disable', to:'users#disable', as: 'disable_user'
     get '/orders/:id', to: 'orders#show', as: 'order'
+    post '/orders/:id/cancel', to: 'orders#cancel', as: 'cancel_order'
   end
 end
