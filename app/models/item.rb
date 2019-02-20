@@ -42,8 +42,12 @@ class Item < ApplicationRecord
     .select("avg(order_items.updated_at - order_items.created_at) as average_time")
     .where(id: self.id, order_items: {fulfilled: 'fulfilled'}, items: {enabled: 'enabled'})
     .group(:id).first
-    .average_time
 
-    "#{time.split("days")[0]}days#{time.split("days")[1][0..2]} hours"
+    if time
+      time = time.average_time
+      "#{time.split("days")[0]}days#{time.split("days")[1][0..2]} hours"
+    else
+      "no fulfillment data available "
+    end
   end
 end
