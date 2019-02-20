@@ -21,10 +21,6 @@ class Users::OrdersController < ApplicationController
     end
   end
 
-
-  def dashboard
-  end
-  
   def cancel
     order  = Order.find(params[:id])
     items = OrderItem.where(order_id: params[:id])
