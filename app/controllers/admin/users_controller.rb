@@ -18,7 +18,6 @@ before_action :require_admin
 
   def update
     user = User.find(params[:user_id])
-
     if user.user?
       user[:role] = 1
       user.save
@@ -34,5 +33,29 @@ before_action :require_admin
       flash[:success] = "#{user.username} is now a user"
       redirect_to admin_user_path(user.id)
     end
+  end
+
+  def disable
+    user = User.find(params[:id])
+    if user.enabled?
+      user.enabled = 'disabled'
+      user.save
+    end
+    flash[:success] = "#{user.username} is now disabled"
+    redirect_to admin_users_path
+  end
+
+  def enable
+    user = User.find(params[:id])
+    if user.disabled?
+      user.enabled = 'enabled'
+      user.save
+    end
+    flash[:success] = "#{user.username} is now enabled"
+    redirect_to admin_users_path
+  end
+
+  def merchants
+    @merchant = User.find(params[:id])
   end
 end
