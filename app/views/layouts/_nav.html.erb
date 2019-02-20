@@ -5,11 +5,7 @@
   <% end %>
   <%= link_to "Home", root_path %>
   <%= link_to "Items", items_path %>
-  <% if admin_user? %>
-    <%= link_to "Merchants", admin_merchants_path %>
-  <% else %>
-    <%= link_to "Merchants", merchants_path %>
-    <% end %>
+  <%= link_to "Merchants", merchants_path %>
   <% unless merchant_or_admin? %>
     <%= link_to "Cart(#{@cart.total})", cart_index_path %>
   <% end %>
