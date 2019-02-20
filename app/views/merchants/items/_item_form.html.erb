@@ -1,0 +1,23 @@
+<% if @errors %>
+  <% @errors.each do |message| %>
+    <%= content_tag :div, message, class: 'error' %>
+  <% end %>
+<% end %>
+<% if @item.id %>
+  <% path = dashboard_edit_item_path(@item) %>
+<% else %>
+  <% path =  dashboard_create_new_item_path %>
+<% end %>
+<%= form_for @item, url: path do |f| %>
+<%= f.label :name %>
+<%= f.text_field :name %>
+<%= f.label :description %>
+<%= f.text_area :description %>
+<%= f.label :thumbnail %>
+<%= f.text_field :thumbnail %>
+<%= f.label :price %>
+<%= f.number_field :price, step: :any %>
+<%= f.label :quantity %>
+<%= f.number_field :quantity %>
+<%= f.submit 'Save Item' %>
+<% end %>
