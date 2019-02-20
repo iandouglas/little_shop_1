@@ -3,9 +3,9 @@
   <p><%= link_to "User: #{user.username}", admin_user_path(user) %></p>
   <p>Registered: <%= user.created_at %> </p>
     <% if user.enabled? %>
-    <p>  <%= button_to 'Disable'%></p>
+    <p>  <%= button_to 'Disable', admin_disable_user_path(user), method: :patch%></p>
     <% else %>
-    <p>  <%= button_to 'Enable'%></p>
+    <p>  <%= button_to 'Enable', admin_enable_user_path(user), method: :patch%></p>
     <% end %>
 </section>
 <% end %>

@@ -11,13 +11,13 @@ RSpec.describe 'As a Visitor', type: :feature do
 
       visit merchants_path
 
-      within ".merchant-#{merchant_1.id}" do
+      within "#merchant-#{merchant_1.id}" do
         expect(page).to have_content("Name: supperhappy")
         expect(page).to have_content("City: steve")
         expect(page).to have_content("State: CO")
         expect(page).to have_content("Date Registered: #{merchant_1.created_at}")
       end
-      within ".merchant-#{merchant_2.id}" do
+      within "#merchant-#{merchant_2.id}" do
         expect(page).to have_content("Name: hellahappy")
         expect(page).to have_content("City: stephen")
         expect(page).to have_content("State: CO")

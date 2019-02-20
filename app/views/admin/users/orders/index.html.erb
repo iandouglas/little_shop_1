@@ -1,6 +1,6 @@
 <% @orders.each do |o| %>
 <section id="order-<%=o.id%>">
-  <p><%= link_to "ID: #{o.id}"%></p>
+  <p><%= link_to "ID: #{o.id}", admin_order_path(o.id)%></p>
   <p>Order Placed: <%= o.created_at %></p>
   <p>Last Updated: <%= o.updated_at %></p>
   <p>Current Status: <%= o.status %></p>

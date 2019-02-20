@@ -1,8 +1,17 @@
-<% @merchants.each do |merchant| %>
-<section class="merchant-<%= merchant.id %>">
-  <p>Name: <%= merchant.username %> </p>
-  <p>City: <%= merchant.city %> </p>
-  <p>State: <%= merchant.state %> </p>
-  <p>Date Registered: <%= merchant.created_at %> </p>
-</section>
+<% @merchants.each do |m| %>
+  <section id="merchant-<%= m.id %>">
+    <% if admin_user? %>
+      <p><%= link_to "Name: #{m.username}", admin_merchant_path(m.id) %></p>
+      <% if m.enabled? %>
+        <%= button_to "Disable" %>
+      <% elsif m.disabled? %>
+        <%= button_to "Enable" %>
+      <% end %>
+    <% else %>
+      <p>Name: <%= m.username %></p>
+    <% end %>
+    <p>State: <%= m.state %></p>
+    <p>City: <%= m.city %></p>
+    <p>Date Registered: <%= m.created_at %></p>
+  </section>
 <% end %>
