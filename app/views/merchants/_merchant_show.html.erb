@@ -51,12 +51,16 @@
 </section>
 <p><%= link_to 'View Your Items', dashboard_items_path %></p>
 <section class='orders'>
-  <% @orders.each do |order| %>
-    <section class="container-fluid" id="order-#{order.id}">
-      <h3><%= link_to "ID: #{order.id}", dashboard_orders_path(order) %></h3>
-      <p>Number of Items: <%= order.total_item_quantity_for_merchant(current_user.id) %></p>
-      <p>Total Cost: <%= number_to_currency(order.total_item_price_for_merchant(current_user.id)) %></p>
-      <p>Date Made: <%= order.created_at %></p>
-    </section>
-  <% end %>
+  <div class = "grid-container">
+    <% @orders.each do |order| %>
+      <div class ="grid-item">
+        <section id="order-#{order.id}">
+          <h3><%= link_to "ID: #{order.id}", dashboard_orders_path(order) %></h3>
+          <p>Date Made: <%= order.created_at %></p>
+          <p>Number of Items: <%= order.total_item_quantity_for_merchant(current_user.id) %></p>
+          <p>Total Cost: <%= number_to_currency(order.total_item_price_for_merchant(current_user.id)) %></p>
+        </section>
+      </div>
+    <% end %>
+  </div>
 </section>

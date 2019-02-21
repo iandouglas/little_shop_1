@@ -1,14 +1,19 @@
-<h1>Items Catalog</h1>
-
-<% @items.each do |item| %>
-  <section id="item-<%=item.id%>">
-    <%= link_to item.name, item_path(item) %>
-    <%= link_to image_tag(item.thumbnail, width: '200'), item_path(item) %>
-    <p>Merchant: <%= item.user.username %></p>
-    <p>Items in stock: <%= item.quantity %></p>
-    <p>Price: <%= number_to_currency(item.price) %></p>
-  </section>
-<% end %>
+<h1 class="title">Items Catalog</h1>
+<div class = "grid-container">
+  <% @items.each do |item| %>
+    <div class ="grid-item">
+      <section id="item-<%=item.id%>">
+        <h4><%= link_to item.name, item_path(item) %></h4>
+        <%= link_to image_tag(item.thumbnail, height: '150'), item_path(item), :class => "small-image" %>
+        <p>Merchant: <%= item.user.username %></p>
+        <p>Items in stock: <%= item.quantity %></p>
+        <p>Price: <%= number_to_currency(item.price) %></p>
+      </section>
+    </div>
+  <% end %>
+</div>
+<section class="item-statistics">
+  <section id=statistics-column-1>
 <section class="statistics">
   <section class="stat-column" id="popular-items">
     <h3>5 Most Popular Items</h3>

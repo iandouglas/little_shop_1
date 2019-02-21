@@ -2,13 +2,14 @@
   <%= button_to "Add to Cart", cart_index_path(item_id: @item.id ) %>
 <% end %>
 
-
+<div class ="grid-item">
 <section class>
   <h3><%= @item.name %></h3>
   <p>Description: <%= @item.description %></p>
-  <img src=<%= @item.thumbnail %>" alt="<%= @item.name %> image" width='200'>
+  <img src=<%= @item.thumbnail %>" alt="<%= @item.name %> image" width='300'>
   <p>Merchant: <%= @item.user.username %></p>
   <p>Items available: <%= @item.quantity %></p>
   <p>Unit Price: <%= @item.price %></p>
   <p>Average fulfillment time: <%= @item.average_fulfilled_time %></p>
 </section>
+</div>
