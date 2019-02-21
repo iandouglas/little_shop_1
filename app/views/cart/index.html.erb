@@ -1,18 +1,23 @@
-<section class='cart'>
+<h1 class='title'>cart</h1>
+<section class='Cart'>
   <% if @cart.contents.count != 0 %>
-    <% @items.each do |item, quantity| %>
-      <section id="item-<%= item.id %>">
-        <h1><%= item.name %></h1>
-        <%= image_tag item.thumbnail %>
-        <p>Merchant: <%= item.user.username %></p>
-        <p>Price: <%= number_to_currency(item.price) %></p>
-        <p>Quantity: <%= quantity %></p>
-        <p>Total: <%= number_to_currency(@cart.subtotal(item)) %></p>
-        <%= button_to '+', update_cart_item_path(item.id), method: :put, params: {type: :add} %>
-        <%= button_to '-', update_cart_item_path(item.id), method: :put, params: {type: :remove} %>
-        <%= button_to 'Remove Item', delete_cart_item_path(item.id), method: :delete %>
-      </section>
-    <% end %>
+    <div class = "grid-container">
+      <% @items.each do |item, quantity| %>
+        <div class ="grid-item">
+          <section id="item-<%= item.id %>">
+            <h4><%= item.name %></h4>
+            <%= image_tag item.thumbnail, :class => "cart-image" %>
+            <p>Merchant: <%= item.user.username %></p>
+            <p>Price: <%= number_to_currency(item.price) %></p>
+            <p>Quantity: <%= quantity %></p>
+            <p>Total: <%= number_to_currency(@cart.subtotal(item)) %></p>
+            <%= button_to '+', update_cart_item_path(item.id), method: :put, params: {type: :add} %>
+            <%= button_to '-', update_cart_item_path(item.id), method: :put, params: {type: :remove} %>
+            <%= button_to 'Remove Item', delete_cart_item_path(item.id), method: :delete %>
+          </section>
+        </div>
+      <% end %>
+    </div>
     <h3>Cart Total: <%= number_to_currency(@cart.grand_total) %></p>
     <%= button_to 'Empty Cart', cart_path(@cart), method: :delete %>
     <% unless regular_user? %>

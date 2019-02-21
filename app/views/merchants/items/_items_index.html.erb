@@ -4,43 +4,47 @@
 <% else %>
 <%= link_to 'Add New Item', dashboard_new_item_path %>
 <% end %>
-<% @items.each do |item| %>
-    <section id="item-<%= item.id %>">
-    <p>Name: <%= item.name %></p>
-    <p>ID: <%= item.id %></p>
-    <%= image_tag "#{item.thumbnail}" %></p>
-    <p>Price: <%= item.price %></p>
-    <p>Current Inventory: <%= item.quantity %></p>
-    <% if admin_user? && @merchant%>
-    <%= link_to "Edit Item", admin_merchant_edit_item_path(@merchant, item) %>
-    <% else %>
-    <%= link_to "Edit Item", dashboard_edit_item_path(item) %>
-    <% end %>
+<div class = "grid-container">
+  <% @items.each do |item| %>
+    <div class ="grid-item">
+      <section id="item-<%= item.id %>">
+        <p>Name: <%= item.name %></p>
+        <p>ID: <%= item.id %></p>
+        <%= image_tag "#{item.thumbnail}" %></p>
+        <p>Price: <%= item.price %></p>
+        <p>Current Inventory: <%= item.quantity %></p>
+        <% if admin_user? && @merchant%>
+        <%= link_to "Edit Item", admin_merchant_edit_item_path(@merchant, item) %>
+        <% else %>
+        <%= link_to "Edit Item", dashboard_edit_item_path(item) %>
+        <% end %>
 
-    <% if admin_user? && @merchant%>
+        <% if admin_user? && @merchant%>
 
-      <% if item.enabled?%>
-        <%= button_to 'Disable Item', admin_merchant_disable_item_path(@merchant, item), method: :patch %>
-      <% elsif item.disabled?%>
-        <%= button_to 'Enable Item', admin_merchant_enable_item_path(@merchant, item), method: :patch %>
-      <% end %>
+          <% if item.enabled?%>
+            <%= button_to 'Disable Item', admin_merchant_disable_item_path(@merchant, item), method: :patch %>
+          <% elsif item.disabled?%>
+            <%= button_to 'Enable Item', admin_merchant_enable_item_path(@merchant, item), method: :patch %>
+          <% end %>
 
-    <% else %>
+        <% else %>
 
-      <% if item.enabled?%>
-      <%= button_to 'Disable Item', merchant_disable_item_path(item), method: :patch %>
-      <% elsif item.disabled?%>
-      <%= button_to 'Enable Item', merchant_enable_item_path(item), method: :patch %>
-      <% end %>
+          <% if item.enabled?%>
+          <%= button_to 'Disable Item', merchant_disable_item_path(item), method: :patch %>
+          <% elsif item.disabled?%>
+          <%= button_to 'Enable Item', merchant_enable_item_path(item), method: :patch %>
+          <% end %>
 
-    <% end %>
+        <% end %>
 
-    <% if @unsold_items.include?(item) %>
-    <% if admin_user? && @merchant%>
-      <%= button_to 'Delete Item', admin_merchant_delete_item_path(@merchant, item), method: :delete %>
-      <% else %>
-      <%= button_to 'Delete Item', dashboard_delete_item_path(item), method: :delete %>
-    <% end %>
-    <% end %>
-  </section>
-<% end %>
+        <% if @unsold_items.include?(item) %>
+        <% if admin_user? && @merchant%>
+          <%= button_to 'Delete Item', admin_merchant_delete_item_path(@merchant, item), method: :delete %>
+          <% else %>
+          <%= button_to 'Delete Item', dashboard_delete_item_path(item), method: :delete %>
+        <% end %>
+        <% end %>
+      </section>
+    </div>
+  <% end %>
+</div>
