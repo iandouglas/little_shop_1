@@ -82,7 +82,7 @@ RSpec.describe Item, type: :model do
         OrderItem.create(item: item_1, order: order_2, fulfilled: 1, current_price: 7.50, quantity: 8, created_at: 2.days.ago)
         OrderItem.create(item: item_1, order: order_3, fulfilled: 1, current_price: 15.0, quantity: 10, created_at: 6.days.ago)
 
-        expect(item_1.average_fulfilled_time).to eq("3 days 16 hours")
+        expect(item_1.average_fulfilled_time).to include("3 days 16")
       end
     end
   end
