@@ -195,8 +195,8 @@ RSpec.describe 'When I visit the items catalog', type: :feature do
 
       visit items_path
 
-      within ".item-statistics" do
-        within "#statistics-column-1" do
+      within ".statistics" do
+        within "#popular-items" do
           expect(page).to have_content("5 Most Popular Items")
           expect(page).to have_content("#{item_10.name}: 24")
           expect(page).to have_content("#{item_9.name}: 22")
@@ -204,7 +204,7 @@ RSpec.describe 'When I visit the items catalog', type: :feature do
           expect(page).to have_content("#{item_7.name}: 18")
           expect(page).to have_content("#{item_6.name}: 16")
         end
-        within "#statistics-column-2" do
+        within "#unpopular-items" do
           expect(page).to have_content("5 Least Popular Items")
           expect(page).to have_content("#{item_1.name}: 5")
           expect(page).to have_content("#{item_2.name}: 8")

@@ -28,7 +28,7 @@ order_2 = Order.create(user_id: vault_guy.id)
 order_3 = Order.create(user_id: vault_guy.id)
 
 order_4 = Order.create(user_id: chosen_one.id)
-order_5 = Order.create(user_id: chosen_one.id, status: 2)
+order_5 = Order.create(user_id: chosen_one.id, status: 1)
 
 OrderItem.create(order_id: order_1.id, item_id: dandy.id, quantity: 3, current_price: 45.75)
 OrderItem.create(order_id: order_1.id, item_id: dcw.id, quantity: 1, current_price: 32.50)

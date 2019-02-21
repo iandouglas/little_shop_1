@@ -5,6 +5,14 @@ Little Shop is a web based application which runs on the Ruby On Rails framework
 
 - Link to original Turing repository: https://github.com/turingschool-projects/little_shop_v2
 
+## Want to take a look?
+Regular user: email: dweller@vt.com
+Merchant user: email: mailman6@ups.com
+Admin User: superchill@bo.com
+
+password for all: 1234
+
+Check out the app live: https://little-shop-of-horrors.herokuapp.com/
 ## Database
 <img width="800" alt="little_shop_database" src="https://user-images.githubusercontent.com/34421236/52988028-f2af0200-33ba-11e9-89c5-4b0f7e04291b.png">
 

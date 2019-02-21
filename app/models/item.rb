@@ -48,7 +48,7 @@ class Item < ApplicationRecord
     if time
       time = time.average_time
     else
-      "no fulfillment data available "
+      # "no fulfillment data available "
     end
   end
 

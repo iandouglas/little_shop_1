@@ -18,7 +18,6 @@
         <% else %>
         <%= link_to "Edit Item", dashboard_edit_item_path(item) %>
         <% end %>
-
         <% if admin_user? && @merchant%>
 
           <% if item.enabled?%>
