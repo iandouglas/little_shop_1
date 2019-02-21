@@ -18,9 +18,9 @@ RSpec.describe 'As a registered user', type: :feature do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
       visit profile_orders_path
-      # save_and_open_page
+
       click_link "ID: #{order_1.id}"
-      # save_and_open_page
+
       expect(current_path).to eq(profile_order_path(order_1))
       expect(page).to have_content("ID: #{order_1.id}")
       expect(page).to have_content("Order Placed: #{order_1.created_at}")

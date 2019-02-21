@@ -91,7 +91,7 @@ RSpec.describe 'as registered user', type: :feature do
     click_link 'Edit Profile'
 
     fill_in 'Email', with: 'bob@bob.net'
-    # save_and_open_page
+
     click_button 'Save Changes'
 
     expect(current_path).to eq(profile_path)

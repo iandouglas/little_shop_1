@@ -15,3 +15,56 @@
     <p>Date Registered: <%= m.created_at %></p>
   </section>
 <% end %>
+
+<section class="statistics">
+  <div id="most-sold">
+    <ul>
+      <% @most_sold.each do |merchant| %>
+      <li><%= merchant.username %>- <%= number_to_currency(merchant.revenue) %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div id="fastest-fulfillers">
+    <h2>Fastest Fulfillers</h2>
+    <ul>
+      <% @fastest_fulfillers.each do |merchant| %>
+      <li>Merchant: <%= merchant.username %> Average Time: <%= merchant.fill_time %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div id="slowest-fulfillers">
+    <h2>Slowest Fulfillers</h2>
+    <ul>
+      <% @slowest_fulfillers.each do |merchant| %>
+      <li>Merchant: <%= merchant.username %> Average Time: <%= merchant.fill_time %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div id="top-states">
+    <h2>Top States</h2>
+    <ul>
+      <% @top_states.each do |state| %>
+      <li>State: <%= state.state %>, Orders: <%= state.state_count %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div id="top-cities">
+    <ul>
+      <% @top_cities.each do |city| %>
+        <li>City: <%= city.city %>, State: <%= city.state %>, Orders: <%= city.city_count %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div id="largest-orders">
+    <ul>
+      <% @largest_orders.each do |order| %>
+        <li>Order: <%= order.id %>, Count: <%= order.item_count %></li>
+      <% end %>
+    </ul>
+  </div>
+
+</section>

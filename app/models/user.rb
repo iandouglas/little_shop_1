@@ -63,4 +63,39 @@ class User < ApplicationRecord
     .limit(limit)
   end
 
+  def self.top_merchants_by_price_and_qty
+    self.joins(items: :order_items)
+    .select("users.username, sum(order_items.current_price * order_items.quantity) as revenue, sum(order_items.quantity) as total_items")
+    .where(order_items: {fulfilled:1}, enabled: :enabled)
+    .order("revenue desc, total_items DESC")
+    .group(:username)
+    .limit(3)
+  end
+
+  def self.fulfillment_times(order)
+    self.joins(items: :order_items)
+    .select('users.username, avg(order_items.updated_at - order_items.created_at) as fill_time')
+    .group(:id)
+    .where(order_items: {fulfilled: 1})
+    .order("fill_time #{order}")
+    .limit(3)
+  end
+
+  def self.top_shipped_states
+    self.joins(:orders)
+    .select("users.state, count(users.state) as state_count")
+    .where(orders: {status: 1})
+    .order("state_count DESC")
+    .group("users.state")
+    .limit(3)
+  end
+
+  def self.top_shipped_cities
+    self.joins(:orders)
+    .select("users.city, count(users.city) as city_count, users.state")
+    .where(orders: {status: 1})
+    .order("city_count DESC, users.state ASC")
+    .group("users.city, users.state")
+    .limit(3)
+  end
 end
