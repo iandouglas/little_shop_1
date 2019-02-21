@@ -11,16 +11,16 @@ RSpec.describe 'As a Merchant', type: :feature do
       OrderItem.create(item_id: item_2.id, order_id: order_1.id, fulfilled: 0, current_price: 7.50, quantity: 3)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
-      visit dashboard_orders_path(order_1)
+      visit dashboard_items_path
 
       expect(item_1.enabled?).to be true
 
       within "#item-#{item_1.id}" do
-        click_button "Disable"
+        click_button "Disable Item"
       end
 
       expect(Item.find(item_1.id).disabled?).to be true
-      expect(current_path).to eq(dashboard_orders_path(order_1))
+      expect(current_path).to eq(dashboard_items_path)
       expect(page).to have_content("#{item_1.name} is now available for sale")
     end
 
@@ -38,7 +38,7 @@ RSpec.describe 'As a Merchant', type: :feature do
       expect(item_1.disabled?).to be true
 
       within "#item-#{item_1.id}" do
-        click_button "Enable"
+        click_button "Enable Item"
       end
 
       expect(Item.find(item_1.id).enabled?).to be true

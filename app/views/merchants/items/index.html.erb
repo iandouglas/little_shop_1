@@ -1,5 +1,5 @@
 <h1>My Items</h1>
-<%= link_to 'Add New Item' %>
+<%= link_to 'Add New Item', dashboard_new_item_path %>
 <% @items.each do |item| %>
     <section id="item-<%= item.id %>">
     <p>Name: <%= item.name %></p>
@@ -7,14 +7,14 @@
     <%= image_tag "#{item.thumbnail}" %></p>
     <p>Price: <%= item.price %></p>
     <p>Current Inventory: <%= item.quantity %></p>
-    <%= link_to "Edit Item" %>
+    <%= link_to "Edit Item", dashboard_edit_item_path(item) %>
     <% if item.enabled?%>
-      <%= button_to 'Disable', merchant_disable_item_path(item), method: :patch %>
+      <%= button_to 'Disable Item', merchant_disable_item_path(item), method: :patch %>
     <% elsif item.disabled?%>
-    <%= button_to 'Enable', merchant_enable_item_path(item), method: :patch %>
+      <%= button_to 'Enable Item', merchant_enable_item_path(item), method: :patch %>
     <% end %>
     <% if @unsold_items.include?(item) %>
-      <%= link_to 'Delete Item' %>
+      <%= button_to 'Delete Item', dashboard_delete_item_path(item), method: :delete %>
     <% end %>
   </section>
 <% end %>
