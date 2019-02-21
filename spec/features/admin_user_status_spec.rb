@@ -43,14 +43,57 @@ RSpec.describe 'As an Admin', type: :feature do
     end
   end
 
-  describe 'admin can upgrade/downgrade' do
+  describe 'admin can enable/disable merchants' do
+    it 'lets an admin disable a merchant' do
+      admin = User.create!(username: 'test', street: '123 main st', city: 'denver', state: 'CO', zip_code: 80216, email: 'test@bob.net', password: 'password', role: 2)
+      merchant = User.create!(username: 'happy', street: '123 main st', city: 'denver', state: 'CO', zip_code: 80216, email: '1test@bob.net', password: 'password', role: 1)
+
+      login_as(admin)
+
+      visit merchants_path
+
+      within "#merchant-#{merchant.id}" do
+        click_button "Disable"
+      end
+
+      expect(current_path).to eq(merchants_path)
+      expect(page).to have_content("#{merchant.username} is now disabled")
+
+      login_as(merchant)
+
+      expect(current_path).to eq(login_path)
+    end
+
+    it 'lets an admin enable a merchant' do
+      admin = User.create!(username: 'test', street: '123 main st', city: 'denver', state: 'CO', zip_code: 80216, email: 'test@bob.net', password: 'password', role: 2)
+      merchant = User.create!(username: 'happy', street: '123 main st', city: 'denver', state: 'CO', zip_code: 80216, email: '1test@bob.net', password: 'password', role: 1, enabled: 'disabled')
+      login_as(admin)
+
+      visit merchants_path
+
+      within "#merchant-#{merchant.id}" do
+        click_button "Enable"
+      end
+
+      expect(current_path).to eq(merchants_path)
+      expect(page).to have_content("#{merchant.username} is now enabled")
+
+      login_as(merchant)
+
+      expect(current_path).to eq(dashboard_path)
+    end
+  end
+
+  describe 'admin can upgrade/downgrade users to merchants' do
     it 'lets an admin upgrade a user to a merchant' do
       admin = User.create!(username: 'test', street: '123 main st', city: 'denver', state: 'CO', zip_code: 80216, email: 'test@bob.net', password: 'password', role: 2)
       user = User.create!(username: 'happy', street: '432 main st', city: 'steve', state: 'CO', zip_code: 80126, email: 'te@bob.net', password: 'password', role: 0)
-      visit login_path
-      fill_in 'Email', with: 'test@bob.net'
-      fill_in 'Password', with: 'password'
-      click_button 'Sign In'
+
+      login_as(user)
+
+      expect(page).to_not have_link("Upgrade #{user.username} to a Merchant")
+
+      login_as(admin)
 
       visit admin_user_path(user)
 
@@ -64,36 +107,35 @@ RSpec.describe 'As an Admin', type: :feature do
 
       expect(current_path).to eq(admin_merchant_path(user))
 
-      click_link 'Logout'
-      click_link 'Log In'
-      fill_in 'Email', with: 'te@bob.net'
-      fill_in 'Password', with: 'password'
-      click_button 'Sign In'
+      login_as(user)
 
       expect(current_path).to eq(dashboard_path)
+      expect(page).to_not have_link("Downgrade")
     end
 
     it 'lets an admin downgrade a merchant to a regular user' do
       admin = User.create!(username: 'test', street: '123 main st', city: 'denver', state: 'CO', zip_code: 80216, email: 'test@bob.net', password: 'password', role: 2)
-      merchant = User.create!(username: 'happy', street: '123 main st', city: 'denver', state: 'CO', zip_code: 80216, email: '1test@bob.net', password: 'password', role: 1)
-      visit login_path
-      fill_in 'Email', with: 'test@bob.net'
-      fill_in 'Password', with: 'password'
-      click_button 'Sign In'
+      user = User.create!(username: 'happy', street: '123 main st', city: 'denver', state: 'CO', zip_code: 80216, email: '1test@bob.net', password: 'password', role: 1)
 
-      visit admin_merchant_path(merchant)
+      login_as(user)
+
+      expect(page).to_not have_link("Downgrade")
+
+      login_as(admin)
+
+      visit admin_merchant_path(user)
 
       click_link "Downgrade"
 
-      expect(current_path).to eq(admin_user_path(merchant))
+      expect(current_path).to eq(admin_user_path(user))
       expect(page).to have_content("happy is now a user")
       expect(User.last.role).to eq('user')
 
-      click_link 'Logout'
-      click_link 'Log In'
-      fill_in 'Email', with: '1test@bob.net'
-      fill_in 'Password', with: 'password'
-      click_button 'Sign In'
+      visit admin_merchant_path(user)
+
+      expect(current_path).to eq(admin_user_path(user))
+
+      login_as(user)
 
       expect(current_path).to eq(profile_path)
     end
@@ -104,10 +146,8 @@ RSpec.describe 'As an Admin', type: :feature do
 
       item_1 = Item.create!(name: 'pot', description:'small pot for plants', quantity: 30, price: 2.49, thumbnail: 'https://images-na.ssl-images-amazon.com/images/I/71VGZezvsGL._SX466_.jpg', user_id: merchant.id)
       item_2 = Item.create(name: 'crayon', description:'small crayon for plants', quantity: 40, price: 13.5, thumbnail: 'https://images-na.ssl-images-amazon.com/images/I/71VGZezvsGL._SX466_.jpg', user_id: merchant.id)
-      visit login_path
-      fill_in 'Email', with: 'test@bob.net'
-      fill_in 'Password', with: 'password'
-      click_button 'Sign In'
+
+      login_as(admin)
 
       visit admin_merchant_path(merchant)
 
@@ -118,11 +158,11 @@ RSpec.describe 'As an Admin', type: :feature do
 
       expect(User.last.role).to eq('user')
 
-      disabled_item_1 = Item.find(item_1.id)
-      disabled_item_2 = Item.find(item_2.id)
+      # disabled_item_1 = Item.find(item_1.id)
+      # disabled_item_2 = Item.find(item_2.id)
 
-      expect(disabled_item_1.disabled?).to be true
-      expect(disabled_item_2.disabled?).to be true
+      expect(Item.find(item_1.id).disabled?).to be true
+      expect(Item.find(item_2.id).disabled?).to be true
     end
   end
 end

@@ -48,20 +48,9 @@ class UsersController < ApplicationController
 
   def profile
       render :file => './public/404.html', status: 404 unless regular_user?
-  end
-
-  def dashboard
-    render :file => './public/404.html', status: 404 unless merchant_user?
-    if current_user
-      @orders = Order.for_merchant(current_user.id)
-      @merchant = User.find(current_user.id)
-      @items = @merchant.top_items_for_merchant(5)
-      @states = @merchant.top_states_for_merchant(3)
-      @cities = @merchant.top_cities_for_merchant(3)
-      @top_user_by_orders = @merchant.top_user_by_orders(1)
-      @top_user_by_items = @merchant.top_user_by_items(1)
-      @top_users_by_price = @merchant.top_users_by_price(3)
-    end
+      if current_user
+        @user = current_user
+      end
   end
 
   private

@@ -1,0 +1,26 @@
+<h3>Order: <%= @order.id %></h3>
+<div id="customer-info">
+  <p>User: <%= @order.user.username %></p>
+  <p>Address: <%= @order.user.street %> <%= @order.user.city %>, <%= @order.user.state %>, <%= @order.user.zip_code %></p>
+</div>
+<section id="items">
+  <% @items.each do |item| %>
+  <div id="item-<%= item.id %>">
+    <p>Item: <%= link_to "#{item.name}" %></p>
+    <%= image_tag "#{item.thumbnail}" %>
+    <p>Price: <%= number_to_currency(item.price) %></p>
+    <p>Quantity: <%= item.orderquan %></p>
+    <% if item.fulfilled? != true && item.orderquan <= item.quantity%>
+      <%= button_to 'Fulfill Item', dashboard_edit_order_path, method: :put, params: [{orderquan: item.orderquan, item: item.id}] unless admin_user? %>
+      <%= button_to 'Fulfill Item', admin_merchant_edit_order_path, method: :put, params: [{orderquan: item.orderquan, item: item.id}] unless merchant_user? %>
+    <% elsif item.orderquan >= item.quantity && item.fulfilled? != true %>
+      <p>Cannot Fulfill</p>
+    <% elsif item.fulfilled? %>
+    <p>Item Fulfilled</p>
+    <% end %>
+
+  </div>
+  <% end %>
+</section>
+
+get '/dashboard/orders/:id/disable', to: 'merchants/orders#disable', as: 'merchant_disable_item'

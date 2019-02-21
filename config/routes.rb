@@ -24,8 +24,14 @@ Rails.application.routes.draw do
   get '/profile/orders/:id', to: 'users/orders#show', as: 'profile_order'
   get '/profile/edit', to: 'users#edit', as: 'edit_profile'
 
-  get '/dashboard', to: 'users#dashboard', as: 'dashboard'
-  get '/dashboard/orders/:id', to: 'users/orders#dashboard', as: 'dashboard_orders'
+  get '/dashboard', to: 'merchants#dashboard', as: 'dashboard'
+  get '/dashboard/orders/:id', to: 'merchants/orders#show', as: 'dashboard_orders'
+
+  patch '/dashboard/orders/:id/enable', to: 'merchants/orders#enable', as: 'merchant_enable_item'
+  patch '/dashboard/orders/:id/disable', to: 'merchants/orders#disable', as: 'merchant_disable_item'
+
+  put '/dashboard/orders/:id/edit', to: 'merchants/orders#edit', as: 'dashboard_edit_order'
+  get '/dashboard/items', to: 'merchants/items#index', as: 'dashboard_items'
   post '/login', to: 'sessions#create'
 
   namespace :admin do
@@ -33,10 +39,15 @@ Rails.application.routes.draw do
     get '/dashboard', to: 'users#dashboard', as: 'dashboard'
     get '/users/:id', to: 'users#show', as: 'user'
     get '/merchants/:id', to: 'merchants#show', as: 'merchant'
-    get '/role', to: 'users#update', as: 'role'
+    get '/merchant_downgrade', to: 'merchants#downgrade', as: 'merchant_downgrade'
+    get '/user_upgrade', to: 'users#upgrade', as: 'user_upgrade'
+    get '/merchants/:id/orders/:order_id', to: 'merchants/orders#show', as: 'merchant_order'
+    put '/merchant/:id/orders/:order_id/edit', to: 'merchants/orders#edit', as: 'merchant_edit_order'
     get '/users/:id/orders', to:'users/orders#index', as: 'user_orders'
     patch '/users/:id/enable', to:'users#enable', as: 'enable_user'
     patch '/users/:id/disable', to:'users#disable', as: 'disable_user'
+    patch '/merchants/:id/enable', to:'merchants#enable', as: 'enable_merchant'
+    patch '/merchants/:id/disable', to:'merchants#disable', as: 'disable_merchant'
     get '/orders/:id', to: 'orders#show', as: 'order'
     post '/orders/:id/cancel', to: 'orders#cancel', as: 'cancel_order'
   end
