@@ -7,19 +7,26 @@
       <p><%= item.name %> - <%= item.total_quan %></p>
     <% end %>
   </div>
-  <div id="total-quantity">
-    <% total_sold =  @items.sum {|item| item.total_quan } %>
-    <% total_inventory = @items.sum {|item| item.quantity } %>
-    <p>Total Quantity Sold: <%= total_sold %></p>
-    <p>Sold <%= @items.sum {|item| item.total_quan } %> items, which is <%= ((total_sold.to_f / total_inventory.to_f) * 100).round(2) %>% of your total inventory.</p>
+  <div class="stat-column" id="total-quantity">
+    <h3>Stock</h3>
+    <ul>
+      <% total_sold =  @items.sum {|item| item.total_quan } %>
+      <% total_inventory = @items.sum {|item| item.quantity } %>
+      <li>Total Quantity Sold: <%= total_sold %></li>
+      <li>Sold <%= @items.sum {|item| item.total_quan } %> items, which is <%= ((total_sold.to_f / total_inventory.to_f) * 100).round(2) %>% of your total inventory.</li>
+    </ul>
   </div>
+
 </div>
   <div class="col-sm" id="top-states">
     <h3>Top 3 States:</h3>
-    <% @states.each do |state| %>
-    <p><%= state.state %> - <%= state.quantity %></p>
-    <% end %>
+    <ul>
+      <% @states.each do |state| %>
+      <li><%= state.state %> - <%= state.quantity %></li>
+      <% end %>
+    </ul>
   </div>
+    
   <div class="col-sm" id="top-cities">
     <h3>Top 3 Cities:</h3>
     <% @cities.each do |city| %>
