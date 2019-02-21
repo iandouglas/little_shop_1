@@ -1,4 +1,6 @@
-<section class="statistics">
+<section class="statistics container-fluid bg-light">
+  <div class="row">
+  <div class="col-sm">
   <div id="top-items">
     <h3>Top 5 Items:</h3>
     <% @items.each do |item| %>
@@ -11,18 +13,18 @@
     <p>Total Quantity Sold: <%= total_sold %></p>
     <p>Sold <%= @items.sum {|item| item.total_quan } %> items, which is <%= ((total_sold.to_f / total_inventory.to_f) * 100).round(2) %>% of your total inventory.</p>
   </div>
-  <div id="top-states">
+</div>
+  <div class="col-sm" id="top-states">
     <h3>Top 3 States:</h3>
     <% @states.each do |state| %>
     <p><%= state.state %> - <%= state.quantity %></p>
     <% end %>
   </div>
-  <div id="top-cities">
+  <div class="col-sm" id="top-cities">
     <h3>Top 3 Cities:</h3>
     <% @cities.each do |city| %>
     <p><%= city.city %>, <%= city.state %> - <%= city.quantity %></p>
     <% end %>
-  </div>
   <div id="top-users-orders-items">
     <% @top_user_by_orders.each do |user| %>
     <p>Most Orders from You: <%= user.username %>, with <%= user.quantity %> orders.</p>
@@ -31,21 +33,23 @@
     <p>Most Items bought from you: <%= user.username %>, with <%= user.quantity %> items.</p>
     <% end %>
   </div>
-  <div id="top-users-price">
+  </div>
+  <div class="col-sm" id="top-users-price">
     <h3>Top 3 Users by amount spent on your Items: </h3>
     <% @top_users_by_price.each do |user| %>
     <p><%= user.username %> - <%= number_to_currency(user.money_spent) %></p>
     <% end %>
   </div>
+</div>
 </section>
 <p><%= link_to 'View Your Items', dashboard_items_path %></p>
 <section class='orders'>
   <% @orders.each do |order| %>
-    <section id="order-#{order.id}">
+    <section class="container-fluid" id="order-#{order.id}">
       <h3><%= link_to "ID: #{order.id}", dashboard_orders_path(order) %></h3>
-      <p>Date Made: <%= order.created_at %></p>
       <p>Number of Items: <%= order.total_item_quantity_for_merchant(current_user.id) %></p>
       <p>Total Cost: <%= number_to_currency(order.total_item_price_for_merchant(current_user.id)) %></p>
+      <p>Date Made: <%= order.created_at %></p>
     </section>
   <% end %>
 </section>
