@@ -27,8 +27,9 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'merchants#dashboard', as: 'dashboard'
   get '/dashboard/orders/:id', to: 'merchants/orders#show', as: 'dashboard_orders'
 
-  patch '/dashboard/orders/:id/enable', to: 'merchants/orders#enable', as: 'merchant_enable_item'
-  patch '/dashboard/orders/:id/disable', to: 'merchants/orders#disable', as: 'merchant_disable_item'
+  patch '/dashboard/items/:id/enable', to: 'merchants/items#enable', as: 'merchant_enable_item'
+
+  patch '/dashboard/items/:id/disable', to: 'merchants/items#disable', as: 'merchant_disable_item'
 
   put '/dashboard/orders/:id/edit', to: 'merchants/orders#edit', as: 'dashboard_edit_order'
   get '/dashboard/items', to: 'merchants/items#index', as: 'dashboard_items'
@@ -48,6 +49,17 @@ Rails.application.routes.draw do
     get '/user_upgrade', to: 'users#upgrade', as: 'user_upgrade'
     get '/merchants/:id/orders/:order_id', to: 'merchants/orders#show', as: 'merchant_order'
     put '/merchant/:id/orders/:order_id/edit', to: 'merchants/orders#edit', as: 'merchant_edit_order'
+    get '/merchant/:id/items', to: 'merchants/items#index', as: 'merchant_items'
+    get '/merchant/:id/items/new', to: 'merchants/items#new', as: 'merchant_new_item'
+    post '/merchant/:id/items/new', to: 'merchants/items#create', as: 'merchant_create_new_item'
+    get '/merchant/:id/items/:item_id/edit', to: 'merchants/items#edit', as: 'merchant_edit_item'
+    patch '/merchant/:id/items/:item_id/edit', to: 'merchants/items#update', as: 'merchant_update_item'
+
+    patch '/merchant/:id/items/:item_id/enable', to: 'merchants/items#enable', as: 'merchant_enable_item'
+
+    patch '/merchant/:id/items/:item_id/disable', to: 'merchants/items#disable', as: 'merchant_disable_item'
+
+    delete '/merchant/:id/items/:item_id/delete', to: 'merchants/items#destroy', as: 'merchant_delete_item'
     get '/users/:id/orders', to:'users/orders#index', as: 'user_orders'
     patch '/users/:id/enable', to:'users#enable', as: 'enable_user'
     patch '/users/:id/disable', to:'users#disable', as: 'disable_user'
