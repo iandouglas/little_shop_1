@@ -18,7 +18,7 @@ Check out the app live: https://little-shop-of-horrors.herokuapp.com/
 
 
 ## Contributors
-- Rene Casco – rene.casco@icloud.com
+- Rene Casco – https://github.com/renecasco
 - Ty Mazey - 43197720+TyMazey@users.noreply.github.com
 - Vincent Provenzano - 40582072+Vjp888@users.noreply.github.com
 - Noah Flint - 34421236+n-flint@users.noreply.github.com
